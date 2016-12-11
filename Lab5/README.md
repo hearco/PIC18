@@ -4,7 +4,7 @@ What to expect on each source code
 
 I/O-Excercise1
 Description: There are 3 push buttons attached with different routines.
-             - Push button #1 pressed: Starts a rotation-to-the-left routine.
+- Push button #1 pressed: Starts a rotation-to-the-left routine.
              - Push button #2 pressed: Starts a rotation-to-the-right routine.
              - Push button #3 pressed: Starts a rotation-to-the-left-and-right routine.
              - No push button pressed: A led is blinking all the time with no rotation.
