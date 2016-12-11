@@ -1,4 +1,4 @@
-Lab 5: I/O ports
+# Lab 5: I/O ports
 
 What to expect on each source code
 
