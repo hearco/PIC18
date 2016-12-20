@@ -1,207 +1,230 @@
-; Created by: Ariel Almendáriz
-;
-; Lab 5: I/O ports
-; Excersice 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Author: Ariel Almendariz
+; Date: December 16, 2016
+; Title: I/O excercise
 ; Description:
-;   - Select a push button to make a rotation to the left when pressed. When the most left led is reached, start over from the right.
-;   - Select a push button to make a rotation to the right when pressed. When the most right led is reached, start over from the left.
-;   - Select a push button to make a rotation to one side. When the end of that side is reached, now continue rotating to the other side.
-;
-; Consider the next:
-;   - The led should be blinking all the time for one second.
-;   - The led should be blinking in one position forever until a push button is pressed.
-;   - To stop a routine, press the same push button that started it. Next, the led should be blinking in the last position it was.
-;   - Routines are not preemtive. That is, when a push button was pressed, no other push button can affect the actual routine.
-;
+;       - To rotate to the left
+;       - To rotate to the right
+;       - To rotate to both sides
+;       - Each routines should be activated with a push button
+;       - If no push button is pressed, a led should be just blinking
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-        RADIX	DEC					; SET DECIMAL AS DEFAULT BASE
-		PROCESSOR	18F45K50		; SET PROCESSOR TYPE
-		#INCLUDE	<P18F45K50.INC>
+RADIX       DEC					; SET DECIMAL AS DEFAULT BASE
+PROCESSOR	18F45K50            ; SET PROCESSOR TYPE
+#INCLUDE	<P18F45K50.INC>     ; INCLUDE PIC18 LIBRARY
+
+
+;	*** VECTORS NEEDED FOR SOFTWARE SIMULATION ***
+; ------------------------------------------------
+
+ORG		0					; RESET VECTOR
+GOTO	0X1000
+
+ORG		0X08				; HIGH INTERRUPT VECTOR
+GOTO	0X1008
+
+ORG		0X18				; LOW INTERRUPT VECTOR
+GOTO	0X1018
+
+
+;	*** VECTORS USED FOR JUMPING BETWEEN MEMORY LOCATIONS ***
+; -----------------------------------------------------------
+
+ORG		0X1000				; RESET VECTOR
+GOTO	MAIN
+
+ORG		0X1008				; HIGH INTERRUPT VECTOR
+;GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
 ;
+ORG		0X1018				; LOW INTERRUPT VECTOR
+;GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
+
+
+; ------------ SET UP THE CONSTANTS ----------------
+;---------------------------------------------------
+
+DELAY1          EQU	0			; DELAY VARIABLE 1
+DELAY2          EQU	1			; DELAY VARIABLE 2
+DELAY3          EQU 3           ; DELAY VARIABLE 3
+LATB_TEMP       EQU 4           ; TEMPORAL FOR LATB
+
+; ----------- INITIALIZE REGISTERS ---------------------
 ;
-;	VARIABLE'S DEFINITION SECTION
+;   We are using PORTB to show the result of the routines
+;   and PORTC to read the push butons state.
 ;
-VAR1        EQU	0			; VARIABLE PARA EL DELAY
-VAR2        EQU	1			; VARIABLE PARA EL DELAY
-VarPORTB    EQU 2           ; VALOR DEL PUERTO ACTUAL
-Vale1Seg    EQU 3           ; VARIABLE DE 1 SEGUNDO
-ContDelays  EQU 4           ; CONTADOR DE DELAYS, SIRVE PARA SABER CUANDO YA PASO UN SEGUNDO
-;
-;
-;	*** ONLY NEEDED FOR SOFTWARE SIMULATION ***
-;
-		ORG		0					; RESET VECTOR
-		GOTO	0X1000
-;
-		ORG		0X08				; HIGH INTERRUPT VECTOR
-		GOTO	0X1008
-;
-		ORG		0X18				; LOW INTERRUPT VECTOR
-		GOTO	0X1018
-;
-;	*** END OF CODE FOR SOFTWARE SIMULATION ***
-;
-;
-;	*** START OF PROGRAM ***
-;
-;	JUMP VECTORS
-;
-		ORG		0X1000				; RESET VECTOR
-		GOTO	MAIN
-;
-		ORG		0X1008				; HIGH INTERRUPT VECTOR
-;		GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
-;
-		ORG		0X1018				; LOW INTERRUPT VECTOR
-;		GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
-;
-;
-; ------------------------------------------------VARIABLES INITIALIZATION AND REGISTERS TO USE------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
+; ------------------------------------------------
 MAIN:
-        MOVLB   15
-        CLRF    ANSELC, BANKED  ; PORT C AS DIGITAL
-        CLRF	ANSELB, BANKED	; PORT B AS DIGITAL
+        MOVLB   15              ; SET BSR FOR BANKED SFR'S
+        CLRF    ANSELC          ; PORT C AS DIGITAL
+        CLRF	ANSELB          ; PORT B AS DIGITAL
 		CLRF    TRISB           ; PORT B AS OUTPUT (EACH PIN CONNECTED TO A LED TO SHOW THE ROUTINES)
-        BSF     TRISC, 0        ; PIN 0 (RC0) AS INPUT (PUSH BUTTON 1)
-        BSF     TRISC, 1        ; PIN 1 (RC1) AS INPUT (PUSH BUTTON 2)
-        BSF     TRISC, 2        ; PIN 2 (RC2) AS INPUT (PUSH BUTTON 3)
-        CLRF    LATB            ; CLEAR PORT C FOR ANY POSSIBLE GARBIGE
-        CLRF    LATC            ; CLEAR PORT C FOR ANY POSSIBLE GARBIGE
-        CLRF    ContDelays      ; VARIABLE TO HOLD THE AMMOUNT OF DELAYS TO USE
+        SETF    TRISC           ; SET PORTC AS INPUT. HERE WE ATACH THE 3 PUSH BUTTONS
         MOVLW   0X01            ;
-        MOVWF   VarPORTB        ; VARIABLE TO BE USED AS A TEMPORAL BEFORE SHOWING THE RESULT TO PORT B
-;
-; ---------------------------------------------------CICLO DE PARPADEO-------------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-PARPADEO:
-        MOVFF   VarPORTB, LATB  ; LATB = VarPORT (SOLO CUANDO ENTRA EL CICLO POR PRIMERA VEZ VALE 0X01
-        CALL    TESTS           ; LLAMO LA RUTINA PARA CHECAR BOTONES
-        CALL    Delay1Seg       ; ESPERO UN SEGUNDO ANTES DE APAGAR EL LED
-        CLRF    LATB            ; LATB = 0
-        CALL    TESTS           ; LLAMO LA RUTINA PARA CHECAR BOTONES
-        CALL    Delay1Seg       ; ESPERO UN SEGUNDO ANTES DE ENCENDER EL LED
-        GOTO    PARPADEO        ; REGRESA A HACER EL PARPADEO
-;
-; -----------------------------------------------EVALUACION DE BOTONES-------------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
+        MOVWF   LATB_TEMP       ; INITIALIZE PORTB WITH 1
+
+; ---------------- BLINK ROUTINE -----------------
+; ------------------------------------------------
+
+BLINK:
+        MOVFF   LATB_TEMP, LATB ; SHOW VALUE ON LATB
+        CALL    TESTS           ; CHECK IF ANY BUTTON IS PRESSED
+        CALL    Delay1Sec       ; WAIT 1 SECOND
+        CLRF    LATB            ; CLEAR LATB
+        CALL    TESTS           ; CHECK IF ANY BUTTON IS PRESSED
+        CALL    Delay1Sec       ; WAIT 1 SECOND
+        GOTO    BLINK           ; REPEAT AGAIN
+
+; -------------- EVALUACION DE BOTONES----------------
+; ----------------------------------------------------
+
 TESTS:
-        BTFSS   PORTC, 0        ; CHECAR SI SE PRESIONO RC0
-        GOTO    CorrimientoIzq  ; SI ES ASI, EMPIEZA EL CORRIMIENTO HACIA LA IZQUIERDA
-        BTFSS   PORTC, 1        ; SI NO, CHECA SI SE PRESIONO RC1
-        GOTO    CorrimientoDer  ; SI ES ASI, EMPIZA EL CORRIMIENTO HACIA LA DERECHA
-        BTFSS   PORTC, 2        ; CHECAR SI SE PRESIONO RC2
-        GOTO    IzqDer          ; SI ES ASI HACE CORRIMIENTO DE IZQ - DER Y VICEVERSA
-        RETURN
-;
-; ---------------------------------------------------CORRIMIENTO HACIA LA IZQUIERDA------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CorrimientoIzq:
-        CALL    Delay1Seg       ; RETRASO PARA ELIMINAR REBOTES
-        RLNCF   VarPORTB        ; HAGO CORRIMIENTO SOBRE LA VARIABLE
-        MOVFF   VarPORTB, LATB  ; MUESTRO LA VARIABLE EN EL PUERTO B
-        BTFSS   PORTC, 0        ; CHECA SI SE PRESIONO EL BOTON
-        GOTO    RETARDO         ; SI ES ASI, REGRESO A PARPADEO
-        CALL    Delay1Seg       ; SI NO, MANDO A LLAMAR UN DELAY DE 1 SEGUNDO
-        CLRF    LATB            ; APAGO EL BIT
-        BTFSS   PORTC, 0        ; CHECO EL BOTON
-        GOTO    RETARDO         ; SI SE PRESIONO, VOY A PARPADEO
-        GOTO    CorrimientoIzq  ; SI NO, SIGO HACIENDO CORRIMIENTO
-;
-; ---------------------------------------------------CORRIMIENTO HACIA LA DERECHA--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CorrimientoDer:
-        CALL    Delay1Seg       ; RETRASO PARA ELIMINAR REBOTES
-        RRNCF   VarPORTB        ; HAGO CORRIMIENTO SOBRE LA VARIABLE
-        MOVFF   VarPORTB, LATB  ; MUESTRO LA VARIABLE EN EL PUERTO B
-        BTFSS   PORTC, 1        ; CHECA SI SE PRESIONO EL BOTON
-        GOTO    RETARDO         ; SI ES ASI, REGRESO A PARPADEO
-        CALL    Delay1Seg       ; SI NO, MANDO A LLAMAR UN DELAY DE 1 SEGUNDO
-        CLRF    LATB            ; APAGO EL BIT
-        BTFSS   PORTC, 1        ; CHECO EL BOTON
-        GOTO    RETARDO         ; SI SE PRESIONO, VOY A PARPADEO
-        GOTO    CorrimientoDer  ; SI NO, SIGO HACIENDO CORRIMIENTO
-;
-; ---------------------------------------------------CORRIMIENTO IZQ / DER / IZQ--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-IzqDer:
-        BTFSS   LATB, 0         ; CHECO SI EL LED PRENDIDO SE ENCUENTRA EN RB0
-        GOTO    Derecha         ; SI ES ASI, AHORA HACE CORRIMIENTO HACIA LA DERECHA
+        BTFSS   PORTC, RC0          ; CHECK IF ROTATE-TO-THE-LEFT BUTTON IS PRESSED
+        GOTO    Rotate_Left         ;
+        BTFSS   PORTC, RC1          ; CHECK IF ROTATE-TO-THE-RIGHT BUTTON IS PRESSED
+        GOTO    Rotate_Right        ;
+        BTFSS   PORTC, RC2          ; CHECK IF ROTATE-TO-BOTH-SIDES BUTTON IS PRESSED
+        GOTO    Rotate_LeftRight    ;
+        RETURN                      ; FINISH ROUTINE CALL
 
-Izquierda:
-        CALL    Delay1Seg
+; ---------------------- ROTATE TO THE LEFT ---------------------------
+;
+; Make a rotate to the left by keeping the led blinking too. Consider
+; that this routine asks twice if the push button is pressed so we
+; try to not miss any user button hit.
+;
+; ---------------------------------------------------------------------
+
+Rotate_Left:
+        CALL    Delay1Sec           ; WAIT 1 SECOND
+        RLNCF   LATB_TEMP           ; ROTATE TO THE LEFT
+        MOVFF   LATB_TEMP, LATB     ; SHOW RESULT ON PORT B
+        
+        BTFSS   PORTC, RC0          ; CHECK IF ROUTINE IS STOPPED
+        CALL    BACK_TO_BLINK       ; IF SO, GO BACK TO BLINK ROUTINE
+        CALL    Delay1Sec           ; ELSE, WAIT 1 SECOND
+        CLRF    LATB                ; CLEAR PORT B
+        
+        BTFSS   PORTC, RC0          ; CHECK IF ROUTINE IS STOPPED
+        GOTO    BACK_TO_BLINK       ; IF SO, GO BACK TO BLINK ROUTINE
+        GOTO    Rotate_Left         ; ELSE, REPEAT ALL
+
+; ---------------------- ROTATE TO THE RIGHT ---------------------------
+;
+; Make a rotate to the right by keeping the led blinking too. Consider
+; that this routine asks twice if the push button is pressed so we
+; try to not miss any user button hit.
+;
+; ----------------------------------------------------------------------
+
+Rotate_Right:
+        CALL    Delay1Sec           ; WAIT 1 SECOND
+        RRNCF   LATB_TEMP           ; ROTATE TO THE RIGHT
+        MOVFF   LATB_TEMP, LATB     ; SHOW RESULT ON PORT B
+        
+        BTFSS   PORTC, RC1          ; CHECK IF ROUTINE IS STOPPED
+        GOTO    BACK_TO_BLINK       ; SI ES ASI, REGRESO A PARPADEO
+        CALL    Delay1Sec           ; ELSE, WAIT 1 SECOND
+        CLRF    LATB                ; CLEAR PORT B
+        
+        BTFSS   PORTC, RC1          ; CHECK IF ROUTINE IS STOPPED
+        GOTO    BACK_TO_BLINK       ; IF SO, GO BACK TO BLINK ROUTINE
+        GOTO    Rotate_Right        ; ELSE, REPEAT ALL
+
+; ------------------- ROTATE TO THE LEFT THEN RIGHT -------------------------
+;
+;
+;
+; ---------------------------------------------------------------------------
+
+Rotate_LeftRight:
+        BTFSS   LATB, RB0           ; CHECK IF RB0 IS OFF
+        GOTO    Right_case          ; IF SO, ROTATE TO THE RIGHT
+
+Left_case:                          ; IF NOT, ROTATE TO THE LEFT
+        CALL    Delay1Sec           ; WAIT 1 SECOND
+        CLRF    LATB                ; CLEAR PORT B
+        
+        BTFSS   PORTC, RC2          ; CHECK IF ROUTINE IS STOPPED
+        GOTO    BACK_TO_BLINK       ; IF SO, GO BACK TO BLINK ROUTINE
+        CALL    Delay1Sec           ; WAIT 1 SECOND
+        RLNCF   LATB_TEMP           ; ROTATE TO THE LEFT
+        MOVFF   LATB_TEMP, LATB     ; SHOW RESULT ON PORT B
+        
+        BTFSC   LATB, RB7           ; CHECK IF CHANGE IN DIRECTION IS NEEDED
+        GOTO    Right_case          ; IF SO, ROTATES TO THE RIGHT
+        
+        BTFSS   PORTC, RC2          ; CHECK IF ROUTINE IS STOPPED
+        GOTO    BACK_TO_BLINK
+        GOTO    Left_case
+
+Right_case:
+        CALL    Delay1Sec
         CLRF    LATB
-        BTFSS   PORTC, 2
-        GOTO    RETARDO
-        CALL    Delay1Seg
-        RLNCF   VarPORTB        ; IF NOT, ROTATES TO THE LEFT
-        MOVFF   VarPORTB, LATB  ;
-        BTFSC   LATB, 7         ; CHECKS IF CHANGE IN DIRECTION IS NEEDED
-        GOTO    Derecha         ; IF SO, ROTATES TO THE RIGHT
-        BTFSS   PORTC, 2
-        GOTO    RETARDO
-        GOTO    Izquierda          ; SI NO, CONTINUO EL CORRIMIENTO
-;
-Derecha:
-        CALL    Delay1Seg
-        CLRF    LATB
-        BTFSS   PORTC, 2
-        GOTO    RETARDO
-        CALL    Delay1Seg
-        RRNCF   VarPORTB            ; HACE UN CORRIMMIENTO DEL PUERTO B A LA DERECHA
-        MOVFF   VarPORTB, LATB      
-        BTFSC   LATB, 0
-        GOTO    Izquierda
-        BTFSS   PORTC, 2
-        GOTO    RETARDO
-        GOTO    Derecha         ; SI NO, HAGO CORIMIENTO A LA DERECHA
-;
-; ---------------------------------------------------RUTINA PARA ELMINAS REBOTES---------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-RETARDO:
-        CALL    EvitarRebotes
-        GOTO    PARPADEO
+        
+        BTFSS   PORTC, RC2
+        GOTO    BACK_TO_BLINK
+        CALL    Delay1Sec
+        RRNCF   LATB_TEMP            ; HACE UN CORRIMMIENTO DEL PUERTO B A LA DERECHA
+        MOVFF   LATB_TEMP, LATB
+        
+        BTFSC   LATB, RB0
+        GOTO    Left_case
 
-Delay:
-        MOVLW   0XFF            ; CARGO EL VLOR MAX POSIBLE EN W
-        MOVWF   VAR1            ; VAR1 = 0XFF
-        MOVWF   VAR2            ; VAR2 = 0XFF
+        BTFSS   PORTC, 2
+        GOTO    BACK_TO_BLINK
+        GOTO    Right_case         ; SI NO, HAGO CORIMIENTO A LA DERECHA
 
- LOOP1:
-            DECFSZ  VAR2        ; DECREMENTO LA VARIABLE 2
-            GOTO    LOOP1       ; SI ES DIFERENTE DE 0, SIGUE DECREMENTANDO
-            DECFSZ  VAR1        ; SI ES 0, DECREMENTO VARIANLE 1
-            GOTO    LOOP1       ; SI ES DIFERENTE DE 0, SIGUE DECREMENTANDO
-            RETURN              ; SI ES 0, TERMINO EL DELAY
-;
-; ------------------------------------------------------RETRASO DE 1 SEGUNDO-------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-Delay1Seg:
-        CALL    Delay           ; Retraso
-        INCF    ContDelays, 1   ; CONTADOR PARA MEDIR LOS SEGUNDOS QUE HAN PASADO
-        MOVLW   12              ; W = 19 segundo
-        CPFSEQ  ContDelays      ; CHECO SI YA PASO UN SEGUNDO
-        GOTO    Delay1Seg       ; SI NO, VUELVO A LLAMAR LA FUNCION
-        CALL    LimpiarContador ; LIMPIO EL CONTADOR DE DELAYS PARA PODER VOLVERLO A USAR
-        Return                  ; SI ES ASI, REGRESO A LA FUNCION QUE LA MANDO A LLAMAR
-;
-; ------------------------------------------------RUTINA PARA LIMPIAR EL CONTADOR DE DELAYS----------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-EvitarRebotes:
-        CALL    Delay           ; Retraso
-        INCF    ContDelays, 1   ; CONTADOR PARA MEDIR LOS SEGUNDOS QUE HAN PASADO
-        MOVLW   1               ; W = 1
-        CPFSEQ  ContDelays      ; CHECO SI YA PASO UN SEGUNDO
-        GOTO    EvitarRebotes         ; SI NO, VUELVO A LLAMAR LA FUNCION
-        CALL    LimpiarContador ; LIMPIO EL CONTADOR DE DELAYS PARA PODER VOLVERLO A USAR
-        Return                  ; SI ES ASI, REGRESO A LA FUNCION QUE LA MANDO A LLAMAR
+; ---------------- BACK TO BLINK ROUTINE ---------------------
+; -----------------------------------------------------------
 
-; ------------------------------------------------RUTINA PARA LIMPIAR EL CONTADOR DE DELAYS----------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-LimpiarContador:
-        CLRF    ContDelays
+BACK_TO_BLINK:
+        CALL    DEBOUNCE
+        GOTO    BLINK
+
+; ----------------- SKIP PUSH-BUTTON BOUNCING ----------------------
+; ------------------------------------------------------------------
+
+DEBOUNCE:
+        BTFSS   PORTC, RC0
+        GOTO    DEBOUNCE
+        BTFSS   PORTC, RC1
+        GOTO    DEBOUNCE
+        BTFSS   PORTC, RC2
+        GOTO    DEBOUNCE
         RETURN
-;
-;
-	END
 
+; ------------------------ DELAY 1 second --------------------------
+;
+; Remember that the PIC184550 clock is 16MHz, so each instruction
+; takes 0.25us. The formula is:
+;
+; 1 cycle = 4 (1/(16M))s
+; 1 cycle = 0.25us
+;
+; Total cycles = 3,999,996 (999.999ms)
+;
+; -----------------------------------------------------------------
+
+Delay1Sec:
+        
+        MOVLW   0XF8
+        MOVWF   DELAY1
+CYCLE3:
+        MOVLW   0X3A
+        MOVWF   DELAY2
+CYCLE2:
+        MOVLW   0X5B
+        MOVWF   DELAY3
+CYCLE1:
+        DECFSZ  DELAY3
+        GOTO    CYCLE1
+        DECFSZ  DELAY2
+        GOTO    CYCLE2
+        DECFSZ  DELAY1
+        GOTO    CYCLE3
+        RETURN
+
+END
