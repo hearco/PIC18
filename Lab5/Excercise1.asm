@@ -58,8 +58,8 @@ LATB_TEMP       EQU 	4       ; TEMPORAL FOR LATB
 ; ------------------------------------------------
 MAIN:
         MOVLB   15              ; SET BSR FOR BANKED SFR'S
-        CLRF    ANSELC          ; PORT C AS DIGITAL
-        CLRF	ANSELB          ; PORT B AS DIGITAL
+        CLRF    ANSELC, BANKED  ; PORT C AS DIGITAL
+        CLRF	ANSELB, BANKED  ; PORT B AS DIGITAL
 	CLRF    TRISB           ; PORT B AS OUTPUT (EACH PIN CONNECTED TO A LED TO SHOW THE ROUTINES)
         SETF    TRISC           ; SET PORTC AS INPUT. HERE WE ATACH THE 3 PUSH BUTTONS
         MOVLW   0X01            ;
