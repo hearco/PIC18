@@ -43,6 +43,26 @@ ORG	0X1018				; LOW INTERRUPT VECTOR
 
 
 ; ------------ SET UP THE CONSTANTS ----------------
+;
+;   RAM memory space goes from 0x00 to 0xFFF. By default,
+;   we can use the access bank (from 0x00 to 0x7F of bank 0
+;   to 0x80 to 0xFF of bank 15)
+;
+;   RAM data memory MAP
+;
+;   BANK 0          0x00 (0x00 to 0x7F Access RAM)
+;                        (0x80 to 0xFF start of GPR's)
+;   BANK 1          0x01 (0x00 to 0xFF)
+;   BANK 2          0x02 (0x00 to 0xFF)
+;   BANK 3          0x03 (0x00 to 0xFF)
+;   BANK 4          0x04 (0x00 to 0xFF)
+;   BANK 5          0x05 (0x00 to 0xFF)
+;   ...
+;   BANK 6 TO 14    (UNUSED, READ 0x00)
+;   ...
+;   BANK 15         0xFF (0x00 to 0x7F UNUSED)
+;                        (0x80 to 0xFF SFR's)
+;
 ;---------------------------------------------------
 
 DELAY1          EQU	0	; DELAY VARIABLE 1
