@@ -11,44 +11,44 @@
 ;       - If no push button is pressed, a led should be just blinking
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-RADIX       DEC					; SET DECIMAL AS DEFAULT BASE
-PROCESSOR	18F45K50            ; SET PROCESSOR TYPE
-#INCLUDE	<P18F45K50.INC>     ; INCLUDE PIC18 LIBRARY
+RADIX       	DEC			; SET DECIMAL AS DEFAULT BASE
+PROCESSOR	18F45K50            	; SET PROCESSOR TYPE
+#INCLUDE	<P18F45K50.INC>     	; INCLUDE PIC18 LIBRARY
 
 
 ;	*** VECTORS NEEDED FOR SOFTWARE SIMULATION ***
 ; ------------------------------------------------
 
-ORG		0					; RESET VECTOR
+ORG	0				; RESET VECTOR
 GOTO	0X1000
 
-ORG		0X08				; HIGH INTERRUPT VECTOR
+ORG	0X08				; HIGH INTERRUPT VECTOR
 GOTO	0X1008
 
-ORG		0X18				; LOW INTERRUPT VECTOR
+ORG	0X18				; LOW INTERRUPT VECTOR
 GOTO	0X1018
 
 
 ;	*** VECTORS USED FOR JUMPING BETWEEN MEMORY LOCATIONS ***
 ; -----------------------------------------------------------
 
-ORG		0X1000				; RESET VECTOR
+ORG	0X1000				; RESET VECTOR
 GOTO	MAIN
 
-ORG		0X1008				; HIGH INTERRUPT VECTOR
+ORG	0X1008				; HIGH INTERRUPT VECTOR
 ;GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
 ;
-ORG		0X1018				; LOW INTERRUPT VECTOR
+ORG	0X1018				; LOW INTERRUPT VECTOR
 ;GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
 
 
 ; ------------ SET UP THE CONSTANTS ----------------
 ;---------------------------------------------------
 
-DELAY1          EQU	0			; DELAY VARIABLE 1
-DELAY2          EQU	1			; DELAY VARIABLE 2
-DELAY3          EQU 3           ; DELAY VARIABLE 3
-LATB_TEMP       EQU 4           ; TEMPORAL FOR LATB
+DELAY1          EQU	0	; DELAY VARIABLE 1
+DELAY2          EQU	1	; DELAY VARIABLE 2
+DELAY3          EQU 	3       ; DELAY VARIABLE 3
+LATB_TEMP       EQU 	4       ; TEMPORAL FOR LATB
 
 ; ----------- INITIALIZE REGISTERS ---------------------
 ;
@@ -60,7 +60,7 @@ MAIN:
         MOVLB   15              ; SET BSR FOR BANKED SFR'S
         CLRF    ANSELC          ; PORT C AS DIGITAL
         CLRF	ANSELB          ; PORT B AS DIGITAL
-		CLRF    TRISB           ; PORT B AS OUTPUT (EACH PIN CONNECTED TO A LED TO SHOW THE ROUTINES)
+	CLRF    TRISB           ; PORT B AS OUTPUT (EACH PIN CONNECTED TO A LED TO SHOW THE ROUTINES)
         SETF    TRISC           ; SET PORTC AS INPUT. HERE WE ATACH THE 3 PUSH BUTTONS
         MOVLW   0X01            ;
         MOVWF   LATB_TEMP       ; INITIALIZE PORTB WITH 1
@@ -103,7 +103,7 @@ Rotate_Left:
         MOVFF   LATB_TEMP, LATB     ; SHOW RESULT ON PORT B
         
         BTFSS   PORTC, RC0          ; CHECK IF ROUTINE IS STOPPED
-        CALL    BACK_TO_BLINK       ; IF SO, GO BACK TO BLINK ROUTINE
+        GOTO    BACK_TO_BLINK       ; IF SO, GO BACK TO BLINK ROUTINE
         CALL    Delay1Sec           ; ELSE, WAIT 1 SECOND
         CLRF    LATB                ; CLEAR PORT B
         
