@@ -1,409 +1,500 @@
-RADIX	DEC					; SET DECIMAL AS DEFAULT BASE
-		PROCESSOR	18F45K50		; SET PROCESSOR TYPE
-		#INCLUDE	<P18F45K50.INC>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Author: Ariel Almendariz
+; Date: December 23, 2016
+; Title: Matrix keypad
+; Description:
+;       - Develop a calculator by using a matrix keypad and 8 leds for showing
+;         the result
+;       - All numbers and results are 8-bit numbers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+RADIX       	DEC			; SET DECIMAL AS DEFAULT BASE
+PROCESSOR	18F45K50            	; SET PROCESSOR TYPE
+#INCLUDE	<P18F45K50.INC>     	; INCLUDE PIC18 LIBRARY
+
+
+;	*** VECTORS NEEDED FOR SOFTWARE SIMULATION ***
+; ------------------------------------------------
+
+ORG	0				; RESET VECTOR
+GOTO	0X1000
+
+ORG	0X08				; HIGH INTERRUPT VECTOR
+GOTO	0X1008
+
+ORG	0X18				; LOW INTERRUPT VECTOR
+GOTO	0X1018
+
+
+;	*** VECTORS USED FOR JUMPING BETWEEN MEMORY LOCATIONS ***
+; -----------------------------------------------------------
+
+ORG	0X1000				; RESET VECTOR
+GOTO	MAIN
+
+ORG	0X1008				; HIGH INTERRUPT VECTOR
+;GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
 ;
+ORG	0X1018				; LOW INTERRUPT VECTOR
+;GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
+
+
+; ------------ SET UP THE CONSTANTS ----------------
 ;
-;	VARIABLE'S DEFINITION SECTION
+;   RAM memory space goes from 0x00 to 0xFFF. By default,
+;   we can use the access bank (from 0x00 to 0x7F of bank 0
+;   to 0x80 to 0xFF of bank 15)
 ;
-VAR1                EQU 0
-VAR2                EQU 1
-PrimerNumero        EQU 2
-copiaDelNumero      EQU	3
-TipoOper            EQU 6
-ContDivision        EQU 7
-ContMultiplicacion  EQU 8
+;   RAM data memory MAP
 ;
+;   BANK 0          0x00 (0x00 to 0x7F Access RAM)
+;                        (0x80 to 0xFF start of GPR's)
+;   BANK 1          0x01 (0x00 to 0xFF)
+;   BANK 2          0x02 (0x00 to 0xFF)
+;   BANK 3          0x03 (0x00 to 0xFF)
+;   BANK 4          0x04 (0x00 to 0xFF)
+;   BANK 5          0x05 (0x00 to 0xFF)
+;   ...
+;   BANK 6 TO 14    (UNUSED, READ 0x00)
+;   ...
+;   BANK 15         0xFF (0x00 to 0x7F UNUSED)
+;                        (0x80 to 0xFF SFR's)
 ;
-;	*** ONLY NEEDED FOR SOFTWARE SIMULATION ***
+;---------------------------------------------------
+
+first_number        EQU 0       ; It holds the last number pressed
+sum_op              EQU 1       ; Identifier for sum
+minus_op            EQU 2       ; Identifier for substraction
+second_number       EQU	3       ; Holds the first number pressed
+mul_op              EQU 4       ; Identifier for multiplication
+operation           EQU 5       ; Holds the operation type to perform
+COUNTER             EQU 6       ; General purpose counter
+div_op              EQU 8       ; Identifier for division
+
+; ----------- INITIALIZE REGISTERS ---------------------
 ;
-		ORG		0					; RESET VECTOR
-		GOTO	0X1000
+;   We are using PORTB to show the result of the routines
+;   and PORTC to read the push butons state.
 ;
-		ORG		0X08				; HIGH INTERRUPT VECTOR
-		GOTO	0X1008
+;   CONSIDER THE NEXT STEPS AND PINOUT:
 ;
-		ORG		0X18				; LOW INTERRUPT VECTOR
-		GOTO	0X1018
-;
-;	*** END OF CODE FOR SOFTWARE SIMULATION ***
-;
-;
-;	*** START OF PROGRAM ***
-;
-;	JUMP VECTORS
-;
-		ORG		0X1000				; RESET VECTOR
-		GOTO	MAIN
-;
-		ORG		0X1008				; HIGH INTERRUPT VECTOR
-;		GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
-;
-		ORG		0X1018				; LOW INTERRUPT VECTOR
-;		GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
-;
-;
-;	RESOURCE INITIALIZATION
-;
-; ---------------------------------------INICIALIZACION DE LAS VARIABLES Y REGISTROS A UTILIZAR------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
+;   PORTB - MATRIX KEYPAD
+;   PORTC - ARRAY OF LEDS
+; ------------------------------------------------------
+
 MAIN:
         MOVLB   15                  ; ACTIVO EL ANSELD
-        CLRF	ANSELD, BANKED      ; PUERTO D COMO DIGITAL
-        CLRF	ANSELB, BANKED		; PUERTO B COMO DIGITAL
-		MOVLW   0xF0                ; PARTE ALTA ES ENTRADA (PUERTO B)
-        MOVWF   TRISB               ; PARTE BAJA ES SALIDA  (PUERTO B)
-        CLRF    TRISD               ; PUERTO D ES SALIDA
-        CLRF    LATD                ; LATD = 0
-        BCF     INTCON2,7           ; SE ACTIVAN LAS RESISTENCIAS PULL-UP
-        CLRF    TipoOper            ; Bandera para identificar operacion
-        CLRF    ContDivision
-        MOVLW   1
-        MOVWF   ContMultiplicacion
-;
-; ------------------------------------------------------RUTINA PARA CHECAR RENGLONES-----------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-ChecarRenglon1:
-        BCF     LATB,0              ; ACTIVO EL PRIMER RENGLON
-        BSF     LATB,1              ; DESACTIVO EL SEGUNDO RENGLON
-        BSF     LATB,2              ; DESACTIVO EL TERCER RENGLON
-        BSF     LATB,3              ; DESACTIVO EL CUARTO RENGLON
-        BTFSS   PORTB,4             ; COMPARO CON COLUMNA 1
-		CALL    UNO                 ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 1
-		BTFSS   PORTB,5             ; SI NO, COMPARO CON COLUMNA 2
-		CALL    DOS                 ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 2
-		BTFSS   PORTB,6             ; SI NO, COMPARO CON COLUMNA 3
-		CALL    TRES                ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 3
-        BTFSS   PORTB,7             ; COMPARO CON COLUMNA 4
-        CALL    AH                  ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA PREPARAR UNA SUMA
 
-ChecarRenglon2:
-        BSF     LATB,0              ; DESACTIVO EL PRIMER RENGLON
-        BCF     LATB,1              ; ACTIVO EL SEGUNDO RENGLON
-        BSF     LATB,2              ; DESACTIVO EL TERCER RENGLON
-        BSF     LATB,3              ; DESACTIVO EL CUARTO RENGLON
-        BTFSS   PORTB,4             ; COMPARO CON COLUMNA 1
-		CALL    CUATRO              ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 4
-		BTFSS   PORTB,5             ; SI NO, COMPARO CON COLUMNA 2
-		CALL    CINCO               ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 5
-		BTFSS   PORTB,6             ; SI NO, COMPARO CON COLUMNA 3
-		CALL    SEIS                ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 6
-		BTFSS   PORTB,7             ; COMPARO CON COLUMNA 4
-        CALL    B                   ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA PREPARAR UNA RESTA
+        ; PORT B CONFIGURATION, MATRIX KEYPAD IS ATTACHED HERE
+        CLRF	ANSELB, BANKED		; PORTB AS DIGITAL
+        MOVLW   b'11110000'         	; THE MSB OF PORTB AS INPUT
+        MOVWF   TRISB               	; AND THE LSB AS OUTPUT
+        BCF     INTCON2, RBPU       	; ACTIVATE PULL-UP RESISTORS OF PORTB (BIT 7 OF INTCON2)
 
-ChecarRenglon3:
-        BSF     LATB,0              ; DESACTIVO EL PRIMER RENGLON
-        BSF     LATB,1              ; DESACTIVO EL SEGUNDO RENGLON
-        BCF     LATB,2              ; ACTIVO EL TERCER RENGLON
-        BSF     LATB,3              ; DESACTIVO EL CUARTO RENGLON
-        BTFSS   PORTB,4             ; COMPARO CON COLUMNA 1
-		CALL    SIETE               ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 7
-		BTFSS   PORTB,5             ; SI NO, COMPARO CON COLUMNA 2
-		CALL    OCHO                ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 8
-		BTFSS   PORTB,6             ; SI NO, COMPARO CON COLUMNA 3
-		CALL    NUEVE               ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 9
-        BTFSS   PORTB,7             ; SI NO, COMPARO CON COLUMNA 4
-        CALL    CH                  ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA PREPARAR UNA MULTIPLICACION
+        ; PORT D CONFIGURATION, THE MATH RESULTS ARE GOING TO BE SHOWED HERE
+        CLRF	ANSELD, BANKED      ; PORTD AS DIGITAL
+        CLRF    TRISD               ; PORTD AS OUTPUT
+        CLRF    LATD                ; CLEAR PORTD VALUE
 
-ChecarRenglon4:
-        BSF     LATB,0              ; DESACTIVO EL PRIMER RENGLON
-        BSF     LATB,1              ; DESACTIVO EL SEGUNDO RENGLON
-        BSF     LATB,2              ; DESACTIVO EL TERCER RENGLON
-        BCF     LATB,3              ; ACTIVO EL CUARTO RENGLON
-        BTFSS   PORTB,4             ; COMPARO CON COLUMNA 1
-		CALL    ASTERISCO           ; SI SE PRESIONA, NO REALIZA NADA
-		BTFSS   PORTB,5             ; SI NO, COMPARO CON COLUMNA 2
-		CALL    CERO                ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA ESCRIBIR UN 0
-		BTFSS   PORTB,6             ; SI NO, COMPARO CON COLUMNA 3
-		CALL    GATO                ; SI SE PRESIONA, SE LLEVA ACABO UNA SUMA, RESTA, MULTIPLICACION O DIVISON SEGUN CORRESPONDA
-        BTFSS   PORTB,7             ; SI NO, COMPARO CON COLUMNA 4
-        CALL    D                   ; SI SE PRESIONA, SE REALIZA LA RUTINA PARA PREPARAR UNA DIVISION
+        ; INITIALIZATION OF VARIABLES
+        CLRF    operation
+        CLRF    COUNTER
 
-        GOTO ChecarRenglon1         ; SI NO SE PRESIONA NADA, REGRESO A CHECAR EL TECLADO ENTERO
+; ------ LOOP ROUTINE TO KEEP CHECKING FOR KEYPAD ROWS -------
 ;
-; ---------------------------------------------------------RUTINA PARA ESCRIBIR CERO-----------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CERO:
-        CALL    DELAY               ; RETRASO PARA EVITAR REBOTES
-        CLRF    LATD                ; LATD = 0
-        MOVFF   LATD, PrimerNumero  ; COPIO EL 0 EN UNA VARIABLE AUXILIAR, PrimerNumero = 0
-        CALL    CHECAR3             ; VERIFICO QUE YA NO SE PREIONE EL BOTON OTRA VEZ
-        RETURN                      ; REGRESO A CONTINUAR CHECANDO LOS BOTONES
+;                        INPUTS
+;                   RB4 RB5 RB6 RB7
+;                  |---------------|
+;   ROW 1 BUTTONS: | 1 | 2 | 3 | A | RB0
+;   ROW 2 BUTTONS: | 4 | 5 | 6 | B | RB1  OUTPUTS
+;   ROW 3 BUTTONS: | 7 | 8 | 9 | C | RB2
+;   ROW 4 BUTTONS: | * | 0 | # | D | RB3
+;                  |---------------|
+; ------------------------------------------------------------
+
+MATRIX_KEYPAD_LOOP:
+CHECK_ROW_1:
+        BCF     LATB, RB0           ; ACTIVATE
+        BSF     LATB, RB1           ; ONLY ROW 1
+        BSF     LATB, RB2           ;
+        BSF     LATB, RB3           ;
+        
+        BTFSS   PORTB, RB4          ; CHECK FOR 1
+	CALL    ONE
+	BTFSS   PORTB, RB5          ; CHECK FOR 2
+	CALL    TWO
+	BTFSS   PORTB, RB6          ; CHECK FOR 3
+	CALL    THREE
+        BTFSS   PORTB, RB7          ; CHECK FOR A (SUM ROUTINE)
+        CALL    A_function
+
+CHECK_ROW_2:
+        BSF     LATB, RB0           ; ACTIVATE
+        BCF     LATB, RB1           ; ONLY ROW 2
+        BSF     LATB, RB2           ;
+        BSF     LATB, RB3           ;
+        
+        BTFSS   PORTB, RB4          ; CHECK FOR 4
+	CALL    FOUR
+	BTFSS   PORTB, RB5          ; CHECK FOR 5
+	CALL    FIVE
+	BTFSS   PORTB, RB6          ; CHECK FOR 6
+	CALL    SIX
+	BTFSS   PORTB, RB7          ; CHECK FOR B (SUBSTRACTION ROUTINE)
+        CALL    B_function
+
+CHECK_ROW_3:
+        BSF     LATB, RB0           ; ACTIVATE
+        BSF     LATB, RB1           ; ONLY ROW 3
+        BCF     LATB, RB2           ;
+        BSF     LATB, RB3           ;
+        
+        BTFSS   PORTB, RB4          ; CHECK FOR 7
+	CALL    SEVEN
+	BTFSS   PORTB, RB5          ; CHECK FOR 8
+	CALL    EIGHT
+	BTFSS   PORTB, RB6          ; CHECK FOR 9
+	CALL    NINE
+        BTFSS   PORTB, RB7          ; CHECK FOR C (MULTIPLICATION ROUTINE)
+        CALL    C_function
+
+CHECK_ROW_4:
+        BSF     LATB, RB0              ; ACTIVATE
+        BSF     LATB, RB1              ; ONLY ROW 4
+        BSF     LATB, RB2              ;
+        BCF     LATB, RB3              ;
+        
+        BTFSS   PORTB, RB4             ; CHECK FOR ASTHERISK
+	CALL    ASTHERISK
+	BTFSS   PORTB, RB5             ; CHECK FOR 0
+	CALL    ZERO
+	BTFSS   PORTB, RB6             ; CHECK FOR SHARP (PERFORM MATH OPERATION AND SHOW RESULT)
+	CALL    SHARP
+        BTFSS   PORTB, RB7             ; CHECK FOR D (DIVISION ROUTINE)
+        CALL    D_function
+
+        GOTO    MATRIX_KEYPAD_LOOP     ; SI NO SE PRESIONA NADA, REGRESO A CHECAR EL TECLADO ENTERO
+
+; ------------ ZERO ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR UNO---------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-UNO:
-        CALL    DELAY               ; RETRASO PARA EVITAR REBOTES
-        MOVLW   0x01                ; W = 1
-        MOVWF   LATD                ; LATD = 1
-        MOVWF   PrimerNumero        ; COPIO EL 1 EN UNA VARIABLE AUXILIAR, PrimerNumero = 1
-        CALL    CHECAR0             ; VERIFICO QUE YA NO SE PREIONE EL BOTON OTRA VEZ
-        RETURN                      ; REGRESO A CONTINUAR CHECANDO LOS BOTONES
+; WRITE ZERO TO PORT D
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR DOS---------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-DOS:
-        CALL    DELAY               ; RETRASO PARA EVITAR REBOTES
-        MOVLW   0x02                ; W = 2
-        MOVWF   LATD                ; LATD = 2
-        MOVWF   PrimerNumero        ; COPIO EL 2 EN UNA VARIABLE AUXILIAR, PrimerNumero = 2
-        CALL    CHECAR1             ; VERIFICO QUE YA NO SE PREIONE EL BOTON OTRA VEZ
-        RETURN                      ; REGRESO A CONTINUAR CHECANDO LOS BOTONES
+; ------------------------------------------
+
+ZERO:
+        CALL    DEBOUNCE            ; WAIT FOR BOUNCING
+        CLRF    LATD                ; SEND 0 TO PORTD
+        MOVFF   LATD, first_number  ; first number = 0
+        RETURN                      ; BACK TO KEYPAD CHECK LOOP
+
+; ------------ ONE ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR TRES--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-TRES:
-        CALL    DELAY               ; RETRASO PARA EVITAR REBOTES
-        MOVLW   0x03                ; W = 3
-        MOVWF   LATD                ; LATD = 3
-        MOVWF   PrimerNumero        ; COPIO EL 3 EN UNA VARIABLE AUXILIAR, PrimerNumero = 3
-        CALL    CHECAR2
+; WRITE ONE TO PORT D
+;
+; ------------------------------------------
+
+ONE:
+        CALL    DEBOUNCE            ; WAIT FOR BOUNCING
+        MOVLW   1                   ; SEND 1 TO
+        MOVWF   LATD                ; PORTD
+        MOVWF   first_number        ; first number = 1
+        RETURN                      ; BACK TO KEYPAD CHECK LOOP
+
+; ------------ TWO ROUTINE ----------------
+;
+; WRITE TWO TO PORT D
+;
+; ------------------------------------------
+
+TWO:
+        CALL    DEBOUNCE            
+        MOVLW   2                   
+        MOVWF   LATD                
+        MOVWF   first_number        
+        RETURN           
+
+; ------------ THREE ROUTINE ---------------- 
+;
+; WRITE THREE TO PORT D
+;
+; ------------------------------------------
+
+THREE:
+        CALL    DEBOUNCE         
+        MOVLW   3                
+        MOVWF   LATD             
+        MOVWF   first_number     
         RETURN
+
+; ------------ FOUR ROUTINE ---------------- 
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR CUATRO------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CUATRO:
-        CALL    DELAY
-        MOVLW   0x04
+; WRITE FOUR TO PORT D
+;
+; ------------------------------------------
+
+FOUR:
+        CALL    DEBOUNCE
+        MOVLW   4
         MOVWF   LATD
-        MOVWF   PrimerNumero
-        CALL    CHECAR0
+        MOVWF   first_number
         RETURN
+
+; ------------ FIVE ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR CINCO-------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CINCO:
-        CALL    DELAY
-        MOVLW   0x05
+; WRITE FIVE TO PORT D
+;
+; ------------------------------------------
+
+FIVE:
+        CALL    DEBOUNCE
+        MOVLW   5
         MOVWF   LATD
-        MOVWF   PrimerNumero
-        CALL    CHECAR1
+        MOVWF   first_number
         RETURN
+
+; ------------ SIX ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR SEIS--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-SEIS:
-        CALL    DELAY
-        MOVLW   0x06
+; WRITE SIX TO PORT D
+;
+; ------------------------------------------
+
+SIX:
+        CALL    DEBOUNCE
+        MOVLW   6
         MOVWF   LATD
-        MOVWF   PrimerNumero
-        CALL    CHECAR2
+        MOVWF   first_number
         RETURN
+
+; ------------ SEVEN ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR SIETE-------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-SIETE:
-        CALL    DELAY
-        MOVLW   0x07
+; WRITE SEVEN TO PORT D
+;
+; ------------------------------------------
+
+SEVEN:
+        CALL    DEBOUNCE
+        MOVLW   7
         MOVWF   LATD
-        MOVWF   PrimerNumero
-        CALL    CHECAR0
+        MOVWF   first_number
         RETURN
+
+; ------------ EIGHT ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR OCHO--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-OCHO:
-        CALL    DELAY
-        MOVLW   0x08
+; WRITE EIGHT TO PORT D
+;
+; ------------------------------------------
+
+EIGHT:
+        CALL    DEBOUNCE
+        MOVLW   8
         MOVWF   LATD
-        MOVWF   PrimerNumero
-        CALL    CHECAR2
+        MOVWF   first_number
         RETURN
+
+; ------------ NINE ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA ESCRIBIR NUEVE-------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-NUEVE:
-        CALL    DELAY
-        MOVLW   0x09
+; WRITE NINE TO PORT D
+;
+; ------------------------------------------
+
+NINE:
+        CALL    DEBOUNCE
+        MOVLW   9
         MOVWF   LATD
-        MOVWF   PrimerNumero
-        CALL    CHECAR2
+        MOVWF   first_number
         RETURN
+
+; ------------ A ROUTINE ----------------
 ;
-; ------------------------------------------------------RUTINA PARA SUMAR----------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-AH:
-        CALL    DELAY
-        CALL    copiarNUMERO             ; Cambia el valor anteriormente almacenado en a
-        BSF     TipoOper,7                 ;     a la variable b
-        BCF     TipoOper,6                 ; Y señala en f que se realizara una suma
-        BCF     TipoOper,5                 ;    con el valor 0x80
-        BCF     TipoOper,4
-        CALL    CHECAR0
-        RETURN
-
-SUMA:
-        MOVF    copiaDelNumero,0
-        ADDWF   PrimerNumero,0               ; Sum a y b.
-        MOVWF   LATD              ; Despliega el resultado en los LEDS
-        MOVWF   PrimerNumero                 ; Y lo guarda en a
-        RETURN
+; PREPARE FOR A SUM BETWEEN TWO NUMBERS
 ;
-; --------------------------------------------------------RUTINA PARA RESTAR-------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-B:
-        CALL    DELAY
-        CALL    copiarNUMERO              ; Cambia el valor anteriormente almacenado en a
-        BCF     TipoOper,7                 ;     a la variable b
-        BSF     TipoOper,6                 ; Y señala en f que se realizara una resta
-        BCF     TipoOper,5                 ;    con el valor 0x40
-        BCF     TipoOper,4
-        CALL    CHECAR1
+; ------------------------------------------
+
+A_function:
+        CALL    DEBOUNCE
+        MOVFF   first_number, second_number
+        MOVLW   sum_op
+        MOVWF   operation
         RETURN
 
-RESTA:
-        MOVF    PrimerNumero,0
-        SUBWF   copiaDelNumero,0               ; Resta b de a
-        MOVWF   LATD              ; Depsliega el resultado en los LEDS
-        MOVWF   PrimerNumero                 ; Y lo guarda en a
-        RETURN
+; --------------- B ROUTINE ---------------------
 ;
-; --------------------------------------------------------RUTINA PARA MULTIPLICAR--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CH:
-        CALL    DELAY
-        CALL    copiarNUMERO              ; Cambia el valor anteriormente almacenado en a
-        BCF     TipoOper,7                ;     a la variable b
-        BCF     TipoOper,6                ; Y señala en f que se realizara una multiplicaion
-        BSF     TipoOper,5                ;    con el valor 0x20
-        BCF     TipoOper,4
-        CALL    CHECAR3
+; PREPARE FOR A SUBSTRACTION BETWEEN TWO NUMBERS
+;
+; -----------------------------------------------
+
+B_function:
+        CALL    DEBOUNCE
+        MOVFF   first_number, second_number
+        MOVLW   minus_op
+        MOVWF   operation
         RETURN
 
-MULTIPLICACION:
-        MOVLW   0                   ; W = 0
-        CPFSEQ  PrimerNumero        ; CHECO SI MI ULTIMO NUMERO TECLEADO ES 0
-        GOTO    ConfirmarCero        ; SI NO, SUMO LAS VECES NECESARIAS
-        CALL    MostrarCero                ; SI ES ASI, MI RESULTADO ES 0
+; ---------------- C ROUTINE ---------------------- 
+;
+; PREPARE FOR A MULTIPLICATION BETWEEN TWO NUMBERS
+;
+; -------------------------------------------------
+
+C_function:
+        CALL    DEBOUNCE
+        MOVFF   first_number, second_number
+        MOVLW   mul_op
+        MOVWF   operation
         RETURN
 
-ConfirmarCero:
-        MOVLW   0
-        CPFSEQ  copiaDelNumero
-        GOTO    SumaMultiple
-        CALL    MostrarCero
-        GOTO    KL
+; ---------------- D ROUTINE ---------------------- 
+;
+; PREPARE FOR A DIVISION BETWEEN TWO NUMBERS
+;
+; -------------------------------------------------
 
-SumaMultiple:
-        MOVF    PrimerNumero, 0
-        CPFSLT  ContMultiplicacion
-        GOTO    MostrarMult
-        MOVF    copiaDelNumero, 0
-        Suma2:
-                ADDWF   copiaDelNumero, 1
-                INCF    ContMultiplicacion
-                MOVF    PrimerNumero, 0
-                CPFSLT  ContMultiplicacion
-                GOTO    MostrarMult
-                GOTO    Suma2
+D_function:
+        CALL    DEBOUNCE
+        MOVFF   first_number, second_number
+        MOVLW   div_op
+        MOVWF   operation
+        RETURN
 
-MostrarMult:
-        MOVFF   copiaDelNumero, LATD
-        MOVLW   1
-        MOVWF   ContMultiplicacion
-        GOTO    KL
+; ---------------- SHARP ROUTINE ----------------------
+;
+; CHECK WHICH OPERATION WAS SELECTED
+;
+; -----------------------------------------------------
 
-MostrarCero:
+SHARP:
+        CALL    DEBOUNCE
+
+        BTFSC   operation, 0        ; CHECK FOR SUM             (b'0000 0001')
+        CALL    SUM           
+        BTFSC   operation, 1        ; CHECK FOR MINUS           (b'0000 0010')
+        CALL    MINUS
+        BTFSC   operation, 2        ; CHECK FOR MULTIPLICATION  (b'0000 0100')
+        CALL    MULTIPLICATION
+        BTFSC   operation, 3        ; CHECK FOR DIVISION        (b'0000 1000')
+        CALL    DIVISION
+        RETURN
+
+; ---------------- SUM ROUTINE ---------------------- 
+;
+; CHECK WHICH OPERATION WAS SELECTED
+;
+; -----------------------------------------------------
+
+SUM:
+        MOVF    second_number, W
+        ADDWF   first_number, F              
+        MOVFF   first_number, LATD            
+        RETURN
+
+; ---------------- MINUS ROUTINE ----------------------
+;
+; CHECK WHICH OPERATION WAS SELECTED
+;
+; -----------------------------------------------------
+
+MINUS:
+        MOVF    first_number, W
+        SUBWF   second_number, W            
+        MOVWF   LATD                        
+        MOVWF   first_number               
+        RETURN
+
+; ---------------- MULTIPLICATION ROUTINE ----------------------
+;
+; PERFORM A MULTIPLICATION BETWEEN THE 2 NUMBERS SELECTED.
+; THE RESULT IS A NUMBER OF 8-bits
+;
+; --------------------------------------------------------------
+
+MULTIPLICATION:
+        TSTFSZ  first_number                ; CHECK IF first_number = 0
+        BRA     MULTIPLICATION1             ; IF SO, THEN RETURN ZERO
+        CLRF    LATD                        ; ELSE, CHECK second_number
+        RETURN
+
+MULTIPLICATION1:
+        TSTFSZ  second_number               ; CHECK IF second_number = 0
+        GOTO    MULTIPLICATION2             ; IF BOTH ARE NUMBERS <> 0, THEN MULTIPLY THEM
+        CLRF    LATD                        ; IF NOT, RETURN 0
+        RETURN
+
+MULTIPLICATION2:
+        MOVF    first_number, W             ; LOAD first_number INTO COUNTER AND
+        MOVWF   COUNTER                     ; second_number INTO WREG TO PERFORM
+        MOVF    second_number, W            ; A SUM LATER ON
+
+MULTIPLICATION3:
+        DECFSZ  COUNTER                     ; WHILE COUNTER IS NOT ZERO, IT MEANS
+        GOTO    MANUAL_MUL                  ; THERE ARE STILL SUMS TO PERFORM
+        MOVFF   second_number, LATD         ;
+        MOVFF   second_number, first_number ; STORE THE RESULT AS THE LAST DIGIT PRESSED
+        RETURN
+
+MANUAL_MUL:
+        ADDWF   second_number, F            ; LOOP FOR ADDING second_number to itself
+        GOTO    MULTIPLICATION3             ;
+
+; ---------------- DIVISION ROUTINE ----------------------
+;
+; PERFORM A DIVISION BETWEEN THE 2 NUMBERS SELECTED
+; THE DIVISION GOES THIS WAY:
+;
+; second_number / first_number = COUNTER
+;
+; Example:  5 / 2 = 2
+;           4 / 2 = 2
+;           1 / 2 = 0
+;           3 / 0 = 0
+;
+; --------------------------------------------------------
+
+DIVISION:
+        TSTFSZ  first_number                ; CHECK IF first_number IS 0
+        BRA     DIVISION1                   ; IF SO, JUST RETURN
+        CLRF    LATD                        ; A ZERO AND FINISH OPERATION
+        RETURN                              ; IF NOT, JUMP TO DIVISION1
+
+DIVISION1:
+        MOVF    first_number, W             ; CHECK IF second_number IS
+        CPFSLT  second_number               ; LESS THAN first_number. IF SO
+        BRA     DIVISION2                   ; RETURN ZERO. IF NOT, JUMP TO
+        MOVFF   COUNTER, LATD               ; DIVISION2 AND PERFORM THE OPERATION
+
+DIVISION2:
+        SUBWF   second_number, F            ; SUBSTRACT first_number FROM second_number
+        INCF    COUNTER, F                  ; UNTIL THE RESULT IS LESS THAN first_number
+        BRA     DIVISION1                   ; THEN RETURN COUNTER VALUE WHICH HOLDS THE ACTUAL RESULT
+
+;--------------- ASTHERISK ROUTINE -------------
+;
+; CLEARS EVERYTHING
+;
+; ----------------------------------------------
+
+ASTHERISK:
+        CALL    DEBOUNCE                    ; CLEARS EVERYTHING
+        CLRF    first_number
+        CLRF    second_number
+        CLRF    WREG
         CLRF    LATD
         RETURN
 
+; ------------ DEBOUNCE ROUTINE -------------------
 ;
-; --------------------------------------------------------RUTINA PARA DIVIDIR--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-D:
-        CALL    DELAY
-        CALL    copiarNUMERO             ; Cambia el valor anteriormente almacenado en a
-        BCF     TipoOper,7                 ;     a la variable b
-        BCF     TipoOper,6                 ; Y señala en f que se realizara una suma
-        BCF     TipoOper,5                 ;    con el valor 0x80
-        BSF     TipoOper,4
-        CALL    CHECAR0
-        RETURN
-
-DIVISION:
-        MOVF    PrimerNumero,0
-        CPFSLT  copiaDelNumero        
-        GOTO    InContDiv                 ; Y posteriormente a la variable a
-        GOTO    MostrarResultado
-
-MostrarResultado:
-        MOVFF   ContDivision, LATD
-        CLRF    ContDivision
-        RETURN
-
-InContDiv:
-        MOVF    PrimerNumero,0
-        SUBWF   copiaDelNumero,1          ; Multiplica a y b
-        INCF    ContDivision, 1
-        GOTO    DIVISION
+; ROUTINE TO SKIP ANY BUTTON BOUNCING
 ;
-; --------------------------------------------------------RUTINA PARA REALIZAR OPERACIONES-----------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-GATO:
-        CALL    DELAY
-        BTFSC   TipoOper,7         ; Se verifica el valor de la bandera f
-        CALL    SUMA               ; y se llama a la rutina con la operacion adecuada
-        BTFSC   TipoOper,6
-        CALL    RESTA
-        BTFSC   TipoOper,5
-        CALL    MULTIPLICACION
+; -------------------------------------------------
 
-        KL:
-            BTFSC   TipoOper,4
-            CALL    DIVISION
-            CALL    CHECAR2
-            RETURN
-;
-; --------------------------------------------------------RUTINA PARA COPIAR EL PRIMER NUMERO INGRESADO----------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-copiarNUMERO:
-        MOVFF    PrimerNumero, copiaDelNumero              ; Mueve el valor de a al
+DEBOUNCE:
+        BTFSS   PORTB, RB4
+        GOTO    DEBOUNCE
+        BTFSS   PORTB, RB5
+        GOTO    DEBOUNCE
+        BTFSS   PORTB, RB6
+        GOTO    DEBOUNCE
+        BTFSS   PORTB, RB7
+        GOTO    DEBOUNCE
         RETURN
-;
-; --------------------------------------------------------RUTINA PARA EL ASTERISC--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-ASTERISCO:
-        CALL    DELAY              ; No tiene utilidad esta rutina
-        CALL    CHECAR0
-        RETURN
-;
-; ----------------------------------RUTINAS PARA CHECAR SI SE SOTARON LOS BOTONES--------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-CHECAR0:
-        CALL    DELAY
-        BTFSC   PORTB,4           ; En estas rutinas se verifica que los
-        RETURN                  ; botones correspondientes hayan sido soltados
-        GOTO    CHECAR0
-
-CHECAR1:
-        CALL    DELAY
-        BTFSC   PORTB,5
-        RETURN
-        GOTO    CHECAR1
-
-CHECAR2:
-        CALL    DELAY
-        BTFSC   PORTB,6
-        RETURN
-        GOTO    CHECAR2
-
-CHECAR3:
-        CALL    DELAY
-        BTFSC   PORTB,7
-        RETURN
-        GOTO    CHECAR3
-;
-; ---------------------------------------------------RUTINA GENERICA DE DELAYS-----------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-DELAY:
-        MOVLW   0XFF            ; CARGO EL VLOR MAX POSIBLE EN W
-        MOVWF   VAR1            ; VAR1 = 0XFF
-        MOVWF   VAR2            ; VAR2 = 0XFF
-
- LOOP1:
-            DECFSZ  VAR2        ; DECREMENTO LA VARIABLE 2
-            GOTO    LOOP1       ; SI ES DIFERENTE DE 0, SIGUE DECREMENTANDO
-            DECFSZ  VAR1        ; SI ES 0, DECREMENTO VARIANLE 1
-            GOTO    LOOP1       ; SI ES DIFERENTE DE 0, SIGUE DECREMENTANDO
-            RETURN              ; SI ES 0, TERMINO EL DELAY
 
 END
