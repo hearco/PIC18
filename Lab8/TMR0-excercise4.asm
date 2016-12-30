@@ -1,180 +1,241 @@
-RADIX	DEC					; SET DECIMAL AS DEFAULT BASE
-		PROCESSOR	18F45K50		; SET PROCESSOR TYPE
-		#INCLUDE	<P18F45K50.INC>
-;
-;
-;	VARIABLE'S DEFINITION SECTION
-;
-VAR1        EQU	0			; VARIABLE PARA EL DELAY
-VAR2        EQU	1			; VARIABLE PARA EL DELAY
-ContDelays  EQU 2           ; CONTADOR DE DELAYS, SIRVE PARA SABER CUANDO YA PASO UN SEGUNDO
-ContPulsos  EQU 3
-TimersCont  EQU 4
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Author: Ariel Almendariz
+; Date: December 30, 2016
+; Title: TIMER0 DELAY
+; Description:
+;       - Count the times a push button was pressed after 10 seconds and multiply it by 6
+;       - Use T1CKI pin as external counter
+;       - Use RB0 as input for push button and RB7 as output for push button
+;       - Use any pin to connect a led
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+RADIX       DEC					; SET DECIMAL AS DEFAULT BASE
+PROCESSOR	18F45K50            ; SET PROCESSOR TYPE
+#INCLUDE	<P18F45K50.INC>     ; INCLUDE PIC18 LIBRARY
 
 
-;	*** ONLY NEEDED FOR SOFTWARE SIMULATION ***
-;
-		ORG		0					; RESET VECTOR
-		GOTO	0X1000
-;
-		ORG		0X08				; HIGH INTERRUPT VECTOR
-		GOTO	0X1008
-;
-		ORG		0X18				; LOW INTERRUPT VECTOR
-		GOTO	0X1018
-;
-;	*** END OF CODE FOR SOFTWARE SIMULATION ***
-;	JUMP VECTORS
-;
-		ORG		0X1000				; RESET VECTOR
-		GOTO	MAIN
-;
-		ORG		0X1008				; HIGH INTERRUPT VECTOR
-;		GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
-;
-		ORG		0X1018				; LOW INTERRUPT VECTOR
-;		GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
-;	RESOURCE INITIALIZATION
+;	*** VECTORS NEEDED FOR SOFTWARE SIMULATION ***
+; ------------------------------------------------
 
+ORG		0					; RESET VECTOR
+GOTO	0X1000
+
+ORG		0X08				; HIGH INTERRUPT VECTOR
+GOTO	0X1008
+
+ORG		0X18				; LOW INTERRUPT VECTOR
+GOTO	0X1018
+
+
+;	*** VECTORS USED FOR JUMPING BETWEEN MEMORY LOCATIONS ***
+; -----------------------------------------------------------
+
+ORG		0X1000				; RESET VECTOR
+GOTO	MAIN
+
+ORG		0X1008				; HIGH INTERRUPT VECTOR
+;GOTO	ISR_HIGH			; UNCOMMENT WHEN NEEDED
 ;
-; ---------------------------------------INICIALIZACION DE LAS VARIABLES Y REGISTROS A UTILIZAR------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
+ORG		0X1018				; LOW INTERRUPT VECTOR
+;GOTO	ISR_LOW				; UNCOMMENT WHEN NEEDED
+
+
+; ------------ SET UP THE CONSTANTS ----------------
+;
+;   RAM memory space goes from 0x00 to 0xFFF. By default,
+;   we can use the access bank (from 0x00 to 0x7F of bank 0
+;   to 0x80 to 0xFF of bank 15)
+;
+;   RAM data memory MAP
+;
+;   BANK 0          0x00 (0x00 to 0x7F Access RAM)
+;                        (0x80 to 0xFF start of GPR's)
+;   BANK 1          0x01 (0x00 to 0xFF)
+;   BANK 2          0x02 (0x00 to 0xFF)
+;   BANK 3          0x03 (0x00 to 0xFF)
+;   BANK 4          0x04 (0x00 to 0xFF)
+;   BANK 5          0x05 (0x00 to 0xFF)
+;   ...
+;   BANK 6 TO 14    (UNUSED, READ 0x00)
+;   ...
+;   BANK 15         0xFF (0x00 to 0x7F UNUSED)
+;                        (0x80 to 0xFF SFR's)
+;
+;---------------------------------------------------
+
+; CONSTANTS
+TEN_SECONDS     EQU     2
+
+; VARIABLES (ADDRESSES)
+DELAY1          EQU     0
+DELAY2          EQU     1
+TIMES_TIMER0    EQU     2
+
+
+; ----------- INITIALIZE REGISTERS ---------------------
+; ------------------------------------------------------
+
 MAIN:
+        ; ----------- CONSIDERATIONS ---------------
+        ;
+        ; - CONNECT PUSH BUTTON TO RB0
+        ; - CONNECT RD7 TO T0CKI (PIN 4) OF PORTA
+        ; - CONNECT LED TO RD0
+        ; ------------------------------------------
+
         MOVLB   15
-        CLRF    ANSELA, BANKED
-        CLRF	ANSELB, BANKED		; SET ALL PINS AS DIGITAL
-        CLRF    TRISB               ; Puerto B es salida
-        CLRF    LATB                ; LIMPIO EL PUERTO B
-        CLRF    TRISD
-        BCF     LATB, 6
-        CLRF    LATD
-        BSF     TRISC, 0            ; RA4 como enrada
-        CLRF    ContDelays          ; ContDelays = 0
-        MOVLW   b'00000111'         ; TIMER = 8 BITS, TRANSICION EXTERNA, PREESCALADOR = 256
-        MOVWF   T0CON               ; Valor de prescala es 128
-        CLRF    INTCON              ; Se limpia bandera de timer OV
-AB:     CLRF    TimersCont
-        CLRF    ContPulsos
-        CLRF    LATD
 
-OtraVez:
-        MOVLW   0x00                ; Valor inicial para
-        MOVWF   TMR0H               ; parte baja del timer
-        MOVLW   0x00                ; Valor inicial para
-        MOVWF   TMR0L               ; parte baja del timer
-        BSF     T0CON, 7            ; ENCIENDO EL TIMER
-        GOTO    LOOP
-   ;     GOTO    OtraVez
+        ; CONFIGURE BIT 0 OF PORTB AS INPUT FOR PUSH BUTTON
+        CLRF	ANSELB, BANKED		; PORTB DIGITAL
+        BSF     TRISB, RB0          ; BIT 0 FOR INPUT, WHERE PUSH BUTTON IS ATTACHED
+        BCF     TRISB, RB7          ; BIT 7 AS OUTPUT
+
+        ; CONFIGURE T1CKI PIN AS INPUT FOR COUNTING
+        CLRF    ANSELC, BANKED      ; PORTC AS DIGITAL
+        BSF     TRISC, 0            ; BIT 0 OF PORTC AS INPUT
+
+        ; CONFIGURE PORTD AS OUTPUT TO SHOW RESULT OF PULSES
+        CLRF    ANSELD, BANKED      ; PORTD DIGITAL
+        CLRF    TRISD               ; LATD FOR OUTPUT
+        CLRF    LATD                ; CLEAR PORTD
+
+        ; CONFIGURE T0CON FOR TIMER0. CHECK PAGE 161 OF DATASHEET FOR FURTHER INFO
+        ; TIMER0 WILL BE USED TO COUNT UP TO 10 SECONDS
+        MOVLW   b'00000111'         ; TIMER = 16 BITS, INCREMENT ON Fosc/4, PRESCALE = 256
+        MOVWF   T0CON               ;
+
+        ; CHECK PAGE 120 OF DATASHEET FOR FURTHER INFO
+        CLRF    INTCON              ; DISABLE ALL INTERRUPTS AS WE WILL NOT USE ISR ROUTINES
+                                    ; INSTEAD, WE WILL KEEP CHECKING FOR TMR0 OVERFLOW FLAG
+
+        ; CONFIGURE T1CON FOR TIMER1. CHECK PAGE 174 OF DATASHEET FOR FURTHER INFO
+        ; TIMER1 WILL BE USED TO COUNT PULSES IN 10 SECONDS
+        MOVLW   b'10000110'         ; NO SYNC, 16-BIT MODE
+        MOVWF   T1CON               ; USE T1CKI AS EXTERNAL CLOCK, PRESCALE = 1, R/W TIMER1 IN 2 8-BIT OPERATIONS
+
+
+; ----------------- TIMER1 --------------------
 ;
-; --------------------------------------------------------CHECA BOTON--------------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-LOOP:
-        BTFSS   PORTC, 0
-        CALL    Boton
-        BTFSS   INTCON,2            ; Esperar hasta que la bandera de
-        GOTO    LOOP
-        GOTO    IncCont
+; USE THIS TIMER AS A COUNTER FOR PUSH BUTTON
+;
+; ---------------------------------------------
 
-Timer3:
-        MOVLW   0x9E
-        MOVWF   TMR0H
-        MOVLW   0x58
-        MOVWF   TMR0L
-        BSF     T0CON, 7
-        GOTO    LOOP2
+SET_UP_TIMER1:
+        BCF     T1CON, TMR1ON
+        MOVLW   TEN_SECONDS         ; LOADS HOW MANY TIMES TIMER0
+        MOVWF   TIMES_TIMER0        ; WILL EXECUTE TO COMPLETE 10 SECONDS
+        CLRF    TMR1H
+        CLRF    TMR1L
+        BSF     T1CON, TMR1ON
 
-LOOP2:
-        BTFSS   PORTC, 0
-        CALL    Boton
-        BTFSS   INTCON,2            ; Esperar hasta que la bandera de
-        GOTO    LOOP2
-        GOTO    Overflow
+; ------------------------ TIMER0 MAX SETUP --------------------------
+;
+; It's simple. Because we are using an external counter, we don't
+; need to calculate any time value. Just keep in the counts and the
+; number TMR0L is going to count from. In this case, we need to count
+; 10 times to turn on a led, then another 10 timer to turn it off.
+; So, it's simple enough to load a value of 246. When it reaches 10
+; counts, i will overflow.
+;
+; --------------------------------------------------------------------
 
-IncCont:
-        BCF     INTCON, 2
-        BCF     T0CON, 7
-        INCF    TimersCont, 1
-        MOVLW   2
-        CPFSEQ  TimersCont
-        GOTO    OtraVez
-        GOTO    Timer3
+SET_UP_TIMER0_1sec:
+        BCF     T0CON, TMR0ON
+        CLRF    TMR0H               ; LOAD THE MAX VALUE
+        CLRF    TMR0L               ; EQUIVALENT TO 4.2s
+        BSF     T0CON, TMR0ON       ;
 
-Boton:
-        CALL    EvitarRebotes
-        BTFSS   PORTC, 0
-        GOTO    Boton
-        INCF    ContPulsos, 1
-     ;   MOVFF   ContPulsos, LATD
-   ;     GOTO    CHECAROverflow
-  QW:   RETURN
+; -------------- CHECK PUSH BUTON ------------------
+;
+; WHEN THE PUSH BUTTON IS PRESSED, INCREMENT COUNT
+;
+; --------------------------------------------------
 
-;CHECAROverflow:
-;        MOVLW   0X00
-;        CPFSEQ  TMR0L
-;        GOTO    QW
-;        GOTO    PRENDER
+BUTTON_STATUS:
+        BTFSS   PORTB, RB0          ; KEEP CHECKING FOR PUSH BUTTON
+        CALL    INCREMENT_COUNT     ;
+        BTFSS   INTCON, TMR0IF      ; AND KEEP CHECKING FOR OVERFLOW
+        BRA     BUTTON_STATUS       ;
 
-;PRENDER:
-;        BSF     INTCON, 2
-;        GOTO    QW
+CHECK_OVERFLOW:
+        BCF     INTCON, TMR0IF      ;
+        BTFSC   TIMES_TIMER0, 7     ; CHECK IF 10 SECONDS HAVE PASSED
+        GOTO    SHOW_COUNTS         ;
+        DECFSZ  TIMES_TIMER0        ; THIS WILL MAKE TIMER0 EXECUTE 2 TIMES
+        GOTO    SET_UP_TIMER0_1sec  ; AND AT 3RD TIME, IT WILL EXECUTE LESS TIME
 
-Overflow:
-        BCF     INTCON,2            ; Limpiar bandera nuevamente
-        BCF     T0CON, 7            ; APAGO EL TIMER
-        BTG     LATB, 6
-        CALL    Mul6func
-        MOVFF   ContPulsos, LATD    ; Cambiar de valor el pin conectado al LED
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        CALL    EvitarRebotes
-        GOTO    AB            ; Regresar al loop
+; ------------------------ LAST_TIMER0 ---------------------------
+;
+; THIS PART OF CODE WILL EXECUTE AFTER 8.4s. NOW, WE HAVE
+; TO EXECUTE 1.6s MORE TO COMPLETE THE 10 SECONDS. SO WE
+; CONSIDER THE NEXT:
+;
+; TMR0value = 65536 - ( Time_needed / (4 * Tosc * Prescaler) )
+; TMR0value = 65536 - ( 1.612 / ( 4 * (1/16M) * 256) )
+; TMR0value = 40,347 -> 0x9D9B
+;
+; ----------------------------------------------------------------
 
-Mul6func:
-        MOVF    ContPulsos, 0
-        ADDWF   ContPulsos, 0
-        ADDWF   ContPulsos, 0
-        ADDWF   ContPulsos, 0
-        ADDWF   ContPulsos, 0
-        ADDWF   ContPulsos, 0
-        MOVWF   ContPulsos
+LAST_TIMER0:
+        BCF     T0CON, TMR0ON       ; LOAD VALUE EQUIVALENT TO
+        MOVLW   0x9E                ; 1.612s
+        MOVWF   TMR0H               ;
+        MOVLW   0x58                ;
+        MOVWF   TMR0L               ;
+        BSF     T0CON, TMR0ON       ; 
+        BSF     TIMES_TIMER0, 7     ; TELL THE PROGRAM THIS IS THE LAST TIME TO EXECUTE TIMER0
+        GOTO    BUTTON_STATUS       ;
+
+; -------------- INCREMENT COUNTER --------------
+;
+; AFTER INCREMENTING COUNTER, CHECK FOR OVERFLOW
+;
+; -----------------------------------------------
+
+INCREMENT_COUNT:
+        CALL    DEBOUNCE            ; TOGGLE A LED EACH TIME
+        BSF     LATB, RB7           ; THE PUSH BUTTON IS PRESSED
+        BSF     LATD, RD0           ; SO WE CAN SEE THE COUNTING
+
+RELEASE_BUTTON:                     ; AS BOUNCING OCCURS WHEN THE PUSH
+        BTFSS   PORTB, RB0          ; BUTTON IS PRESSED AND RELEASED, THERE
+        GOTO    RELEASE_BUTTON      ; ARE TO SITUATIONS WHERE A DEBOUNCE ROUTINE
+        CALL    DEBOUNCE            ; HAS TO BE ADDED
+        BCF     LATB, RB7           ;
+        BCF     LATD, RD0           ;
         RETURN
+
+; ----------------------------
 ;
-; ------------------------------------------------RUTINA PARA EVITAR REBOTES-------------------------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-EvitarRebotes:
-        CALL    Delay               ; Retraso
-        INCF    ContDelays, 1       ; CONTADOR PARA MEDIR LOS SEGUNDOS QUE HAN PASADO
-        MOVLW   4                   ; W = 1
-        CPFSEQ  ContDelays          ; CHECO SI YA PASO UN SEGUNDO
-        GOTO    EvitarRebotes       ; SI NO, VUELVO A LLAMAR LA FUNCION
-        CALL    LimpiarContador     ; LIMPIO EL CONTADOR DE DELAYS PARA PODER VOLVERLO A USAR
-        Return                      ; SI ES ASI, REGRESO A LA FUNCION QUE LA MANDO A LLAMAR
+; SHOW RESULT ROUTINE
+;
+; ----------------------------
 
-Delay:
-        MOVLW   0XFF                ; CARGO EL VLOR MAX POSIBLE EN W
-        MOVWF   VAR1                ; VAR1 = 0XFF
-        MOVWF   VAR2                ; VAR2 = 0XFF
+SHOW_COUNTS:
+        MOVLW   6                   ; AFTER COUNTING 10 SECONDS, SHOW
+        MULWF   TMR1L               ; HOW MANY TIMES THE PUSH BUTTON WAS
+        MOVFF   PRODL, LATD         ; PRESSED TIMES 6
+        GOTO    SET_UP_TIMER1       ;
 
- LOOP1:
-            DECFSZ  VAR2            ; DECREMENTO LA VARIABLE 2
-            GOTO    LOOP1           ; SI ES DIFERENTE DE 0, SIGUE DECREMENTANDO
-            DECFSZ  VAR1            ; SI ES 0, DECREMENTO VARIANLE 1
-            GOTO    LOOP1           ; SI ES DIFERENTE DE 0, SIGUE DECREMENTANDO
-            RETURN                  ; SI ES 0, TERMINO EL DELAY
-; ------------------------------------------------RUTINA PARA LIMPIAR EL CONTADOR DE DELAYS----------------------------------------------------
-; ---------------------------------------------------------------------------------------------------------------------------------------------
-LimpiarContador:
-        CLRF    ContDelays
+; -------- DEBOUNCE ROUTINE ----------
+;
+; WAITS ABOUT 15.25ms
+;
+; ------------------------------------
+
+DEBOUNCE:
+        MOVLW   200
+        MOVWF   DELAY2
+
+DELAY_2:
+        MOVLW   100
+        MOVWF   DELAY1
+
+DELAY_1:
+        DECFSZ  DELAY1
+        GOTO    DELAY_1
+        DECFSZ  DELAY2
+        GOTO    DELAY_2
         RETURN
-;
-;
+
 END

@@ -7,7 +7,7 @@ Software used:
 - XC8 compiler for compiling C code (download it from here: http://www.microchip.com/mplab/compilers)
 
 Hardware used:
-- PIC8F45K50
+- PIC18F45K50
 
 Creating a MPLAB project:
 - Go to File/New Project/Microchip Embedded/Standalone Project/Next >
@@ -17,3 +17,6 @@ Creating a MPLAB project:
 - Give a name to the project and select a folder to save it, then click on finish.
 - Go to "Source files" on the project window and then right click. Select New/Empty File.
 - Name the file as you wish with .asm extension. Example: "helloworld.asm"
+
+Useful resources
+- http://microchip.wikidot.com/8bit:timer1
