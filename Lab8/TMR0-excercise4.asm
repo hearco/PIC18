@@ -3,10 +3,10 @@
 ; Date: December 30, 2016
 ; Title: TIMER0 DELAY
 ; Description:
-;       - Toggle a led after pressing a push button 10 times
-;       - Use T0CKI pin as external counter
-;       - Use RB0 as input for push button and RD7 as output for push button
-;       - Use any pin to cinnect a led
+;       - Count the times a push button was pressed after 10 seconds and multiply it by 6
+;       - Use T1CKI pin as external counter
+;       - Use RB0 as input for push button and RB7 as output for push button
+;       - Use any pin to connect a led
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 RADIX       DEC					; SET DECIMAL AS DEFAULT BASE
