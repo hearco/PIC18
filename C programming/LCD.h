@@ -57,7 +57,7 @@
 /****   LCD constants   ****************/
 #define FIRST_ROW       0 
 #define SECOND_ROW      1
-#define LCD_COL_LIMIT   14
+#define LCD_COL_LIMIT   15
 #define INIT_SUCCESS    1
 
 /****   Program variables   **************/
