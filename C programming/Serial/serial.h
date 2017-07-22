@@ -70,7 +70,7 @@ void serial_config(unsigned int baud_rate){
 */
 void serial_echo(){
         TXREG1 = RCREG1;
-        while(!TXSTA1bits.TRMT);
+        while(SENDING_BYTE);
         PIR1bits.RCIF = 0;
 }
 
