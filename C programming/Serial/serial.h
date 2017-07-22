@@ -13,13 +13,14 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 
 /**** Serial  ****************/
-#define BUFF_SIZE_LIMIT         70
-#define SENDING_BYTE            !TXSTA1bits.TRMT
-#define BYTE_AT_SERIAL_PORT     PIR1bits.RCIF
-#define MSG_TRANSMITTED         0
-#define NO_SOH_ERROR            -1
-#define NO_EOT_ERROR            -2
-#define UNK_ERROR               -3
+#define BUFF_SIZE_LIMIT             70
+#define SENDING_BYTE                !TXSTA1bits.TRMT
+#define BYTE_AT_SERIAL_PORT         PIR1bits.RCIF
+#define NO                          0
+#define MSG_TRANSMITTED_SUCCESS     0
+#define NO_SOH_ERROR                -1
+#define NO_EOT_ERROR                -2
+#define UNK_ERROR                   -3
 
 unsigned char SERIAL_BUFFER[BUFF_SIZE_LIMIT];
 
@@ -71,7 +72,7 @@ void serial_config(unsigned int baud_rate){
 void serial_echo(){
         TXREG1 = RCREG1;
         while(SENDING_BYTE);
-        PIR1bits.RCIF = 0;
+        BYTE_AT_SERIAL_PORT = NO;
 }
 
 /*! \fn unsigned char serial_read_msg( unsigned char *msg_to_receive, unsigned char soh, unsigned char eot )
@@ -137,7 +138,7 @@ signed char serial_read_msg(unsigned char *msg_to_receive, unsigned char soh, un
 *            at buffer. This typically is a constant value defined by the user.
 *   \param   eot End of transmission of message. Defines when to stop storing bytes
 *            at buffer. This typically is a constant value defined by the user.
-*   \return  MSG_TRANSMITTED : 0 > success
+*   \return  MSG_TRANSMITTED_SUCCESS : 0 > success
 */
 unsigned char serial_send_msg(unsigned char *msg_to_send, unsigned char soh, unsigned char eot){
     
@@ -156,15 +157,15 @@ unsigned char serial_send_msg(unsigned char *msg_to_send, unsigned char soh, uns
         *(msg_to_send++);
         i++;
     }
-    PIR1bits.RCIF = 0;
+    BYTE_AT_SERIAL_PORT = NO;
     INTCONbits.GIE = 1;
-    return MSG_TRANSMITTED;
+    return MSG_TRANSMITTED_SUCCESS;
 }
 
 /*! \fn unsigned char serial_send_string( unsigned char *string_to_send )
 *   \brief   Send an array of characters until end of line ('\0') is found.
 *   \param   string_to_send string constant which is composed by an array of characters
-*   \return  MSG_TRANSMITTED : 0 > success
+*   \return  MSG_TRANSMITTED_SUCCESS : 0 > success
 */
 unsigned char serial_send_string(unsigned char *string_to_send){
     
@@ -173,9 +174,9 @@ unsigned char serial_send_string(unsigned char *string_to_send){
         while(SENDING_BYTE);
         *(string_to_send++);
     }
-    PIR1bits.RCIF = 0;
+    BYTE_AT_SERIAL_PORT = NO;
     INTCONbits.GIE = 1;
-    return MSG_TRANSMITTED;
+    return MSG_TRANSMITTED_SUCCESS;
 }
 
 //TODO: currently not supported, mmaybe add later
