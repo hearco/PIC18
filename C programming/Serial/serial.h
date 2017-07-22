@@ -2,7 +2,7 @@
  * File: serial.h
  * Author: Ariel Almendariz
  * Comments:
- * Revision history: 
+ * Revision history: 1.0 - 22/jul/2017
  */
 
 // This is a guard condition so that contents of this file are not included
@@ -30,31 +30,35 @@ unsigned char SERIAL_BUFFER[BUFF_SIZE_LIMIT];
 */
 void serial_config(unsigned int baud_rate){
     
-    unsigned char val_high, val_low;
-    unsigned int temp;
-    temp = val_high = val_low = 0;
+    unsigned int temp = 0;    
+    temp = ((_XTAL_FREQ / baud_rate) / 64) - 1;
     
-    temp = ((16000000 / baud_rate) / 64) - 1;
-    
+    // Set PORTC as digital
     ANSELC = 0;
     
+    // Serial pins configuration
     TRISCbits.TRISC6 = 0;               //  TX/CK output
     TRISCbits.TRISC7 = 1;               //  RX/DT input
     
+    // Baud rate control register
     BAUDCON1bits.TXCKP = 0;             //  Idle state for transmit (TX) is high
     BAUDCON1bits.RXDTP = 0;             //  Receive data (RX) is active-high
     BAUDCON1bits.BRG16 = 0;             //  16-bit Baud rate generator (SPBRGHx:SPBRGx)
     
+    // Baud rate generator
+    SPBRGH1 = temp / 256;               //  EUSART Baud rate generator, High Byte
+    SPBRG1 = temp;                      //  EUSART Baud rate generator, Low Byte
+    
+    // Transmit status and control register
     TXSTA1bits.BRGH = 0;                //  High Speed enable
     TXSTA1bits.SYNC = 0;                //  Transmit status and control register, Modo asincrono
     TXSTA1bits.TXEN = 1;                //  Transmit status and control register, transmit enabled
     
-    SPBRGH1 = temp / 256;               //  EUSART Baud rate generator, High Byte = 0
-    SPBRG1 = temp;                      //  EUSART Baud rate generator, Low Byte = 0001 1001
-    
+    // Receive status and control register
     RCSTA1bits.CREN = 1;                //  Receive status and control register, enables receiver
     RCSTA1bits.SPEN = 1;                //  Receive status and control register, Serial port enabled
     
+    // Serial interruptions
     PIE1bits.RCIE = 1;
     PIE1bits.TXIE = 0;
     
@@ -178,4 +182,3 @@ unsigned char serial_send_string(unsigned char *string_to_send){
 //void serial_timeout( unsigned char seconds );
 
 #endif  /* XC_HEADER_TEMPLATE_H */
-
