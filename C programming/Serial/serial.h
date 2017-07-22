@@ -14,8 +14,6 @@
 
 /**** Serial  ****************/
 #define BUFF_SIZE_LIMIT         70
-#define SOH                     0x01
-#define EOT                     0x04
 #define SENDING_BYTE            !TXSTA1bits.TRMT
 #define BYTE_AT_SERIAL_PORT     PIR1bits.RCIF
 #define MSG_TRANSMITTED         0
