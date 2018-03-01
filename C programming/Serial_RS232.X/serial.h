@@ -179,6 +179,12 @@ unsigned char serial_send_string(unsigned char *string_to_send){
     return MSG_TRANSMITTED_SUCCESS;
 }
 
+unsigned char send_char(unsigned char byte_to_send){
+    TXREG1 = byte_to_send;
+    while(SENDING_BYTE);
+    BYTE_AT_SERIAL_PORT = NO;
+}
+
 //TODO: currently not supported, mmaybe add later
 //void serial_timeout( unsigned char seconds );
 

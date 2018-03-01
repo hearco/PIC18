@@ -1,0 +1,317 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F45K50 ]
+[d frameptr 4065 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"16 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.c
+[v _high_isr high_isr `II(v  1 e 1 0 ]
+"23
+[v _low_isr low_isr `IIL(v  1 e 1 0 ]
+"28
+[v _main main `(v  1 e 1 0 ]
+"32 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.h
+[v _serial_config serial_config `(v  1 e 1 0 ]
+"90
+[v _serial_read_msg serial_read_msg `(c  1 e 1 0 ]
+"143
+[v _serial_send_msg serial_send_msg `(uc  1 e 1 0 ]
+"170
+[v _serial_send_string serial_send_string `(uc  1 e 1 0 ]
+"325 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
+[v _ANSELC ANSELC `VEuc  1 e 1 @3933 ]
+[s S22 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"5098
+[s S31 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S38 . 1 `S22 1 . 1 0 `S31 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES38  1 e 1 @3988 ]
+[s S280 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 ACTIE 1 0 :1:7 
+]
+"6217
+[s S289 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SSP1IE 1 0 :1:3 
+`uc 1 TX1IE 1 0 :1:4 
+`uc 1 RC1IE 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 STIE 1 0 :1:7 
+]
+[s S296 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 PSPIE 1 0 :1:7 
+]
+[u S299 . 1 `S280 1 . 1 0 `S289 1 . 1 0 `S296 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES299  1 e 1 @3997 ]
+[s S325 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 ACTIF 1 0 :1:7 
+]
+"6316
+[s S334 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 STIF 1 0 :1:7 
+]
+[s S341 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 PSPIF 1 0 :1:7 
+]
+[u S344 . 1 `S325 1 . 1 0 `S334 1 . 1 0 `S341 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES344  1 e 1 @3998 ]
+[s S229 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"7088
+[s S238 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 ADEN 1 0 :1:3 
+]
+[s S241 . 1 `uc 1 RCD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[s S245 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S248 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 SRENA 1 0 :1:5 
+]
+[u S251 . 1 `S229 1 . 1 0 `S238 1 . 1 0 `S241 1 . 1 0 `S245 1 . 1 0 `S248 1 . 1 0 ]
+[v _RCSTA1bits RCSTA1bits `VES251  1 e 1 @4011 ]
+[s S145 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"7313
+[s S154 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[s S158 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 BRGH1 1 0 :1:2 
+]
+[s S161 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 CSRC1 1 0 :1:7 
+]
+[s S164 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SENDB1 1 0 :1:3 
+]
+[s S167 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 SYNC1 1 0 :1:4 
+]
+[s S170 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 TRMT1 1 0 :1:1 
+]
+[s S173 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX91 1 0 :1:6 
+]
+[s S176 . 1 `uc 1 TX9D1 1 0 :1:0 
+]
+[s S178 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 TXEN1 1 0 :1:5 
+]
+[u S181 . 1 `S145 1 . 1 0 `S154 1 . 1 0 `S158 1 . 1 0 `S161 1 . 1 0 `S164 1 . 1 0 `S167 1 . 1 0 `S170 1 . 1 0 `S173 1 . 1 0 `S176 1 . 1 0 `S178 1 . 1 0 ]
+[v _TXSTA1bits TXSTA1bits `VES181  1 e 1 @4012 ]
+"7549
+[v _TXREG1 TXREG1 `VEuc  1 e 1 @4013 ]
+"7587
+[v _RCREG1 RCREG1 `VEuc  1 e 1 @4014 ]
+"7625
+[v _SPBRG1 SPBRG1 `VEuc  1 e 1 @4015 ]
+"7763
+[v _SPBRGH1 SPBRGH1 `VEuc  1 e 1 @4016 ]
+[s S58 . 1 `uc 1 ABDEN 1 0 :1:0 
+`uc 1 WUE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG16 1 0 :1:3 
+`uc 1 TXCKP 1 0 :1:4 
+`uc 1 RXDTP 1 0 :1:5 
+`uc 1 RCIDL 1 0 :1:6 
+`uc 1 ABDOVF 1 0 :1:7 
+]
+"8759
+[s S67 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 CKTXP 1 0 :1:4 
+`uc 1 DTRXP 1 0 :1:5 
+]
+[s S71 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 SCKP 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RCMT 1 0 :1:6 
+]
+[s S76 . 1 `uc 1 ABDEN1 1 0 :1:0 
+`uc 1 WUE1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG161 1 0 :1:3 
+`uc 1 SCKP1 1 0 :1:4 
+`uc 1 DTRXP1 1 0 :1:5 
+`uc 1 RCIDL1 1 0 :1:6 
+`uc 1 ABDOVF1 1 0 :1:7 
+]
+[s S85 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TXCKP1 1 0 :1:4 
+`uc 1 RXDTP1 1 0 :1:5 
+`uc 1 RCMT1 1 0 :1:6 
+]
+[s S90 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 RXCKP 1 0 :1:5 
+]
+[s S93 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 W4E 1 0 :1:1 
+]
+[u S96 . 1 `S58 1 . 1 0 `S67 1 . 1 0 `S71 1 . 1 0 `S76 1 . 1 0 `S85 1 . 1 0 `S90 1 . 1 0 `S93 1 . 1 0 ]
+[v _BAUDCON1bits BAUDCON1bits `VES96  1 e 1 @4024 ]
+[s S368 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"13255
+[s S377 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S386 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S390 . 1 `S368 1 . 1 0 `S377 1 . 1 0 `S386 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES390  1 e 1 @4082 ]
+"13 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.c
+[v _SERIAL_AVAILABLE SERIAL_AVAILABLE `c  1 e 1 0 ]
+"14
+[v _serial_buffer_ptr serial_buffer_ptr `*.39uc  1 e 2 0 ]
+"25 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.h
+[v _SERIAL_BUFFER SERIAL_BUFFER `[70]uc  1 e 70 0 ]
+"28 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.c
+[v _main main `(v  1 e 1 0 ]
+{
+"49
+} 0
+"170 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.h
+[v _serial_send_string serial_send_string `(uc  1 e 1 0 ]
+{
+[v serial_send_string@string_to_send string_to_send `*.32uc  1 p 2 39 ]
+"180
+} 0
+"143
+[v _serial_send_msg serial_send_msg `(uc  1 e 1 0 ]
+{
+"145
+[v serial_send_msg@i i `uc  1 a 1 44 ]
+"143
+[v serial_send_msg@msg_to_send msg_to_send `*.39uc  1 p 2 39 ]
+[v serial_send_msg@soh soh `uc  1 p 1 41 ]
+[v serial_send_msg@eot eot `uc  1 p 1 42 ]
+"163
+} 0
+"32
+[v _serial_config serial_config `(v  1 e 1 0 ]
+{
+"34
+[v serial_config@temp temp `ui  1 a 2 10 ]
+"32
+[v serial_config@baud_rate baud_rate `ui  1 p 2 47 ]
+"66
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+{
+"11
+[v ___aldiv@quotient quotient `l  1 a 4 2 ]
+"12
+[v ___aldiv@sign sign `uc  1 a 1 1 ]
+[v ___aldiv@counter counter `uc  1 a 1 0 ]
+"8
+[v ___aldiv@dividend dividend `l  1 p 4 39 ]
+[v ___aldiv@divisor divisor `l  1 p 4 43 ]
+"42
+} 0
+"23 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.c
+[v _low_isr low_isr `IIL(v  1 e 1 0 ]
+{
+"24
+} 0
+"16
+[v _high_isr high_isr `II(v  1 e 1 0 ]
+{
+"21
+} 0
+"90 C:\Users\usuario\Documents\MICROS C\Serial_RS232.X\serial.h
+[v _serial_read_msg serial_read_msg `(c  1 e 1 0 ]
+{
+"92
+[v serial_read_msg@temp_soh temp_soh `uc  1 a 1 7 ]
+[v serial_read_msg@temp_eot temp_eot `uc  1 a 1 6 ]
+[v serial_read_msg@i i `uc  1 a 1 5 ]
+"90
+[v serial_read_msg@msg_to_receive msg_to_receive `*.39uc  1 p 2 0 ]
+[v serial_read_msg@soh soh `uc  1 p 1 2 ]
+[v serial_read_msg@eot eot `uc  1 p 1 3 ]
+"131
+} 0
