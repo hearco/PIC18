@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.42\dat\en_msgs.txt -cs \
   -h+dist/default/production\LCD.X.production.sym \
   --cmf=dist/default/production\LCD.X.production.cmf -z -Q18F45K50 \
-  -oC:\Users\usuario\AppData\Local\Temp\s129c.2 \
+  -oC:\Users\usuario\AppData\Local\Temp\s1uig.2 \
   -Mdist/default/production/LCD.X.production.map -E1 -ver=XC8 \
   -ASTACK=060h-07ffh -pstack=STACK -ACODE=01000h-07FFFh \
   -ACONST=01000h-07FFFh -ASMALLCONST=01000h-010FFhx112 \
@@ -23,7 +23,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\usuario\AppData\Local\Temp\s129c.obj \
+  C:\Users\usuario\AppData\Local\Temp\s1uig.obj \
   dist/default/production\LCD.X.production.obj 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\usuario\AppData\Local\Temp\s129c.obj
+C:\Users\usuario\AppData\Local\Temp\s1uig.obj
                 init                               1000     1000        4      800       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0

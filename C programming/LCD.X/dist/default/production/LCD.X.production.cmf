@@ -11,6 +11,10 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
+$C:\Users\usuario\AppData\Local\Temp\s1uig.obj
+idloc IDLOC 0 200000 200000 8 1
+init CODE 0 1000 1000 4 1
+config CONFIG 0 300000 300000 E 1
 $dist/default/production\LCD.X.production.obj
 cinit CODE 0 7DD2 7DD2 A 1
 text0 CODE 0 7DDC 7DDC 12 1
@@ -21,10 +25,6 @@ text4 CODE 0 7ECE 7ECE 62 1
 text5 CODE 0 7E7A 7E7A 54 1
 cstackCOMRAM COMRAM 1 1 1 10 1
 smallconst SMALLCONST 0 1004 1004 1A 1
-$C:\Users\usuario\AppData\Local\Temp\s129c.obj
-idloc IDLOC 0 200000 200000 8 1
-init CODE 0 1000 1000 4 1
-config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -64,92 +64,92 @@ MEDIUMCONST 101E-7DD1 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\LCD.X.production.obj
-7E7A text5 CODE >60:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E7C text5 CODE >62:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E7E text5 CODE >64:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E7E text5 CODE >65:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E80 text5 CODE >66:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E82 text5 CODE >68:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E82 text5 CODE >69:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E84 text5 CODE >74:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E86 text5 CODE >62:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E94 text5 CODE >74:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E94 text5 CODE >76:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E96 text5 CODE >78:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E9C text5 CODE >79:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E9E text5 CODE >80:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EAE text5 CODE >81:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EB0 text5 CODE >83:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EB8 text5 CODE >84:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EBA text5 CODE >85:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7ECA text5 CODE >86:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7ECC text5 CODE >87:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7ECE text4 CODE >153:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7ECE text4 CODE >155:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7ED4 text4 CODE >156:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EDA text4 CODE >158:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EDE text4 CODE >159:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EE2 text4 CODE >161:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EE6 text4 CODE >162:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EEA text4 CODE >164:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EEC text4 CODE >165:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EEE text4 CODE >166:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EF2 text4 CODE >167:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7EF4 text4 CODE >168:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F04 text4 CODE >169:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F06 text4 CODE >171:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F10 text4 CODE >172:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F1A text4 CODE >173:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F24 text4 CODE >174:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E2C text3 CODE >21:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E2E text3 CODE >23:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E3A text3 CODE >25:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E3C text3 CODE >26:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E3E text3 CODE >33:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E4A text3 CODE >34:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E4C text3 CODE >36:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E58 text3 CODE >37:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E5A text3 CODE >39:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E64 text3 CODE >41:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E66 text3 CODE >30:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7E76 text3 CODE >43:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
+7E7A text5 CODE >60:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E7C text5 CODE >62:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E7E text5 CODE >64:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E7E text5 CODE >65:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E80 text5 CODE >66:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E82 text5 CODE >68:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E82 text5 CODE >69:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E84 text5 CODE >74:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E86 text5 CODE >62:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E94 text5 CODE >74:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E94 text5 CODE >76:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E96 text5 CODE >78:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E9C text5 CODE >79:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E9E text5 CODE >80:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EAE text5 CODE >81:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EB0 text5 CODE >83:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EB8 text5 CODE >84:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EBA text5 CODE >85:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7ECA text5 CODE >86:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7ECC text5 CODE >87:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7ECE text4 CODE >153:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7ECE text4 CODE >155:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7ED4 text4 CODE >156:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EDA text4 CODE >158:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EDE text4 CODE >159:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EE2 text4 CODE >161:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EE6 text4 CODE >162:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EEA text4 CODE >164:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EEC text4 CODE >165:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EEE text4 CODE >166:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EF2 text4 CODE >167:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7EF4 text4 CODE >168:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F04 text4 CODE >169:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F06 text4 CODE >171:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F10 text4 CODE >172:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F1A text4 CODE >173:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F24 text4 CODE >174:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E2C text3 CODE >21:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E2E text3 CODE >23:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E3A text3 CODE >25:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E3C text3 CODE >26:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E3E text3 CODE >33:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E4A text3 CODE >34:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E4C text3 CODE >36:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E58 text3 CODE >37:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E5A text3 CODE >39:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E64 text3 CODE >41:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E66 text3 CODE >30:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7E76 text3 CODE >43:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
 7DEE text2 CODE >4:C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c
 7DEE text2 CODE >8:C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c
 7DF6 text2 CODE >9:C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c
 7DF8 text2 CODE >10:C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c
 7DFC text2 CODE >9:C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c
 7E0E text2 CODE >12:C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c
-7F30 text1 CODE >100:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F30 text1 CODE >108:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F40 text1 CODE >111:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F4A text1 CODE >112:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F54 text1 CODE >114:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F58 text1 CODE >115:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F5C text1 CODE >116:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F60 text1 CODE >117:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F6C text1 CODE >119:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F7C text1 CODE >121:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7F82 text1 CODE >123:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FB6 text1 CODE >124:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FB8 text1 CODE >121:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FCA text1 CODE >131:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FD4 text1 CODE >132:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FDE text1 CODE >133:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FE8 text1 CODE >134:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FF2 text1 CODE >135:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7FFC text1 CODE >117:C:\Users\usuario\Documents\MICROS C\LCD.X\LCD.c
-7DDC text0 CODE >15:C:\Users\usuario\Documents\MICROS C\LCD.X\main.c
-7DDC text0 CODE >16:C:\Users\usuario\Documents\MICROS C\LCD.X\main.c
-7DE0 text0 CODE >18:C:\Users\usuario\Documents\MICROS C\LCD.X\main.c
-7DEC text0 CODE >20:C:\Users\usuario\Documents\MICROS C\LCD.X\main.c
-7DD2 cinit CODE >936:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD2 cinit CODE >938:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD2 cinit CODE >941:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD2 cinit CODE >947:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD2 cinit CODE >950:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD4 cinit CODE >951:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD6 cinit CODE >952:C:\Users\usuario\AppData\Local\Temp\s129c.
-7DD8 cinit CODE >953:C:\Users\usuario\AppData\Local\Temp\s129c.
+7F30 text1 CODE >100:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F30 text1 CODE >108:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F40 text1 CODE >111:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F4A text1 CODE >112:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F54 text1 CODE >114:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F58 text1 CODE >115:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F5C text1 CODE >116:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F60 text1 CODE >117:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F6C text1 CODE >119:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F7C text1 CODE >121:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7F82 text1 CODE >123:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FB6 text1 CODE >124:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FB8 text1 CODE >121:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FCA text1 CODE >131:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FD4 text1 CODE >132:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FDE text1 CODE >133:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FE8 text1 CODE >134:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FF2 text1 CODE >135:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7FFC text1 CODE >117:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
+7DDC text0 CODE >15:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
+7DDC text0 CODE >16:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
+7DE0 text0 CODE >18:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
+7DEC text0 CODE >20:C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
+7DD2 cinit CODE >936:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD2 cinit CODE >938:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD2 cinit CODE >941:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD2 cinit CODE >947:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD2 cinit CODE >950:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD4 cinit CODE >951:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD6 cinit CODE >952:C:\Users\usuario\AppData\Local\Temp\s1uig.
+7DD8 cinit CODE >953:C:\Users\usuario\AppData\Local\Temp\s1uig.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -167,26 +167,26 @@ __Hspace_0 30000E 0 ABS 0 - dist/default/production\LCD.X.production.obj
 __Hspace_1 11 0 ABS 0 - dist/default/production\LCD.X.production.obj
 __Hspace_2 0 0 ABS 0 - dist/default/production\LCD.X.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\LCD.X.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\usuario\AppData\Local\Temp\s129c.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __size_of_LCD_SetCursor 0 0 ABS 0 - dist/default/production\LCD.X.production.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\LCD.X.production.obj
 __Lsmallconst 1004 0 SMALLCONST 0 smallconst dist/default/production\LCD.X.production.obj
 _LATC F8B 0 ABS 0 - dist/default/production\LCD.X.production.obj
 _LATD F8C 0 ABS 0 - dist/default/production\LCD.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s129c.obj
+___sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 _main 7DDC 0 CODE 0 text0 dist/default/production\LCD.X.production.obj
-start 1000 0 CODE 0 init C:\Users\usuario\AppData\Local\Temp\s129c.obj
+start 1000 0 CODE 0 init C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __end_of_LCD_WriteByte 7ECE 0 CODE 0 text5 dist/default/production\LCD.X.production.obj
 __size_of_main 0 0 ABS 0 - dist/default/production\LCD.X.production.obj
 _LCD_Init 7ECE 0 CODE 0 text4 dist/default/production\LCD.X.production.obj
 __Hpowerup 1000 0 CODE 0 powerup dist/default/production\LCD.X.production.obj
 __end_of_LCD_SetCursor 7E7A 0 CODE 0 text3 dist/default/production\LCD.X.production.obj
-__accesstop 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s129c.obj
+__accesstop 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __end_of_LCD_Init 7F30 0 CODE 0 text4 dist/default/production\LCD.X.production.obj
-intlevel0 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s129c.obj
-intlevel1 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s129c.obj
-intlevel2 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s129c.obj
-intlevel3 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s129c.obj
+intlevel0 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1uig.obj
+intlevel1 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1uig.obj
+intlevel2 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1uig.obj
+intlevel3 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\LCD.X.production.obj
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\LCD.X.production.obj
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\LCD.X.production.obj
@@ -194,8 +194,8 @@ _LCD_WriteMsg 7F30 0 CODE 0 text1 dist/default/production\LCD.X.production.obj
 _ANSELC F5D 0 ABS 0 - dist/default/production\LCD.X.production.obj
 _ANSELD F5E 0 ABS 0 - dist/default/production\LCD.X.production.obj
 LCD_WriteMsg@msg 7 0 COMRAM 1 cstackCOMRAM dist/default/production\LCD.X.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s129c.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s129c.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s1uig.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\LCD.X.production.obj
 LCD_SetCursor@col 4 0 COMRAM 1 cstackCOMRAM dist/default/production\LCD.X.production.obj
 LCD_SetCursor@row 5 0 COMRAM 1 cstackCOMRAM dist/default/production\LCD.X.production.obj
@@ -236,7 +236,7 @@ __Htext5 0 0 ABS 0 text5 dist/default/production\LCD.X.production.obj
 LCD_WriteByte@InputValue 3 0 COMRAM 1 cstackCOMRAM dist/default/production\LCD.X.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\LCD.X.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\LCD.X.production.obj
-__smallconst 1004 0 SMALLCONST 0 smallconst C:\Users\usuario\AppData\Local\Temp\s129c.obj
+__smallconst 1004 0 SMALLCONST 0 smallconst C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 LCD_WriteMsg@msgSize D 0 COMRAM 1 cstackCOMRAM dist/default/production\LCD.X.production.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\LCD.X.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/production\LCD.X.production.obj
@@ -302,8 +302,8 @@ _LATCbits F8B 0 ABS 0 - dist/default/production\LCD.X.production.obj
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\LCD.X.production.obj
 _strlen 7DEE 0 CODE 0 text2 dist/default/production\LCD.X.production.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\LCD.X.production.obj
-stackhi 7FF 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s129c.obj
-stacklo 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s129c.obj
+stackhi 7FF 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s1uig.obj
+stacklo 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __Lintcode 1000 0 CODE 0 intcode dist/default/production\LCD.X.production.obj
 __Lintret 0 0 ABS 0 intret dist/default/production\LCD.X.production.obj
 __Lirdata 0 0 CODE 0 irdata dist/default/production\LCD.X.production.obj
@@ -327,7 +327,7 @@ __ptext4 7ECE 0 CODE 0 text4 dist/default/production\LCD.X.production.obj
 __ptext5 7E7A 0 CODE 0 text5 dist/default/production\LCD.X.production.obj
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\LCD.X.production.obj
 _LCD_WriteByte 7E7A 0 CODE 0 text5 dist/default/production\LCD.X.production.obj
-__ramtop 800 0 RAM 0 ramtop C:\Users\usuario\AppData\Local\Temp\s129c.obj
+__ramtop 800 0 RAM 0 ramtop C:\Users\usuario\AppData\Local\Temp\s1uig.obj
 __Lpowerup 1000 0 CODE 0 powerup dist/default/production\LCD.X.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\LCD.X.production.obj
 __psmallconst 1004 0 SMALLCONST 0 smallconst dist/default/production\LCD.X.production.obj
