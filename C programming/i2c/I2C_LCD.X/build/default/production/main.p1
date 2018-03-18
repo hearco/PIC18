@@ -1,11 +1,16 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"275 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
-[v _ANSELB `Vuc ~T0 @X0 0 e@3932 ]
-"4846
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
-"3889
-[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
+"69 mcc_generated_files/mcc.h
+[v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
+"135 main.c
+[c E5760 0 1 2 3 4 5 6 .. ]
+[n E5760 . I2C1_MESSAGE_COMPLETE I2C1_MESSAGE_FAIL I2C1_MESSAGE_PENDING I2C1_STUCK_START I2C1_MESSAGE_ADDRESS_NO_ACK I2C1_DATA_NO_ACK I2C1_LOST_STATE  ]
+"259 mcc_generated_files/i2c1.h
+[v _I2C1_MasterWrite `(v ~T0 @X0 0 ef4`*uc`uc`ui`*E5760 ]
+[v F5719 `(v ~T0 @X0 1 tf1`ul ]
+"164 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18.h
+[v __delay `JF5719 ~T0 @X0 0 e ]
+[p i __delay ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5360,34 +5365,173 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.h: 69: void SYSTEM_Initialize(void);
 [; ;mcc.h: 82: void OSCILLATOR_Initialize(void);
 [v $root$_main `(v ~T0 @X0 0 e ]
-"51 main.c
+"54 main.c
 [v _main `(v ~T0 @X0 1 ef ]
-"52
+"55
 {
-[; ;main.c: 51: void main(void)
-[; ;main.c: 52: {
+[; ;main.c: 54: void main(void)
+[; ;main.c: 55: {
 [e :U _main ]
 [f ]
-[; ;main.c: 84: ANSELB = TRISB = 0;
-"84
-[e = _ANSELB = _TRISB -> -> 0 `i `uc ]
-[; ;main.c: 85: LATB = 0xFF;
-"85
-[e = _LATB -> -> 255 `i `uc ]
-[; ;main.c: 87: while (1)
-"87
-[e :U 634 ]
-[; ;main.c: 88: {
-"88
+[; ;main.c: 57: SYSTEM_Initialize();
+"57
+[e ( _SYSTEM_Initialize ..  ]
+"93
+[v _i `uc ~T0 @X0 1 a ]
+"94
+[v _timeout `us ~T0 @X0 1 a ]
+[v F5817 `uc ~T0 @X0 -> 18 `i s ]
+[i F5817
+:U ..
+"95
+-> -> 50 `i `uc
+"97
+-> -> 18 `i `uc
+"99
+-> -> 50 `i `uc
+"101
+-> -> 18 `i `uc
+"103
+-> -> 56 `i `uc
+"105
+-> -> 24 `i `uc
+"107
+-> -> 48 `i `uc
+"109
+-> -> 16 `i `uc
+"111
+-> -> 63 `i `uc
+"113
+-> -> 31 `i `uc
+"115
+-> -> 48 `i `uc
+"117
+-> -> 16 `i `uc
+"119
+-> -> 50 `i `uc
+"121
+-> -> 18 `i `uc
+"123
+-> -> 48 `i `uc
+"125
+-> -> 16 `i `uc
+"127
+-> -> 49 `i `uc
+"130
+-> -> 17 `i `uc
+..
+]
+"95
+[v _LCD_commands `uc ~T0 @X0 -> 18 `i a ]
+[; ;main.c: 93: unsigned char i;
+[; ;main.c: 94: unsigned short timeout;
+[; ;main.c: 95: unsigned char LCD_commands[18] = {0x32,
+[; ;main.c: 97: 0x12,
+[; ;main.c: 99: 0x32,
+[; ;main.c: 101: 0x12,
+[; ;main.c: 103: 0x38,
+[; ;main.c: 105: 0x18,
+[; ;main.c: 107: 0x30,
+[; ;main.c: 109: 0x10,
+[; ;main.c: 111: 0x3F,
+[; ;main.c: 113: 0x1F,
+[; ;main.c: 115: 0x30,
+[; ;main.c: 117: 0x10,
+[; ;main.c: 119: 0x32,
+[; ;main.c: 121: 0x12,
+[; ;main.c: 123: 0x30,
+[; ;main.c: 125: 0x10,
+[; ;main.c: 127: 0x31,
+[; ;main.c: 129: 0x11
+[; ;main.c: 130: };
+"130
+[e = _LCD_commands F5817 ]
+"132
+[v _data `uc ~T0 @X0 1 a ]
+[; ;main.c: 132: unsigned char data = 0xFF;
+[e = _data -> -> 255 `i `uc ]
+"133
+[v _pD `*uc ~T0 @X0 1 a ]
+"134
+[v _writeBuffer `uc ~T0 @X0 -> -> 1 `i `ux a ]
+"135
+[v _status `E5760 ~T0 @X0 1 a ]
+[; ;main.c: 133: unsigned char * pD;
+[; ;main.c: 134: unsigned char writeBuffer[1];
+[; ;main.c: 135: I2C1_MESSAGE_STATUS status = I2C1_MESSAGE_PENDING;
+[e = _status . `E5760 2 ]
+[; ;main.c: 137: pD = LCD_commands;
+"137
+[e = _pD &U _LCD_commands ]
+[; ;main.c: 138: for(i = 0; i < 18; i++)
+"138
 {
-"90
-}
-[e :U 633 ]
-"87
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 18 `i 633  ]
 [e $U 634  ]
-[e :U 635 ]
-[; ;main.c: 90: }
-[; ;main.c: 91: }
-"91
+"139
+[e :U 633 ]
+[; ;main.c: 139: {
+{
+[; ;main.c: 140: writeBuffer[0] = *(pD + i);
+"140
+[e = *U + &U _writeBuffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _writeBuffer `ui `ux *U + _pD * -> _i `ux -> -> # *U _pD `ui `ux ]
+[; ;main.c: 141: timeout = 0;
+"141
+[e = _timeout -> -> 0 `i `us ]
+[; ;main.c: 142: while((status != I2C1_MESSAGE_FAIL) && (status != I2C1_MESSAGE_COMPLETE) && (timeout < 3))
+"142
+[e $U 636  ]
+[e :U 637 ]
+[; ;main.c: 143: {
+"143
+{
+[; ;main.c: 144: I2C1_MasterWrite(writeBuffer, 1, 0x40, &status);
+"144
+[e ( _I2C1_MasterWrite (4 , , , &U _writeBuffer -> -> 1 `i `uc -> -> 64 `i `ui &U _status ]
+[; ;main.c: 147: while(status == I2C1_MESSAGE_PENDING);
+"147
+[e $U 639  ]
+[e :U 640 ]
+[e :U 639 ]
+[e $ == -> _status `i -> . `E5760 2 `i 640  ]
+[e :U 641 ]
+[; ;main.c: 149: timeout++;
+"149
+[e ++ _timeout -> -> 1 `i `us ]
+"150
+}
+[e :U 636 ]
+"142
+[e $ && && != -> _status `i -> . `E5760 1 `i != -> _status `i -> . `E5760 0 `i < -> _timeout `ui -> -> 3 `i `ui 637  ]
+[e :U 638 ]
+[; ;main.c: 150: }
+[; ;main.c: 152: _delay((unsigned long)((5)*(250000/4000.0)));
+"152
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 250000 `l `d .4000.0 `ul ]
+"153
+}
+"138
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 18 `i 633  ]
+[e :U 634 ]
+"153
+}
+[; ;main.c: 153: }
+[; ;main.c: 155: while (1)
+"155
+[e :U 643 ]
+[; ;main.c: 156: {
+"156
+{
+"158
+}
+[e :U 642 ]
+"155
+[e $U 643  ]
+[e :U 644 ]
+[; ;main.c: 158: }
+[; ;main.c: 159: }
+"159
 [e :UE 632 ]
 }
