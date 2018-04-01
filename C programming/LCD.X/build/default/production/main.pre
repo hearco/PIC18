@@ -7081,7 +7081,7 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 67 "LCD.h"
+# 64 "LCD.h"
 typedef enum {
 LCD_COMMAND_WRITE,
 LCD_DATA_WRITE
@@ -7089,14 +7089,14 @@ LCD_DATA_WRITE
 
 
 void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData);
-void LCD_WriteMsg(UInt8_T * msg);
+UInt8_T LCD_WriteMsg(UInt8_T * msg);
 UInt8_T LCD_Init(void);
 
 # 15 "main.c"
 void main(void) {
 LCD_Init();
 
-LCD_WriteMsg("Hola Crayola jajejijoju");
+(void)LCD_WriteMsg("Hola Crayola jajejijoju");
 
 while(0x01);
 }

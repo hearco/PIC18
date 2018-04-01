@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/i2c/I2C_LCD.X/main.c</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/main.c</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/i2c.h</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/i2c.c</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/dataTypes.h</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/hwconfig.h</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/i2c_LCD.h</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/PIC18/C%20programming/I2C_LCD.X/i2c_LCD.c</file>
         </group>
     </open-files>
 </project-private>

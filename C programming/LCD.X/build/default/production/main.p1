@@ -1,9 +1,9 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"75 LCD.h
+"72 LCD.h
 [v _LCD_Init `(uc ~T0 @X0 0 ef ]
-"74
-[v _LCD_WriteMsg `(v ~T0 @X0 0 ef1`*uc ]
+"71
+[v _LCD_WriteMsg `(uc ~T0 @X0 0 ef1`*uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5345,13 +5345,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dataTypes.h: 40: typedef signed short int SInt16_T;
 [; ;dataTypes.h: 41: typedef signed long int SInt32_T;
 [; ;dataTypes.h: 42: typedef signed long long int SInt64_T;
-[; ;LCD.h: 67: typedef enum {
-[; ;LCD.h: 68: LCD_COMMAND_WRITE,
-[; ;LCD.h: 69: LCD_DATA_WRITE
-[; ;LCD.h: 70: }LCDMODE_E;
-[; ;LCD.h: 73: void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData);
-[; ;LCD.h: 74: void LCD_WriteMsg(UInt8_T * msg);
-[; ;LCD.h: 75: UInt8_T LCD_Init(void);
+[; ;LCD.h: 64: typedef enum {
+[; ;LCD.h: 65: LCD_COMMAND_WRITE,
+[; ;LCD.h: 66: LCD_DATA_WRITE
+[; ;LCD.h: 67: }LCDMODE_E;
+[; ;LCD.h: 70: void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData);
+[; ;LCD.h: 71: UInt8_T LCD_WriteMsg(UInt8_T * msg);
+[; ;LCD.h: 72: UInt8_T LCD_Init(void);
 [v $root$_main `(v ~T0 @X0 0 e ]
 "15 main.c
 [v _main `(v ~T0 @X0 1 ef ]
@@ -5362,7 +5362,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 16: LCD_Init();
 "16
 [e ( _LCD_Init ..  ]
-[; ;main.c: 18: LCD_WriteMsg("Hola Crayola jajejijoju");
+[; ;main.c: 18: (void)LCD_WriteMsg("Hola Crayola jajejijoju");
 "18
 [e ( _LCD_WriteMsg (1 -> :s 1C `*uc ]
 [; ;main.c: 20: while(0x01);

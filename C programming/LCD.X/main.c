@@ -15,7 +15,7 @@
 void main(void) {
     LCD_Init();
     //set_cursor_pos(LCD_SECOND_ROW, 5);
-    LCD_WriteMsg("Hola Crayola jajejijoju");
+    (void)LCD_WriteMsg("Hola Crayola jajejijoju");
     
     while(STAY_HERE);
 }

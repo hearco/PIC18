@@ -7081,7 +7081,7 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 67 "LCD.h"
+# 64 "LCD.h"
 typedef enum {
 LCD_COMMAND_WRITE,
 LCD_DATA_WRITE
@@ -7089,10 +7089,10 @@ LCD_DATA_WRITE
 
 
 void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData);
-void LCD_WriteMsg(UInt8_T * msg);
+UInt8_T LCD_WriteMsg(UInt8_T * msg);
 UInt8_T LCD_Init(void);
 
-# 21 "LCD.c"
+# 22 "LCD.c"
 static UInt8_T LCD_SetCursor(UInt8_T row, UInt8_T col)
 {
 if ((col > 16) || (row > 1))
@@ -7119,17 +7119,17 @@ return (1);
 }
 }
 
-# 60
+# 61
 void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData)
 {
 switch (CommandData)
 {
 case LCD_COMMAND_WRITE:
-LATCbits.LATC0 = 0;
+LATAbits.LATA0 = 0;
 break;
 
 case LCD_DATA_WRITE:
-LATCbits.LATC0 = 1;
+LATAbits.LATA0 = 1;
 break;
 
 default:
@@ -7138,25 +7138,28 @@ break;
 
 R_W = 0;
 
+# 85
 LATD = (UInt8_T)(InputValue & 0xF0);
-LATCbits.LATC2 = 1;
+LATAbits.LATA2 = 1;
 _delay((unsigned long)((5)*(16000000/4000.0)));
-LATCbits.LATC2 = 0;
+LATAbits.LATA2 = 0;
 
 LATD = (UInt8_T)((InputValue << 4) & 0xF0);
-LATCbits.LATC2 = 1;
+LATAbits.LATA2 = 1;
 _delay((unsigned long)((5)*(16000000/4000.0)));
-LATCbits.LATC2 = 0;
+LATAbits.LATA2 = 0;
+
 }
 
-# 100
-void LCD_WriteMsg(UInt8_T * msg)
+# 108
+UInt8_T LCD_WriteMsg(UInt8_T * msg)
 {
 UInt8_T i, j;
 UInt8_T msgSize;
 UInt8_T lcdRowPos;
 UInt8_T lcdColPos;
 UInt8_T charsLeft;
+UInt8_T status = 1;
 
 msgSize = (UInt8_T)strlen(msg);
 
@@ -7181,35 +7184,38 @@ charsLeft++;
 
 else
 {
-LCD_WriteByte(0x02, LCD_COMMAND_WRITE);
-LCD_WriteByte(0x01, LCD_COMMAND_WRITE);
-LCD_WriteByte('E', LCD_COMMAND_WRITE);
-LCD_WriteByte('r', LCD_COMMAND_WRITE);
-LCD_WriteByte('r', LCD_COMMAND_WRITE);
-}
+status = 0;
 }
 }
 
-# 153
+return status;
+}
+
+# 160
 UInt8_T LCD_Init(void)
 {
-ANSELC = 0;
+ANSELA = 0;
 ANSELD = 0;
 
-TRISC = 0;
-LATC = 0;
+TRISA = 0;
+LATA = 0;
 
 TRISD = 0;
 LATD = 0;
 
-LATCbits.LATC0 = 0;
-LATCbits.LATC1 = 0;
+
+
+
+LATAbits.LATA0 = 0;
+LATAbits.LATA1 = 0;
 LATD = 0x20;
-LATCbits.LATC2 = 1;
+LATAbits.LATA2 = 1;
 _delay((unsigned long)((5)*(16000000/4000.0)));
-LATCbits.LATC2 = 0;
+LATAbits.LATA2 = 0;
 
 LCD_WriteByte(0x28, LCD_COMMAND_WRITE);
+
+
 LCD_WriteByte(0x0F, LCD_COMMAND_WRITE);
 LCD_WriteByte(0x02, LCD_COMMAND_WRITE);
 LCD_WriteByte(0x01, LCD_COMMAND_WRITE);
