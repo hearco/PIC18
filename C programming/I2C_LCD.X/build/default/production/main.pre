@@ -7070,66 +7070,30 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 57 "main.c"
-unsigned char rotateByte(unsigned char x)
-{
-unsigned char newByte = 0;
-signed char i;
-for(i = 7; i >= 0; i--)
-{
-newByte |= (unsigned char)((x & 0b10000000) >> i);
-x = (unsigned char)(x << 1);
-}
+# 34 "dataTypes.h"
+typedef unsigned char UInt8_T;
+typedef unsigned short int UInt16_T;
+typedef unsigned long int UInt32_T;
+typedef unsigned long long int UInt64_T;
 
-return newByte;
-}
+typedef signed char SInt8_T;
+typedef signed short int SInt16_T;
+typedef signed long int SInt32_T;
+typedef signed long long int SInt64_T;
 
+# 59 "i2c.h"
+void I2C_Master_Init();
+UInt8_T I2C_Master_Start();
+UInt8_T I2C_Master_Write(UInt8_T data);
+void I2C_Master_Stop();
 
-void I2C_Master_Init()
-{
-SSP1CON1 = 0b00100000 | 0b00001000;
-SSP1CON2 = 0;
-SSP1ADD = 0x27;
-SSP1STAT = 0b10000000;
-
-ANSELBbits.ANSB0 = 0;
-ANSELBbits.ANSB1 = 0;
-
-TRISBbits.TRISB0 = 1;
-TRISBbits.TRISB1 = 1;
-}
-
-unsigned char I2C_Master_Start()
-{
-
-SSP1CON2 |= 0b00000001;
-while(SSP1CON2 & 0b00000001);
-return 1;
-}
-
-unsigned char I2C_Master_Write(unsigned char data)
-{
-unsigned char newData = 0;
-newData = rotateByte(data);
-SSP1BUF = newData;
-while(SSP1STAT & 0b00000100);
-return 1;
-}
-
-void I2C_Master_Stop()
-{
-SSP1CON2 |= 0b00000100;
-while(SSP1CON2 & 0b00000100);
-}
-
-
-
+# 9 "main.c"
 void main(void)
 {
 I2C_Master_Init();
 (void)I2C_Master_Start();
 (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
-(void)I2C_Master_Write(0b00010011);
+(void)I2C_Master_Write(0b11010011);
 I2C_Master_Stop();
 
 while(1)

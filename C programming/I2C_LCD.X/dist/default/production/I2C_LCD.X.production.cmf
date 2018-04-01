@@ -11,6 +11,10 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
+$C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+idloc IDLOC 0 200000 200000 8 1
+init CODE 0 1000 1000 4 1
+config CONFIG 0 300000 300000 E 1
 $dist/default/production\I2C_LCD.X.production.obj
 cinit CODE 0 7F5A 7F5A 6 1
 text0 CODE 0 7FA6 7FA6 22 1
@@ -20,10 +24,6 @@ text3 CODE 0 7F68 7F68 8 1
 text4 CODE 0 7F60 7F60 8 1
 text5 CODE 0 7F88 7F88 1E 1
 cstackCOMRAM COMRAM 1 1 1 7 1
-$C:\Users\usuario\AppData\Local\Temp\scpg.obj
-idloc IDLOC 0 200000 200000 8 1
-init CODE 0 1000 1000 4 1
-config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -63,50 +63,50 @@ MEDIUMCONST 1004-7F59 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\I2C_LCD.X.production.obj
-7F88 text5 CODE >71:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F88 text5 CODE >73:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F8C text5 CODE >74:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F90 text5 CODE >75:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F94 text5 CODE >76:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F98 text5 CODE >78:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F9C text5 CODE >79:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FA0 text5 CODE >81:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FA2 text5 CODE >82:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FA4 text5 CODE >83:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F60 text4 CODE >85:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F60 text4 CODE >88:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F62 text4 CODE >89:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F68 text3 CODE >102:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F68 text3 CODE >104:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F6A text3 CODE >105:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FC8 text2 CODE >57:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FCA text2 CODE >59:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FCE text2 CODE >61:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FD6 text2 CODE >63:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FF2 text2 CODE >64:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FF8 text2 CODE >61:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FFC text2 CODE >67:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F70 text1 CODE >93:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F72 text1 CODE >95:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F76 text1 CODE >96:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F7E text1 CODE >97:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F82 text1 CODE >98:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FA6 text0 CODE >110:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FA6 text0 CODE >112:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FAA text0 CODE >113:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FAE text0 CODE >114:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FB4 text0 CODE >115:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FBA text0 CODE >116:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FBE text0 CODE >120:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FC2 text0 CODE >121:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FC4 text0 CODE >122:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7FC6 text0 CODE >118:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
-7F5A cinit CODE >488:C:\Users\usuario\AppData\Local\Temp\scpg.
-7F5A cinit CODE >490:C:\Users\usuario\AppData\Local\Temp\scpg.
-7F5A cinit CODE >493:C:\Users\usuario\AppData\Local\Temp\scpg.
-7F5A cinit CODE >499:C:\Users\usuario\AppData\Local\Temp\scpg.
-7F5A cinit CODE >501:C:\Users\usuario\AppData\Local\Temp\scpg.
-7F5C cinit CODE >502:C:\Users\usuario\AppData\Local\Temp\scpg.
+7F88 text5 CODE >44:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F88 text5 CODE >46:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F8C text5 CODE >47:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F90 text5 CODE >48:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F94 text5 CODE >49:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F98 text5 CODE >51:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F9C text5 CODE >52:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FA0 text5 CODE >54:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FA2 text5 CODE >55:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FA4 text5 CODE >56:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F60 text4 CODE >58:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F60 text4 CODE >61:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F62 text4 CODE >62:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F68 text3 CODE >75:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F68 text3 CODE >77:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F6A text3 CODE >78:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FC8 text2 CODE >30:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FCA text2 CODE >32:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FCE text2 CODE >34:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FD6 text2 CODE >36:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FF2 text2 CODE >37:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FF8 text2 CODE >34:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FFC text2 CODE >40:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F70 text1 CODE >66:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F72 text1 CODE >68:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F76 text1 CODE >69:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F7E text1 CODE >70:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7F82 text1 CODE >71:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\i2c.c
+7FA6 text0 CODE >9:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FA6 text0 CODE >11:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FAA text0 CODE >12:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FAE text0 CODE >13:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FB4 text0 CODE >14:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FBA text0 CODE >15:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FBE text0 CODE >19:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FC2 text0 CODE >20:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FC4 text0 CODE >21:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7FC6 text0 CODE >17:C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+7F5A cinit CODE >904:C:\Users\usuario\AppData\Local\Temp\s1jsg.
+7F5A cinit CODE >906:C:\Users\usuario\AppData\Local\Temp\s1jsg.
+7F5A cinit CODE >909:C:\Users\usuario\AppData\Local\Temp\s1jsg.
+7F5A cinit CODE >915:C:\Users\usuario\AppData\Local\Temp\s1jsg.
+7F5A cinit CODE >917:C:\Users\usuario\AppData\Local\Temp\s1jsg.
+7F5C cinit CODE >918:C:\Users\usuario\AppData\Local\Temp\s1jsg.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -125,26 +125,26 @@ __Hspace_1 8 0 ABS 0 - dist/default/production\I2C_LCD.X.production.obj
 __Hspace_2 0 0 ABS 0 - dist/default/production\I2C_LCD.X.production.obj
 _rotateByte 7FC8 0 CODE 0 text2 dist/default/production\I2C_LCD.X.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\I2C_LCD.X.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\usuario\AppData\Local\Temp\scpg.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\I2C_LCD.X.production.obj
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\I2C_LCD.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\scpg.obj
+___sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 _main 7FA6 0 CODE 0 text0 dist/default/production\I2C_LCD.X.production.obj
-start 1000 0 CODE 0 init C:\Users\usuario\AppData\Local\Temp\scpg.obj
+start 1000 0 CODE 0 init C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __size_of_main 0 0 ABS 0 - dist/default/production\I2C_LCD.X.production.obj
 __Hpowerup 1000 0 CODE 0 powerup dist/default/production\I2C_LCD.X.production.obj
-__accesstop 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\scpg.obj
-intlevel0 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\scpg.obj
-intlevel1 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\scpg.obj
-intlevel2 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\scpg.obj
-intlevel3 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\scpg.obj
+__accesstop 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+intlevel0 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+intlevel1 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+intlevel2 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+intlevel3 0 0 CODE 0 text C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\I2C_LCD.X.production.obj
 __end_of_rotateByte 8000 0 CODE 0 text2 dist/default/production\I2C_LCD.X.production.obj
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\I2C_LCD.X.production.obj
 rotateByte@newByte 3 0 COMRAM 1 cstackCOMRAM dist/default/production\I2C_LCD.X.production.obj
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\I2C_LCD.X.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\scpg.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\scpg.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\I2C_LCD.X.production.obj
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\I2C_LCD.X.production.obj
 __Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\I2C_LCD.X.production.obj
@@ -179,7 +179,7 @@ __Htext4 0 0 ABS 0 text4 dist/default/production\I2C_LCD.X.production.obj
 __Htext5 0 0 ABS 0 text5 dist/default/production\I2C_LCD.X.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\I2C_LCD.X.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\I2C_LCD.X.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\usuario\AppData\Local\Temp\scpg.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\I2C_LCD.X.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/production\I2C_LCD.X.production.obj
 __Lbank0 0 0 ABS 0 bank0 dist/default/production\I2C_LCD.X.production.obj
@@ -247,8 +247,8 @@ __Lconfig 300000 0 CONFIG 0 config dist/default/production\I2C_LCD.X.production.
 _LATBbits F8A 0 ABS 0 - dist/default/production\I2C_LCD.X.production.obj
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\I2C_LCD.X.production.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\I2C_LCD.X.production.obj
-stackhi 7FF 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\scpg.obj
-stacklo 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\scpg.obj
+stackhi 7FF 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
+stacklo 60 0 ABS 0 - C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __Lintcode 1000 0 CODE 0 intcode dist/default/production\I2C_LCD.X.production.obj
 __Lintret 0 0 ABS 0 intret dist/default/production\I2C_LCD.X.production.obj
 __end_of_I2C_Master_Init 7FA6 0 CODE 0 text5 dist/default/production\I2C_LCD.X.production.obj
@@ -276,7 +276,7 @@ __ptext3 7F68 0 CODE 0 text3 dist/default/production\I2C_LCD.X.production.obj
 __ptext4 7F60 0 CODE 0 text4 dist/default/production\I2C_LCD.X.production.obj
 __ptext5 7F88 0 CODE 0 text5 dist/default/production\I2C_LCD.X.production.obj
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\I2C_LCD.X.production.obj
-__ramtop 800 0 RAM 0 ramtop C:\Users\usuario\AppData\Local\Temp\scpg.obj
+__ramtop 800 0 RAM 0 ramtop C:\Users\usuario\AppData\Local\Temp\s1jsg.obj
 __Lpowerup 1000 0 CODE 0 powerup dist/default/production\I2C_LCD.X.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\I2C_LCD.X.production.obj
 _I2C_Master_Init 7F88 0 CODE 0 text5 dist/default/production\I2C_LCD.X.production.obj

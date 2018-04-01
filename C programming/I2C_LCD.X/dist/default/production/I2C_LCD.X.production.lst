@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.42 build -159332390 
-                                                                                               Sat Mar 31 18:55:31 2018
+                                                                                               Sat Mar 31 19:14:02 2018
 
 Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130522
      1                           	processor	18F45K50
@@ -62,13 +62,13 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
     48                           ; 
     49                           ; SFR Addresses
     50  0000                     _ANSELBbits	set	3932
-    51  0000                     _LATBbits	set	3978
-    52  0000                     _SSP1BUF	set	4041
-    53  0000                     _TRISBbits	set	3987
-    54  0000                     _SSP1STAT	set	4039
-    55  0000                     _SSP1ADD	set	4040
-    56  0000                     _SSP1CON2	set	4037
-    57  0000                     _SSP1CON1	set	4038
+    51  0000                     _SSP1BUF	set	4041
+    52  0000                     _SSP1STAT	set	4039
+    53  0000                     _SSP1ADD	set	4040
+    54  0000                     _SSP1CON2	set	4037
+    55  0000                     _SSP1CON1	set	4038
+    56  0000                     _LATBbits	set	3978
+    57  0000                     _TRISBbits	set	3987
     58                           
     59                           ; #config settings
     60                           
@@ -90,7 +90,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
     76  000001                     __pcstackCOMRAM:
     77                           	opt stack 0
     78  000001                     ??_rotateByte:
-    79  000001                     
+    79                           
     80                           ; 1 bytes @ 0x0
     81  000001                     	ds	2
     82  000003                     rotateByte@newByte:
@@ -125,7 +125,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    111 ;;
    112 ;; *************** function _main *****************
    113 ;; Defined at:
-   114 ;;		line 110 in file "main.c"
+   114 ;;		line 9 in file "main.c"
    115 ;; Parameters:    Size  Location     Type
    116 ;;		None
    117 ;; Auto vars:     Size  Location     Type
@@ -161,48 +161,48 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    147  007FA6                     _main:
    148                           	opt stack 29
    149                           
-   150                           ;main.c: 112: I2C_Master_Init();
+   150                           ;main.c: 11: I2C_Master_Init();
    151                           
    152                           ; BSR set to: 15
    153                           ;incstack = 0
    154  007FA6  ECC4  F03F         	call	_I2C_Master_Init	;wreg free
    155                           
-   156                           ;main.c: 113: (void)I2C_Master_Start();
+   156                           ;main.c: 12: (void)I2C_Master_Start();
    157  007FAA  ECB0  F03F         	call	_I2C_Master_Start	;wreg free
    158                           
-   159                           ;main.c: 114: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
+   159                           ;main.c: 13: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
    160  007FAE  0E7E               	movlw	126
    161  007FB0  ECB8  F03F         	call	_I2C_Master_Write
    162                           
-   163                           ;main.c: 115: (void)I2C_Master_Write(0b00010011);
-   164  007FB4  0E13               	movlw	19
+   163                           ;main.c: 14: (void)I2C_Master_Write(0b11010011);
+   164  007FB4  0ED3               	movlw	211
    165  007FB6  ECB8  F03F         	call	_I2C_Master_Write
    166                           
-   167                           ;main.c: 116: I2C_Master_Stop();
+   167                           ;main.c: 15: I2C_Master_Stop();
    168  007FBA  ECB4  F03F         	call	_I2C_Master_Stop	;wreg free
-   169  007FBE                     l718:
+   169  007FBE                     l730:
    170                           
-   171                           ;main.c: 119: {
-   172                           ;main.c: 120: ANSELBbits.ANSB4 = 0;
+   171                           ;main.c: 18: {
+   172                           ;main.c: 19: ANSELBbits.ANSB4 = 0;
    173  007FBE  010F               	movlb	15	; () banked
    174  007FC0  995C               	bcf	92,4,b	;volatile
    175                           
    176                           ; BSR set to: 15
-   177                           ;main.c: 121: TRISBbits.TRISB4 = 0;
+   177                           ;main.c: 20: TRISBbits.TRISB4 = 0;
    178  007FC2  9893               	bcf	3987,4,c	;volatile
    179                           
    180                           ; BSR set to: 15
-   181                           ;main.c: 122: LATBbits.LATB4 = 1;
+   181                           ;main.c: 21: LATBbits.LATB4 = 1;
    182  007FC4  888A               	bsf	3978,4,c	;volatile
    183                           
    184                           ; BSR set to: 15
-   185  007FC6  D7FB               	goto	l718
+   185  007FC6  D7FB               	goto	l730
    186  007FC8                     __end_of_main:
    187                           	opt stack 0
    188                           
    189 ;; *************** function _I2C_Master_Write *****************
    190 ;; Defined at:
-   191 ;;		line 93 in file "main.c"
+   191 ;;		line 66 in file "i2c.c"
    192 ;; Parameters:    Size  Location     Type
    193 ;;  data            1    wreg     unsigned char 
    194 ;; Auto vars:     Size  Location     Type
@@ -242,27 +242,27 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    228                           ;I2C_Master_Write@data stored from wreg
    229  007F70  6E06               	movwf	I2C_Master_Write@data,c
    230                           
-   231                           ;main.c: 95: unsigned char newData = 0;
+   231                           ;i2c.c: 68: UInt8_T newData = 0;
    232  007F72  0E00               	movlw	0
    233  007F74  6E07               	movwf	I2C_Master_Write@newData,c
    234                           
-   235                           ;main.c: 96: newData = rotateByte(data);
+   235                           ;i2c.c: 69: newData = rotateByte(data);
    236  007F76  5006               	movf	I2C_Master_Write@data,w,c
    237  007F78  ECE4  F03F         	call	_rotateByte
    238  007F7C  6E07               	movwf	I2C_Master_Write@newData,c
    239                           
-   240                           ;main.c: 97: SSP1BUF = newData;
+   240                           ;i2c.c: 70: SSP1BUF = newData;
    241  007F7E  C007  FFC9         	movff	I2C_Master_Write@newData,4041	;volatile
-   242  007F82                     l33:
+   242  007F82                     l53:
    243  007F82  A4C7               	btfss	4039,2,c	;volatile
    244  007F84  0012               	return	
-   245  007F86  D7FD               	goto	l33
+   245  007F86  D7FD               	goto	l53
    246  007F88                     __end_of_I2C_Master_Write:
    247                           	opt stack 0
    248                           
    249 ;; *************** function _rotateByte *****************
    250 ;; Defined at:
-   251 ;;		line 57 in file "main.c"
+   251 ;;		line 30 in file "i2c.c"
    252 ;; Parameters:    Size  Location     Type
    253 ;;  x               1    wreg     unsigned char 
    254 ;; Auto vars:     Size  Location     Type
@@ -301,20 +301,20 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    287                           ;rotateByte@x stored from wreg
    288  007FC8  6E04               	movwf	rotateByte@x,c
    289                           
-   290                           ;main.c: 59: unsigned char newByte = 0;
+   290                           ;i2c.c: 32: UInt8_T newByte = 0;
    291  007FCA  0E00               	movlw	0
    292  007FCC  6E03               	movwf	rotateByte@newByte,c
    293                           
-   294                           ;main.c: 60: signed char i;
-   295                           ;main.c: 61: for(i = 7; i >= 0; i--)
+   294                           ;i2c.c: 33: SInt8_T i;
+   295                           ;i2c.c: 34: for(i = 7; i >= 0; i--)
    296  007FCE  0E07               	movlw	7
    297  007FD0  6E05               	movwf	rotateByte@i,c
-   298  007FD2                     l674:
+   298  007FD2                     l686:
    299  007FD2  BE05               	btfsc	rotateByte@i,7,c
-   300  007FD4  D013               	goto	l684
+   300  007FD4  D013               	goto	l696
    301                           
-   302                           ;main.c: 62: {
-   303                           ;main.c: 63: newByte |= (unsigned char)((x & 0b10000000) >> i);
+   302                           ;i2c.c: 35: {
+   303                           ;i2c.c: 36: newByte |= (UInt8_T)((x & 0b10000000) >> i);
    304  007FD6  C005  F001         	movff	rotateByte@i,??_rotateByte
    305  007FDA  C004  F002         	movff	rotateByte@x,??_rotateByte+1
    306  007FDE  0E80               	movlw	128
@@ -330,16 +330,16 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    316  007FEE  5002               	movf	??_rotateByte+1,w,c
    317  007FF0  1203               	iorwf	rotateByte@newByte,f,c
    318                           
-   319                           ;main.c: 64: x = (unsigned char)(x << 1);
+   319                           ;i2c.c: 37: x = (UInt8_T)(x << 1);
    320  007FF2  5004               	movf	rotateByte@x,w,c
    321  007FF4  2404               	addwf	rotateByte@x,w,c
    322  007FF6  6E04               	movwf	rotateByte@x,c
    323  007FF8  0605               	decf	rotateByte@i,f,c
-   324  007FFA  D7EB               	goto	l674
-   325  007FFC                     l684:
+   324  007FFA  D7EB               	goto	l686
+   325  007FFC                     l696:
    326                           
-   327                           ;main.c: 65: }
-   328                           ;main.c: 67: return newByte;
+   327                           ;i2c.c: 38: }
+   328                           ;i2c.c: 40: return newByte;
    329  007FFC  5003               	movf	rotateByte@newByte,w,c
    330  007FFE  0012               	return	
    331  008000                     __end_of_rotateByte:
@@ -348,7 +348,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    334                           
    335 ;; *************** function _I2C_Master_Stop *****************
    336 ;; Defined at:
-   337 ;;		line 102 in file "main.c"
+   337 ;;		line 75 in file "i2c.c"
    338 ;; Parameters:    Size  Location     Type
    339 ;;		None
    340 ;; Auto vars:     Size  Location     Type
@@ -381,21 +381,21 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    367  007F68                     _I2C_Master_Stop:
    368                           	opt stack 30
    369                           
-   370                           ;main.c: 104: SSP1CON2 |= 0b00000100;
+   370                           ;i2c.c: 77: SSP1CON2 |= 0b00000100;
    371                           
    372                           ;incstack = 0
    373  007F68  84C5               	bsf	4037,2,c	;volatile
-   374  007F6A                     l39:
+   374  007F6A                     l59:
    375  007F6A  A4C5               	btfss	4037,2,c	;volatile
    376  007F6C  0012               	return	
-   377  007F6E  D7FD               	goto	l39
+   377  007F6E  D7FD               	goto	l59
    378  007F70                     __end_of_I2C_Master_Stop:
    379                           	opt stack 0
    380                           status	equ	0xFD8
    381                           
    382 ;; *************** function _I2C_Master_Start *****************
    383 ;; Defined at:
-   384 ;;		line 85 in file "main.c"
+   384 ;;		line 58 in file "i2c.c"
    385 ;; Parameters:    Size  Location     Type
    386 ;;		None
    387 ;; Auto vars:     Size  Location     Type
@@ -428,21 +428,21 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    414  007F60                     _I2C_Master_Start:
    415                           	opt stack 30
    416                           
-   417                           ;main.c: 88: SSP1CON2 |= 0b00000001;
+   417                           ;i2c.c: 61: SSP1CON2 |= 0b00000001;
    418                           
    419                           ;incstack = 0
    420  007F60  80C5               	bsf	4037,0,c	;volatile
-   421  007F62                     l27:
+   421  007F62                     l47:
    422  007F62  A0C5               	btfss	4037,0,c	;volatile
    423  007F64  0012               	return	
-   424  007F66  D7FD               	goto	l27
+   424  007F66  D7FD               	goto	l47
    425  007F68                     __end_of_I2C_Master_Start:
    426                           	opt stack 0
    427                           status	equ	0xFD8
    428                           
    429 ;; *************** function _I2C_Master_Init *****************
    430 ;; Defined at:
-   431 ;;		line 71 in file "main.c"
+   431 ;;		line 44 in file "i2c.c"
    432 ;; Parameters:    Size  Location     Type
    433 ;;		None
    434 ;; Auto vars:     Size  Location     Type
@@ -475,39 +475,39 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    461  007F88                     _I2C_Master_Init:
    462                           	opt stack 30
    463                           
-   464                           ;main.c: 73: SSP1CON1 = 0b00100000 | 0b00001000;
+   464                           ;i2c.c: 46: SSP1CON1 = 0b00100000 | 0b00001000;
    465                           
    466                           ;incstack = 0
    467  007F88  0E28               	movlw	40
    468  007F8A  6EC6               	movwf	4038,c	;volatile
    469                           
-   470                           ;main.c: 74: SSP1CON2 = 0;
+   470                           ;i2c.c: 47: SSP1CON2 = 0;
    471  007F8C  0E00               	movlw	0
    472  007F8E  6EC5               	movwf	4037,c	;volatile
    473                           
-   474                           ;main.c: 75: SSP1ADD = 0x27;
+   474                           ;i2c.c: 48: SSP1ADD = 0x27;
    475  007F90  0E27               	movlw	39
    476  007F92  6EC8               	movwf	4040,c	;volatile
    477                           
-   478                           ;main.c: 76: SSP1STAT = 0b10000000;
+   478                           ;i2c.c: 49: SSP1STAT = 0b10000000;
    479  007F94  0E80               	movlw	128
    480  007F96  6EC7               	movwf	4039,c	;volatile
    481                           
-   482                           ;main.c: 78: ANSELBbits.ANSB0 = 0;
+   482                           ;i2c.c: 51: ANSELBbits.ANSB0 = 0;
    483  007F98  010F               	movlb	15	; () banked
    484  007F9A  915C               	bcf	92,0,b	;volatile
    485                           
    486                           ; BSR set to: 15
-   487                           ;main.c: 79: ANSELBbits.ANSB1 = 0;
+   487                           ;i2c.c: 52: ANSELBbits.ANSB1 = 0;
    488  007F9C  010F               	movlb	15	; () banked
    489  007F9E  935C               	bcf	92,1,b	;volatile
    490                           
    491                           ; BSR set to: 15
-   492                           ;main.c: 81: TRISBbits.TRISB0 = 1;
+   492                           ;i2c.c: 54: TRISBbits.TRISB0 = 1;
    493  007FA0  8093               	bsf	3987,0,c	;volatile
    494                           
    495                           ; BSR set to: 15
-   496                           ;main.c: 82: TRISBbits.TRISB1 = 1;
+   496                           ;i2c.c: 55: TRISBbits.TRISB1 = 1;
    497  007FA2  8293               	bsf	3987,1,c	;volatile
    498                           
    499                           ; BSR set to: 15
@@ -652,11 +652,11 @@ SFR                  0      0       0     200        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                   Sat Mar 31 18:55:31 2018
+Symbol Table                                                                                   Sat Mar 31 19:14:02 2018
 
-                       l33 7F82                         l27 7F62                         l39 7F6A  
-                       u24 7FEA                         u25 7FE6                        l718 7FBE  
-                      l674 7FD2                        l684 7FFC                       _main 7FA6  
+                       l53 7F82                         l47 7F62                         l59 7F6A  
+                       u24 7FEA                         u25 7FE6                        l730 7FBE  
+                      l686 7FD2                        l696 7FFC                       _main 7FA6  
                      start 1000               ___param_bank 000000           ?_I2C_Master_Init 0001  
          ?_I2C_Master_Stop 0001                      ?_main 0001                      status 000FD8  
           __initialization 7F5A               __end_of_main 7FC8                     ??_main 0008  
