@@ -3,7 +3,7 @@ __S1 8 0 ABS 0
 __S2 0 0 ABS 0
 __Hintentry 0 0 ABS 0
 __Lintentry 0 0 ABS 0
-_main 7FA6 0 CODE 0
+_main 7F10 0 CODE 0
 ___sp 0 0 STACK 2
 start 1000 0 CODE 0
 __Hirdata 0 0 CODE 0
@@ -12,8 +12,8 @@ __HRAM 0 0 ABS 0
 __LRAM 1 0 ABS 0
 __Hconfig 30000E 0 CONFIG 0
 __Lconfig 300000 0 CONFIG 0
-_I2C_Master_Stop 7F68 0 CODE 0
-__end_of_rotateByte 8000 0 CODE 0
+_I2C_Master_Stop 7ED2 0 CODE 0
+__end_of_rotateByte 7F98 0 CODE 0
 __Hbigram 0 0 ABS 0
 __Lbigram 0 0 ABS 0
 __Hrparam 0 0 COMRAM 1
@@ -60,24 +60,26 @@ __LnvFARRAM 0 0 FARRAM 0
 __Hdata 0 0 ABS 0
 __Ldata 0 0 ABS 0
 stackhi 7FF 0 ABS 0
-__end_of_I2C_Master_Init 7FA6 0 CODE 0
+__end_of_I2C_Master_Init 7F10 0 CODE 0
 __Htemp 0 0 COMRAM 1
 __Ltemp 0 0 COMRAM 1
 stacklo 60 0 ABS 0
 __Hrbit 0 0 COMRAM 1
 __Lrbit 0 0 COMRAM 1
-__end_of_I2C_Master_Stop 7F70 0 CODE 0
+__end_of_I2C_Master_Stop 7EDA 0 CODE 0
 __Hinit 1004 0 CODE 0
 __Linit 1000 0 CODE 0
 __Hintcodelo 1000 0 CODE 0
 __Lintcodelo 1000 0 CODE 0
 __Hrbss 0 0 COMRAM 1
-__end_of_main 7FC8 0 CODE 0
+__end_of_main 7F2E 0 CODE 0
 __Lrbss 0 0 COMRAM 1
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
-end_of_initialization 7F5A 0 CODE 0
+end_of_initialization 7EC4 0 CODE 0
+__size_of_I2C_LCD_Init 0 0 ABS 0
 __size_of_I2C_Master_Init 0 0 ABS 0
+rotateByte@rotatedByte 3 0 COMRAM 1
 __size_of_I2C_Master_Stop 0 0 ABS 0
 _SSP1ADD FC8 0 ABS 0
 _TRISBbits F93 0 ABS 0
@@ -108,29 +110,36 @@ __Htext0 0 0 ABS 0
 __Ltext0 0 0 ABS 0
 __Htext1 0 0 ABS 0
 __Ltext1 0 0 ABS 0
-__ptext0 7FA6 0 CODE 0
+__ptext0 7F10 0 CODE 0
 __Htext2 0 0 ABS 0
 __Ltext2 0 0 ABS 0
-__ptext1 7F70 0 CODE 0
+__ptext1 7ED2 0 CODE 0
 __Htext3 0 0 ABS 0
 __Ltext3 0 0 ABS 0
-__ptext2 7FC8 0 CODE 0
+__ptext2 7ECA 0 CODE 0
 __Htext4 0 0 ABS 0
 __Ltext4 0 0 ABS 0
-__ptext3 7F68 0 CODE 0
+__ptext3 7EF2 0 CODE 0
 __size_of_rotateByte 0 0 ABS 0
 __Htext5 0 0 ABS 0
 __Ltext5 0 0 ABS 0
-__ptext4 7F60 0 CODE 0
-__ptext5 7F88 0 CODE 0
+__ptext4 7F98 0 CODE 0
+__Htext6 0 0 ABS 0
+__Ltext6 0 0 ABS 0
+__ptext5 7F2E 0 CODE 0
+__Htext7 0 0 ABS 0
+__Ltext7 0 0 ABS 0
 __size_of_I2C_Master_Write 0 0 ABS 0
+__ptext6 7EDA 0 CODE 0
 I2C_Master_Write@data 6 0 COMRAM 1
+__ptext7 7F60 0 CODE 0
 __Hclrtext 0 0 ABS 0
+_I2C_LCD_ClearLCD 7F2E 0 CODE 0
 __Lclrtext 0 0 ABS 0
-rotateByte@newByte 3 0 COMRAM 1
-__end_of__initialization 7F5A 0 CODE 0
+__end_of__initialization 7EC4 0 CODE 0
 ___rparam_used 1 0 ABS 0
-_rotateByte 7FC8 0 CODE 0
+_I2C_LCD_Init 7F98 0 CODE 0
+_rotateByte 7F60 0 CODE 0
 __Hidata 0 0 CODE 0
 __Lidata 0 0 CODE 0
 __Hrdata 0 0 COMRAM 1
@@ -157,101 +166,137 @@ __Hnvbit 0 0 COMRAM 1
 __Lnvbit 0 0 COMRAM 1
 __Hcinit 0 0 ABS 0
 __Lcinit 0 0 ABS 0
-__pcinit 7F5A 0 CODE 0
+__pcinit 7EC4 0 CODE 0
 __ramtop 800 0 RAM 0
 __mediumconst 0 0 MEDIUMCONST 0
 __size_of_main 0 0 ABS 0
 __Hconst 0 0 CONST 0
 __Lconst 0 0 CONST 0
+__end_of_I2C_LCD_ClearLCD 7F60 0 CODE 0
 _SSP1CON1 FC6 0 ABS 0
 _SSP1CON2 FC5 0 ABS 0
-_I2C_Master_Start 7F60 0 CODE 0
+_I2C_Master_Start 7ECA 0 CODE 0
 ___inthi_sp 0 0 STACK 2
 _ANSELBbits F5C 0 ABS 0
 ___intlo_sp 0 0 STACK 2
+__size_of_I2C_LCD_ClearLCD 0 0 ABS 0
 __smallconst 0 0 SMALLCONST 0
 __Hreset_vec 1000 0 CODE 0
 __Lreset_vec 1000 0 CODE 0
-rotateByte@x 4 0 COMRAM 1
-_I2C_Master_Write 7F70 0 CODE 0
+_I2C_Master_Write 7EDA 0 CODE 0
 __accesstop 60 0 ABS 0
 __Hintcode_body 0 0 ABS 0
 __Lintcode_body 0 0 ABS 0
 intlevel0 0 0 CODE 0
 _SSP1STAT FC7 0 ABS 0
 intlevel1 0 0 CODE 0
-__end_of_I2C_Master_Write 7F88 0 CODE 0
+__end_of_I2C_Master_Write 7EF2 0 CODE 0
 intlevel2 0 0 CODE 0
 intlevel3 0 0 CODE 0
-start_initialization 7F5A 0 CODE 0
-__end_of_I2C_Master_Start 7F68 0 CODE 0
-_I2C_Master_Init 7F88 0 CODE 0
+start_initialization 7EC4 0 CODE 0
+__end_of_I2C_Master_Start 7ED2 0 CODE 0
+_I2C_Master_Init 7EF2 0 CODE 0
 I2C_Master_Write@newData 7 0 COMRAM 1
-__initialization 7F5A 0 CODE 0
+__end_of_I2C_LCD_Init 8000 0 CODE 0
+__initialization 7EC4 0 CODE 0
+rotateByte@byte 4 0 COMRAM 1
 __activetblptr 0 0 ABS 0
 %segments
 reset_vec 1000 1003 CODE 1000 0
 config 300000 30000D CONFIG 300000 0
 idloc 200000 200007 IDLOC 200000 0
 cstackCOMRAM 1 7 COMRAM 1 1
-text2 7FC8 7FFF CODE 7FC8 0
-text0 7FA6 7FC7 CODE 7FA6 0
-text5 7F88 7FA5 CODE 7F88 0
-text1 7F70 7F87 CODE 7F70 0
-text3 7F68 7F6F CODE 7F68 0
-text4 7F60 7F67 CODE 7F60 0
-cinit 7F5A 7F5F CODE 7F5A 0
+text4 7F98 7FFF CODE 7F98 0
+text7 7F60 7F97 CODE 7F60 0
+text5 7F2E 7F5F CODE 7F2E 0
+text0 7F10 7F2D CODE 7F10 0
+text3 7EF2 7F0F CODE 7EF2 0
+text6 7EDA 7EF1 CODE 7EDA 0
+text1 7ED2 7ED9 CODE 7ED2 0
+text2 7ECA 7ED1 CODE 7ECA 0
+cinit 7EC4 7EC9 CODE 7EC4 0
 %locals
 dist/default/production\I2C_LCD.X.production.obj
 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
-C:\Users\usuario\AppData\Local\Temp\s1jsg.
-904 7F5A 0 CODE 0
-906 7F5A 0 CODE 0
-909 7F5A 0 CODE 0
-915 7F5A 0 CODE 0
-917 7F5A 0 CODE 0
-918 7F5C 0 CODE 0
+C:\Users\usuario\AppData\Local\Temp\s2lnk.
+1323 7EC4 0 CODE 0
+1325 7EC4 0 CODE 0
+1328 7EC4 0 CODE 0
+1334 7EC4 0 CODE 0
+1336 7EC4 0 CODE 0
+1337 7EC6 0 CODE 0
 main.c
-9 7FA6 0 CODE 0
-11 7FA6 0 CODE 0
-12 7FAA 0 CODE 0
-13 7FAE 0 CODE 0
-14 7FB4 0 CODE 0
-15 7FBA 0 CODE 0
-19 7FBE 0 CODE 0
-20 7FC2 0 CODE 0
-21 7FC4 0 CODE 0
-17 7FC6 0 CODE 0
+10 7F10 0 CODE 0
+12 7F10 0 CODE 0
+13 7F14 0 CODE 0
+15 7F18 0 CODE 0
+16 7F1C 0 CODE 0
+18 7F20 0 CODE 0
+22 7F24 0 CODE 0
+23 7F28 0 CODE 0
+24 7F2A 0 CODE 0
+20 7F2C 0 CODE 0
 i2c.c
-66 7F70 0 CODE 0
-68 7F72 0 CODE 0
-69 7F76 0 CODE 0
-70 7F7E 0 CODE 0
-71 7F82 0 CODE 0
+134 7ED2 0 CODE 0
+136 7ED2 0 CODE 0
+137 7ED4 0 CODE 0
 i2c.c
-30 7FC8 0 CODE 0
-32 7FCA 0 CODE 0
-34 7FCE 0 CODE 0
-36 7FD6 0 CODE 0
-37 7FF2 0 CODE 0
-34 7FF8 0 CODE 0
-40 7FFC 0 CODE 0
+94 7ECA 0 CODE 0
+97 7ECA 0 CODE 0
+98 7ECC 0 CODE 0
 i2c.c
-75 7F68 0 CODE 0
-77 7F68 0 CODE 0
-78 7F6A 0 CODE 0
+69 7EF2 0 CODE 0
+71 7EF2 0 CODE 0
+72 7EF6 0 CODE 0
+73 7EFA 0 CODE 0
+74 7EFE 0 CODE 0
+76 7F02 0 CODE 0
+77 7F06 0 CODE 0
+79 7F0A 0 CODE 0
+80 7F0C 0 CODE 0
+81 7F0E 0 CODE 0
+i2c_LCD.c
+47 7F98 0 CODE 0
+49 7F98 0 CODE 0
+52 7F9E 0 CODE 0
+53 7FA4 0 CODE 0
+54 7FAA 0 CODE 0
+55 7FB0 0 CODE 0
+58 7FB6 0 CODE 0
+59 7FBC 0 CODE 0
+60 7FC2 0 CODE 0
+61 7FC8 0 CODE 0
+64 7FCE 0 CODE 0
+65 7FD4 0 CODE 0
+66 7FDA 0 CODE 0
+67 7FE0 0 CODE 0
+70 7FE6 0 CODE 0
+71 7FEC 0 CODE 0
+72 7FF2 0 CODE 0
+73 7FF8 0 CODE 0
+77 7FFE 0 CODE 0
+i2c_LCD.c
+90 7F2E 0 CODE 0
+93 7F2E 0 CODE 0
+94 7F34 0 CODE 0
+95 7F3A 0 CODE 0
+96 7F40 0 CODE 0
+99 7F46 0 CODE 0
+100 7F4C 0 CODE 0
+101 7F52 0 CODE 0
+102 7F58 0 CODE 0
+105 7F5E 0 CODE 0
 i2c.c
-58 7F60 0 CODE 0
-61 7F60 0 CODE 0
-62 7F62 0 CODE 0
+114 7EDA 0 CODE 0
+116 7EDC 0 CODE 0
+117 7EE0 0 CODE 0
+118 7EE8 0 CODE 0
+119 7EEC 0 CODE 0
 i2c.c
-44 7F88 0 CODE 0
-46 7F88 0 CODE 0
-47 7F8C 0 CODE 0
+44 7F60 0 CODE 0
+46 7F62 0 CODE 0
+48 7F66 0 CODE 0
+50 7F6E 0 CODE 0
+51 7F8A 0 CODE 0
 48 7F90 0 CODE 0
-49 7F94 0 CODE 0
-51 7F98 0 CODE 0
-52 7F9C 0 CODE 0
-54 7FA0 0 CODE 0
-55 7FA2 0 CODE 0
-56 7FA4 0 CODE 0
+54 7F94 0 CODE 0

@@ -1,5 +1,5 @@
 
-# 1 "i2c.c"
+# 1 "i2c_LCD.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -7081,63 +7081,64 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
+# 53 "i2c_LCD.h"
+void I2C_LCD_Init();
+void I2C_LCD_ClearLCD();
+
 # 59 "i2c.h"
 void I2C_Master_Init();
 UInt8_T I2C_Master_Start();
 UInt8_T I2C_Master_Write(UInt8_T data);
 void I2C_Master_Stop();
 
-# 44 "i2c.c"
-static UInt8_T rotateByte(UInt8_T byte)
+# 47 "i2c_LCD.c"
+void I2C_LCD_Init()
 {
-UInt8_T rotatedByte = 0;
-SInt8_T i;
-for(i = 7; i >= 0; i--)
-{
-rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);
-byte = (UInt8_T)(byte << 1);
+(void)I2C_Master_Write((0x3F << 1) | 0b00000000);
+
+
+(void)I2C_Master_Write(0b00110000 | ((0x28 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00010000 | ((0x28 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00110000 | (0x28 & 0x0F));
+(void)I2C_Master_Write(0b00010000 | (0x28 & 0x0F));
+
+
+(void)I2C_Master_Write(0b00110000 | ((0x01 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00010000 | ((0x01 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00110000 | (0x01 & 0x0F));
+(void)I2C_Master_Write(0b00010000 | (0x01 & 0x0F));
+
+
+(void)I2C_Master_Write(0b00110000 | ((0x0F & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00010000 | ((0x0F & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00110000 | (0x0F & 0x0F));
+(void)I2C_Master_Write(0b00010000 | (0x0F & 0x0F));
+
+
+(void)I2C_Master_Write(0b00110000 | ((0x02 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00010000 | ((0x02 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00110000 | (0x02 & 0x0F));
+(void)I2C_Master_Write(0b00010000 | (0x02 & 0x0F));
+
+
+
 }
 
-return rotatedByte;
-}
-
-# 69
-void I2C_Master_Init()
-{
-SSP1CON1 = 0b00100000 | 0b00001000;
-SSP1CON2 = 0;
-SSP1ADD = 0x27;
-SSP1STAT = 0b10000000;
-
-ANSELBbits.ANSB0 = 0;
-ANSELBbits.ANSB1 = 0;
-
-(TRISBbits.TRISB0) = 1;
-(TRISBbits.TRISB1) = 1;
-}
-
-# 94
-UInt8_T I2C_Master_Start()
+# 90
+void I2C_LCD_ClearLCD()
 {
 
-SSP1CON2 |= 0b00000001;
-while(SSP1CON2 & 0b00000001);
-return 1;
+(void)I2C_Master_Write(0b00110000 | ((0x01 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00010000 | ((0x01 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00110000 | (0x01 & 0x0F));
+(void)I2C_Master_Write(0b00010000 | (0x01 & 0x0F));
+
+
+(void)I2C_Master_Write(0b00110000 | ((0x02 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00010000 | ((0x02 & 0xF0) >> 4));
+(void)I2C_Master_Write(0b00110000 | (0x02 & 0x0F));
+(void)I2C_Master_Write(0b00010000 | (0x02 & 0x0F));
+
+
 }
 
-# 114
-UInt8_T I2C_Master_Write(UInt8_T data)
-{
-UInt8_T newData = 0;
-newData = rotateByte(data);
-SSP1BUF = newData;
-while(SSP1STAT & 0b00000100);
-return 1;
-}
-
-# 134
-void I2C_Master_Stop()
-{
-SSP1CON2 |= 0b00000100;
-while(SSP1CON2 & 0b00000100);
-}

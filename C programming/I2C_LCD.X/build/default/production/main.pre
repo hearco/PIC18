@@ -7081,19 +7081,25 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
+# 53 "i2c_LCD.h"
+void I2C_LCD_Init();
+void I2C_LCD_ClearLCD();
+
 # 59 "i2c.h"
 void I2C_Master_Init();
 UInt8_T I2C_Master_Start();
 UInt8_T I2C_Master_Write(UInt8_T data);
 void I2C_Master_Stop();
 
-# 9 "main.c"
+# 10 "main.c"
 void main(void)
 {
 I2C_Master_Init();
 (void)I2C_Master_Start();
-(void)I2C_Master_Write((0x3F << 1) | 0b00000000);
-(void)I2C_Master_Write(0b11010011);
+
+I2C_LCD_Init();
+I2C_LCD_ClearLCD();
+
 I2C_Master_Stop();
 
 while(1)

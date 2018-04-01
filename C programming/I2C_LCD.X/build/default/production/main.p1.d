@@ -3,4 +3,5 @@
  main.c  \
 dataTypes.h  \
 i2c.h  \
-hwconfig.h 
+hwconfig.h  \
+i2c_LCD.h 

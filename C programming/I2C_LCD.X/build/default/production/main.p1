@@ -4,9 +4,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _I2C_Master_Init `(v ~T0 @X0 0 ef ]
 "60
 [v _I2C_Master_Start `(uc ~T0 @X0 0 ef ]
-"61
-[v _I2C_Master_Write `(uc ~T0 @X0 0 ef1`uc ]
-"62
+"53 i2c_LCD.h
+[v _I2C_LCD_Init `(v ~T0 @X0 0 ef ]
+"54
+[v _I2C_LCD_ClearLCD `(v ~T0 @X0 0 ef ]
+"62 i2c.h
 [v _I2C_Master_Stop `(v ~T0 @X0 0 ef ]
 "281 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -5379,57 +5381,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dataTypes.h: 40: typedef signed short int SInt16_T;
 [; ;dataTypes.h: 41: typedef signed long int SInt32_T;
 [; ;dataTypes.h: 42: typedef signed long long int SInt64_T;
+[; ;i2c_LCD.h: 53: void I2C_LCD_Init();
+[; ;i2c_LCD.h: 54: void I2C_LCD_ClearLCD();
 [; ;i2c.h: 59: void I2C_Master_Init();
 [; ;i2c.h: 60: UInt8_T I2C_Master_Start();
 [; ;i2c.h: 61: UInt8_T I2C_Master_Write(UInt8_T data);
 [; ;i2c.h: 62: void I2C_Master_Stop();
 [v $root$_main `(v ~T0 @X0 0 e ]
-"9 main.c
+"10 main.c
 [v _main `(v ~T0 @X0 1 ef ]
-"10
+"11
 {
-[; ;main.c: 9: void main(void)
-[; ;main.c: 10: {
+[; ;main.c: 10: void main(void)
+[; ;main.c: 11: {
 [e :U _main ]
 [f ]
-[; ;main.c: 11: I2C_Master_Init();
-"11
-[e ( _I2C_Master_Init ..  ]
-[; ;main.c: 12: (void)I2C_Master_Start();
+[; ;main.c: 12: I2C_Master_Init();
 "12
-[e ( _I2C_Master_Start ..  ]
-[; ;main.c: 13: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
+[e ( _I2C_Master_Init ..  ]
+[; ;main.c: 13: (void)I2C_Master_Start();
 "13
-[e ( _I2C_Master_Write (1 -> | << -> 63 `i -> 1 `i -> 0 `i `uc ]
-[; ;main.c: 14: (void)I2C_Master_Write(0b11010011);
-"14
-[e ( _I2C_Master_Write (1 -> -> 211 `i `uc ]
-[; ;main.c: 15: I2C_Master_Stop();
+[e ( _I2C_Master_Start ..  ]
+[; ;main.c: 15: I2C_LCD_Init();
 "15
-[e ( _I2C_Master_Stop ..  ]
-[; ;main.c: 17: while(1)
-"17
-[e :U 634 ]
-[; ;main.c: 18: {
+[e ( _I2C_LCD_Init ..  ]
+[; ;main.c: 16: I2C_LCD_ClearLCD();
+"16
+[e ( _I2C_LCD_ClearLCD ..  ]
+[; ;main.c: 18: I2C_Master_Stop();
 "18
-{
-[; ;main.c: 19: ANSELBbits.ANSB4 = 0;
-"19
-[e = . . _ANSELBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 20: TRISBbits.TRISB4 = 0;
+[e ( _I2C_Master_Stop ..  ]
+[; ;main.c: 20: while(1)
 "20
-[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 21: LATBbits.LATB4 = 1;
+[e :U 634 ]
+[; ;main.c: 21: {
 "21
-[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
+{
+[; ;main.c: 22: ANSELBbits.ANSB4 = 0;
 "22
+[e = . . _ANSELBbits 0 4 -> -> 0 `i `uc ]
+[; ;main.c: 23: TRISBbits.TRISB4 = 0;
+"23
+[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
+[; ;main.c: 24: LATBbits.LATB4 = 1;
+"24
+[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
+"25
 }
 [e :U 633 ]
-"17
+"20
 [e $U 634  ]
 [e :U 635 ]
-[; ;main.c: 22: }
-[; ;main.c: 23: }
-"23
+[; ;main.c: 25: }
+[; ;main.c: 26: }
+"26
 [e :UE 632 ]
 }

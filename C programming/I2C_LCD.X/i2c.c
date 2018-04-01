@@ -1,6 +1,6 @@
 #include "i2c.h"
 
-/******************************************************************************************************************************************************
+/*
  * 
  *  i2c is enabled in the Master Serial Synchronous Port
  *  Registers associated with i2c operation (p. 259)
@@ -26,21 +26,46 @@
  * 
  *  For i2c master mode transmission steps, check page 248 of datasheet
  * 
- ***************************************************************************************************************************************************/
-static UInt8_T rotateByte(UInt8_T x)
+ */
+
+// Private functions
+/********************************************************************************************
+ * 
+ *    Function: rotateByte
+ * 
+ * Description: Left-rotate byte to correct data transfer. This function may not be needed
+ *              if i2c slave module has a different hardware layout.
+ * 
+ *  Parameters: UInt8_T byte
+ * 
+ *     Returns: UInt8_T rotatedByte
+ * 
+ ********************************************************************************************/
+static UInt8_T rotateByte(UInt8_T byte)
 {    
-    UInt8_T newByte = 0;
+    UInt8_T rotatedByte = 0;
     SInt8_T i;                      // Keep it signed to meet the conditional exit of the for loop   
     for(i = 7; i >= 0; i--)          
     {                                
-        newByte |= (UInt8_T)((x & 0b10000000) >> i);  
-        x = (UInt8_T)(x << 1);                  
+        rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);  
+        byte = (UInt8_T)(byte << 1);                  
     }                                
 
-    return newByte;
+    return rotatedByte;
 }
 
-
+// Public functions
+/********************************************************************************************
+ * 
+ *    Function: I2C_Master_Init
+ * 
+ * Description: Initializes MSSP for i2c as master mode 
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ********************************************************************************************/
 void I2C_Master_Init()
 {
     SSP1CON1 = I2C_ENABLE_SERIAL_PORT | I2C_MASTER_MODE;                           // i2c mode configuration
@@ -55,6 +80,17 @@ void I2C_Master_Init()
     I2C_SCL_PIN = 1;                                                               
 }
 
+/********************************************************************************************
+ * 
+ *    Function: I2C_Master_Start
+ * 
+ * Description: Starts i2c protocol 
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: UInt8_T
+ * 
+ ********************************************************************************************/
 UInt8_T I2C_Master_Start()
 {
     
@@ -63,6 +99,18 @@ UInt8_T I2C_Master_Start()
     return 1;
 }
 
+/********************************************************************************************
+ * 
+ *    Function: I2C_Master_Write
+ * 
+ * Description: Sends data to i2c bus. If rotateByte function is no needed, SSPIBUF can take
+ *              the value of data parameter directly. 
+ * 
+ *  Parameters: UInt8_T data
+ * 
+ *     Returns: UInt8_T
+ * 
+ ********************************************************************************************/
 UInt8_T I2C_Master_Write(UInt8_T data)
 {   
     UInt8_T newData = 0;
@@ -72,6 +120,17 @@ UInt8_T I2C_Master_Write(UInt8_T data)
     return 1;
 }
 
+/********************************************************************************************
+ * 
+ *    Function: I2C_Master_Stop
+ * 
+ * Description: Stops i2c protocol. 
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ********************************************************************************************/
 void I2C_Master_Stop()
 {
     SSP1CON2 |= I2C_STOP_IN_PROGRESS;
