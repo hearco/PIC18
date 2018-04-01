@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.42\dat\en_msgs.txt -cs \
   -h+dist/default/production\I2C_LCD.X.production.sym \
   --cmf=dist/default/production\I2C_LCD.X.production.cmf -z -Q18F45K50 \
-  -oC:\Users\usuario\AppData\Local\Temp\s1d0c.2 \
+  -oC:\Users\usuario\AppData\Local\Temp\scpg.2 \
   -Mdist/default/production/I2C_LCD.X.production.map -E1 -ver=XC8 \
   -ASTACK=060h-07ffh -pstack=STACK -ACODE=01000h-07FFFh \
   -ACONST=01000h-07FFFh -ASMALLCONST=01000h-010FFhx112 \
@@ -23,7 +23,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\usuario\AppData\Local\Temp\s1d0c.obj \
+  C:\Users\usuario\AppData\Local\Temp\scpg.obj \
   dist/default/production\I2C_LCD.X.production.obj 
 
 Object code version is 3.11
@@ -36,30 +36,32 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\usuario\AppData\Local\Temp\s1d0c.obj
+C:\Users\usuario\AppData\Local\Temp\scpg.obj
                 init                               1000     1000        4      800       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
 dist/default/production\I2C_LCD.X.production.obj
-                text4                              7F74     7F74       20     3FBA       0
-                text3                              7F6A     7F6A        A     3FB5       0
-                text2                              7F62     7F62        8     3FB1       0
-                text1                              7F94     7F94       2C     3FCA       0
-                text0                              7FC0     7FC0       40     3FE0       0
-                cstackCOMRAM                          1        1        4        1       1
-                cinit                              7F5C     7F5C        6     3FAE       0
+                text5                              7F88     7F88       1E     3FC4       0
+                text4                              7F60     7F60        8     3FB0       0
+                text3                              7F68     7F68        8     3FB4       0
+                text2                              7FC8     7FC8       38     3FE4       0
+                text1                              7F70     7F70       18     3FB8       0
+                text0                              7FA6     7FA6       22     3FD3       0
+                cstackCOMRAM                          1        1        7        1       1
+                cinit                              7F5A     7F5A        6     3FAD       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
 
         CLASS   CODE           
                 init                               1000     1000        4         0
-                text4                              7F74     7F74       20         0
-                text3                              7F6A     7F6A        A         0
-                text2                              7F62     7F62        8         0
-                text1                              7F94     7F94       2C         0
-                text0                              7FC0     7FC0       40         0
-                cinit                              7F5C     7F5C        6         0
+                text5                              7F88     7F88       1E         0
+                text4                              7F60     7F60        8         0
+                text3                              7F68     7F68        8         0
+                text2                              7FC8     7FC8       38         0
+                text1                              7F70     7F70       18         0
+                text0                              7FA6     7FA6       22         0
+                cinit                              7F5A     7F5A        6         0
 
         CLASS   CONST          
 
@@ -68,7 +70,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                cstackCOMRAM                          1        1        4         1
+                cstackCOMRAM                          1        1        7         1
 
         CLASS   ABS1           
 
@@ -108,14 +110,15 @@ TOTAL           Name                               Link     Load   Length     Sp
 
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
-                cstackCOMRAM                   000001  000004  000005         1       1  COMRAM  
+                cstackCOMRAM                   000001  000007  000008         1       1  COMRAM  
                 reset_vec                      001000  000004  001004       800       0  CODE    
-                cinit                          007F5C  000006  007F62      3FAE       0  CODE    
-                text2                          007F62  000008  007F6A      3FB1       0  CODE    
-                text3                          007F6A  00000A  007F74      3FB5       0  CODE    
-                text4                          007F74  000020  007F94      3FBA       0  CODE    
-                text1                          007F94  00002C  007FC0      3FCA       0  CODE    
-                text0                          007FC0  000040  008000      3FE0       0  CODE    
+                cinit                          007F5A  000006  007F60      3FAD       0  CODE    
+                text4                          007F60  000008  007F68      3FB0       0  CODE    
+                text3                          007F68  000008  007F70      3FB4       0  CODE    
+                text1                          007F70  000018  007F88      3FB8       0  CODE    
+                text5                          007F88  00001E  007FA6      3FC4       0  CODE    
+                text0                          007FA6  000022  007FC8      3FD3       0  CODE    
+                text2                          007FC8  000038  008000      3FE4       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -131,43 +134,34 @@ UNUSED ADDRESS RANGES
         BANK5            000500-0005FF              100
         BANK6            000600-0006FF              100
         BANK7            000700-0007FF              100
-        BIGRAM           000005-0007FF              7FB
-        CODE             001004-007F5B             6F58
-        COMRAM           000005-00005F               5B
-        CONST            001004-007F5B             6F58
+        BIGRAM           000008-0007FF              7F8
+        CODE             001004-007F59             6F56
+        COMRAM           000008-00005F               58
+        CONST            001004-007F59             6F56
         EEDATA           F00000-F000FF              100
         FARRAM           000000-000000                1
-        MEDIUMCONST      001004-007F5B             6F58
+        MEDIUMCONST      001004-007F59             6F56
         RAM              000060-0007FF              100
         SFR              000F53-000FFF                D
-        SMALLCONST       001004-007F5B              100
+        SMALLCONST       001004-007F59              100
         STACK            000060-0007FF              7A0
 
                                   Symbol Table
 
-I2C_Master_Init@clockSpeed cstackCOMRAM 000001
-I2C_Master_Write@data      cstackCOMRAM 000004
-I2C_Master_Write@temp      cstackCOMRAM 000003
-_ANSELB                    (abs)        000F5C
+I2C_Master_Write@data      cstackCOMRAM 000006
+I2C_Master_Write@newData   cstackCOMRAM 000007
 _ANSELBbits                (abs)        000F5C
-_ANSELD                    (abs)        000F5E
-_I2C_Master_Init           text4        007F74
-_I2C_Master_Start          text3        007F6A
-_I2C_Master_Stop           text2        007F62
-_I2C_Master_Write          text1        007F94
+_I2C_Master_Init           text5        007F88
+_I2C_Master_Start          text4        007F60
+_I2C_Master_Stop           text3        007F68
+_I2C_Master_Write          text1        007F70
 _LATBbits                  (abs)        000F8A
-_LATD                      (abs)        000F8C
-_PIR1                      (abs)        000F9E
-_PIR1bits                  (abs)        000F9E
 _SSP1ADD                   (abs)        000FC8
 _SSP1BUF                   (abs)        000FC9
 _SSP1CON1                  (abs)        000FC6
 _SSP1CON2                  (abs)        000FC5
-_SSP1CON2bits              (abs)        000FC5
-_SSP1CON3                  (abs)        000FCB
 _SSP1STAT                  (abs)        000FC7
 _TRISBbits                 (abs)        000F93
-_TRISD                     (abs)        000F95
 __HRAM                     (abs)        000000
 __Habs1                    abs1         000000
 __Hbank0                   bank0        000000
@@ -220,7 +214,7 @@ __Hrparam                  rparam       000000
 __Hsfr                     sfr          000000
 __Hsmallconst              smallconst   000000
 __Hspace_0                 (abs)        30000E
-__Hspace_1                 (abs)        000005
+__Hspace_1                 (abs)        000008
 __Hspace_2                 (abs)        000000
 __Hstack                   stack        000000
 __Hstruct                  struct       000000
@@ -231,6 +225,7 @@ __Htext1                   text1        000000
 __Htext2                   text2        000000
 __Htext3                   text3        000000
 __Htext4                   text4        000000
+__Htext5                   text5        000000
 __LRAM                     (abs)        000001
 __Labs1                    abs1         000000
 __Lbank0                   bank0        000000
@@ -294,8 +289,9 @@ __Ltext1                   text1        000000
 __Ltext2                   text2        000000
 __Ltext3                   text3        000000
 __Ltext4                   text4        000000
+__Ltext5                   text5        000000
 __S0                       (abs)        30000E
-__S1                       (abs)        000005
+__S1                       (abs)        000008
 __S2                       (abs)        000000
 ___inthi_sp                stack        000000
 ___intlo_sp                stack        000000
@@ -304,45 +300,52 @@ ___rparam_used             (abs)        000001
 ___sp                      stack        000000
 __accesstop                (abs)        000060
 __activetblptr             (abs)        000000
-__end_of_I2C_Master_Init   text4        007F94
-__end_of_I2C_Master_Start  text3        007F74
-__end_of_I2C_Master_Stop   text2        007F6A
-__end_of_I2C_Master_Write  text1        007FC0
-__end_of__initialization   cinit        007F5C
-__end_of_main              text0        008000
-__initialization           cinit        007F5C
+__end_of_I2C_Master_Init   text5        007FA6
+__end_of_I2C_Master_Start  text4        007F68
+__end_of_I2C_Master_Stop   text3        007F70
+__end_of_I2C_Master_Write  text1        007F88
+__end_of__initialization   cinit        007F5A
+__end_of_main              text0        007FC8
+__end_of_rotateByte        text2        008000
+__initialization           cinit        007F5A
 __mediumconst              mediumconst  000000
-__pcinit                   cinit        007F5C
+__pcinit                   cinit        007F5A
 __pcstackCOMRAM            cstackCOMRAM 000001
-__ptext0                   text0        007FC0
-__ptext1                   text1        007F94
-__ptext2                   text2        007F62
-__ptext3                   text3        007F6A
-__ptext4                   text4        007F74
+__ptext0                   text0        007FA6
+__ptext1                   text1        007F70
+__ptext2                   text2        007FC8
+__ptext3                   text3        007F68
+__ptext4                   text4        007F60
+__ptext5                   text5        007F88
 __ramtop                   ramtop       000800
 __size_of_I2C_Master_Init  (abs)        000000
 __size_of_I2C_Master_Start (abs)        000000
 __size_of_I2C_Master_Stop  (abs)        000000
 __size_of_I2C_Master_Write (abs)        000000
 __size_of_main             (abs)        000000
+__size_of_rotateByte       (abs)        000000
 __smallconst               smallconst   000000
-_main                      text0        007FC0
-end_of_initialization      cinit        007F5C
+_main                      text0        007FA6
+_rotateByte                text2        007FC8
+end_of_initialization      cinit        007F5A
 intlevel0                  text         000000
 intlevel1                  text         000000
 intlevel2                  text         000000
 intlevel3                  text         000000
+rotateByte@i               cstackCOMRAM 000005
+rotateByte@newByte         cstackCOMRAM 000003
+rotateByte@x               cstackCOMRAM 000004
 stackhi                    (abs)        0007FF
 stacklo                    (abs)        000060
 start                      init         001000
-start_initialization       cinit        007F5C
+start_initialization       cinit        007F5A
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 134 in file "main.c"
+		line 110 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -361,7 +364,7 @@ FUNCTION INFORMATION:
       Temps:          0       0       0       0       0       0       0       0       0
       Totals:         0       0       0       0       0       0       0       0       0
 Total ram usage:        0 bytes
- Hardware stack levels required when called:    1
+ Hardware stack levels required when called:    2
  This function calls:
 		_I2C_Master_Init
 		_I2C_Master_Start
@@ -374,12 +377,44 @@ Total ram usage:        0 bytes
 
  *************** function _I2C_Master_Write *****************
  Defined at:
-		line 110 in file "main.c"
+		line 93 in file "main.c"
  Parameters:    Size  Location     Type
   data            1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
-  data            1    3[COMRAM] unsigned char 
-  temp            1    2[COMRAM] unsigned char 
+  data            1    5[COMRAM] unsigned char 
+  newData         1    6[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+      Params:         0       0       0       0       0       0       0       0       0
+      Locals:         2       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0
+      Totals:         2       0       0       0       0       0       0       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    1
+ This function calls:
+		_rotateByte
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _rotateByte *****************
+ Defined at:
+		line 57 in file "main.c"
+ Parameters:    Size  Location     Type
+  x               1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  x               1    3[COMRAM] unsigned char 
+  i               1    4[COMRAM] char 
+  newByte         1    2[COMRAM] unsigned char 
  Return value:  Size  Location     Type
                   1    wreg      unsigned char 
  Registers used:
@@ -390,15 +425,15 @@ Total ram usage:        0 bytes
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
       Params:         0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0
+      Locals:         3       0       0       0       0       0       0       0       0
       Temps:          2       0       0       0       0       0       0       0       0
-      Totals:         4       0       0       0       0       0       0       0       0
-Total ram usage:        4 bytes
+      Totals:         5       0       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
  Hardware stack levels used:    1
  This function calls:
 		Nothing
  This function is called by:
-		_main
+		_I2C_Master_Write
  This function uses a non-reentrant model
 
 
@@ -433,7 +468,7 @@ Total ram usage:        0 bytes
 
  *************** function _I2C_Master_Start *****************
  Defined at:
-		line 92 in file "main.c"
+		line 85 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -462,25 +497,25 @@ Total ram usage:        0 bytes
 
  *************** function _I2C_Master_Init *****************
  Defined at:
-		line 72 in file "main.c"
+		line 71 in file "main.c"
  Parameters:    Size  Location     Type
-  clockSpeed      4    0[COMRAM] const unsigned long 
+		None
  Auto vars:     Size  Location     Type
 		None
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, status,2, status,0
+		wreg, status,2
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
-      Params:         4       0       0       0       0       0       0       0       0
+      Params:         0       0       0       0       0       0       0       0       0
       Locals:         0       0       0       0       0       0       0       0       0
       Temps:          0       0       0       0       0       0       0       0       0
-      Totals:         4       0       0       0       0       0       0       0       0
-Total ram usage:        4 bytes
+      Totals:         0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
  Hardware stack levels used:    1
  This function calls:
 		Nothing
@@ -494,16 +529,17 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 shared
-		__initialization		CODE           	7F5C	0000	1
+		__initialization		CODE           	7F5A	0000	1
 
 shared estimated size: 1
 
 main.c
-		_I2C_Master_Init		CODE           	7F74	0000	33
-		_I2C_Master_Stop		CODE           	7F62	0000	9
-		_main          		CODE           	7FC0	0000	65
-		_I2C_Master_Write		CODE           	7F94	0000	45
-		_I2C_Master_Start		CODE           	7F6A	0000	11
+		_rotateByte    		CODE           	7FC8	0000	57
+		_I2C_Master_Init		CODE           	7F88	0000	31
+		_I2C_Master_Stop		CODE           	7F68	0000	9
+		_main          		CODE           	7FA6	0000	35
+		_I2C_Master_Write		CODE           	7F70	0000	25
+		_I2C_Master_Start		CODE           	7F60	0000	9
 
-main.c estimated size: 163
+main.c estimated size: 166
 

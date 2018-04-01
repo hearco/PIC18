@@ -23,31 +23,29 @@
 [v ___flmul __flmul `(d  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"72 C:\Users\usuario\Documents\GitHub\PIC18\C programming\i2c\I2C_LCD.X\main.c
+"57 C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
+[v _rotateByte rotateByte `(uc  1 e 1 0 ]
+"71
 [v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
-"92
+"85
 [v _I2C_Master_Start I2C_Master_Start `(uc  1 e 1 0 ]
+"93
+[v _I2C_Master_Write I2C_Master_Write `(uc  1 e 1 0 ]
 "102
 [v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
 "110
-[v _I2C_Master_Write I2C_Master_Write `(uc  1 e 1 0 ]
-"134
 [v _main main `(v  1 e 1 0 ]
-"275 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
-[v _ANSELB ANSELB `VEuc  1 e 1 @3932 ]
-[s S26 . 1 `uc 1 ANSB0 1 0 :1:0 
+[s S25 . 1 `uc 1 ANSB0 1 0 :1:0 
 `uc 1 ANSB1 1 0 :1:1 
 `uc 1 ANSB2 1 0 :1:2 
 `uc 1 ANSB3 1 0 :1:3 
 `uc 1 ANSB4 1 0 :1:4 
 `uc 1 ANSB5 1 0 :1:5 
 ]
-"290
-[u S33 . 1 `S26 1 . 1 0 ]
-[v _ANSELBbits ANSELBbits `VES33  1 e 1 @3932 ]
-"359
-[v _ANSELD ANSELD `VEuc  1 e 1 @3934 ]
-[s S201 . 1 `uc 1 LATB0 1 0 :1:0 
+"290 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
+[u S32 . 1 `S25 1 . 1 0 ]
+[v _ANSELBbits ANSELBbits `VES32  1 e 1 @3932 ]
+[s S83 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -57,7 +55,7 @@
 `uc 1 LATB7 1 0 :1:7 
 ]
 "3916
-[s S210 . 1 `uc 1 LB0 1 0 :1:0 
+[s S92 . 1 `uc 1 LB0 1 0 :1:0 
 `uc 1 LB1 1 0 :1:1 
 `uc 1 LB2 1 0 :1:2 
 `uc 1 LB3 1 0 :1:3 
@@ -66,11 +64,9 @@
 `uc 1 LB6 1 0 :1:6 
 `uc 1 LB7 1 0 :1:7 
 ]
-[u S219 . 1 `S201 1 . 1 0 `S210 1 . 1 0 ]
-[v _LATBbits LATBbits `VES219  1 e 1 @3978 ]
-"4103
-[v _LATD LATD `VEuc  1 e 1 @3980 ]
-[s S43 . 1 `uc 1 TRISB0 1 0 :1:0 
+[u S101 . 1 `S83 1 . 1 0 `S92 1 . 1 0 ]
+[v _LATBbits LATBbits `VES101  1 e 1 @3978 ]
+[s S42 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -80,7 +76,7 @@
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "4878
-[s S52 . 1 `uc 1 RB0 1 0 :1:0 
+[s S51 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -89,71 +85,10 @@
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-[u S61 . 1 `S43 1 . 1 0 `S52 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES61  1 e 1 @3987 ]
-"5246
-[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-"6287
-[v _PIR1 PIR1 `VEuc  1 e 1 @3998 ]
-[s S84 . 1 `uc 1 TMR1IF 1 0 :1:0 
-`uc 1 TMR2IF 1 0 :1:1 
-`uc 1 CCP1IF 1 0 :1:2 
-`uc 1 SSPIF 1 0 :1:3 
-`uc 1 TXIF 1 0 :1:4 
-`uc 1 RCIF 1 0 :1:5 
-`uc 1 ADIF 1 0 :1:6 
-`uc 1 ACTIF 1 0 :1:7 
-]
-"6316
-[s S93 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 SSP1IF 1 0 :1:3 
-`uc 1 TX1IF 1 0 :1:4 
-`uc 1 RC1IF 1 0 :1:5 
-`uc 1 . 1 0 :1:6 
-`uc 1 STIF 1 0 :1:7 
-]
-[s S100 . 1 `uc 1 . 1 0 :7:0 
-`uc 1 PSPIF 1 0 :1:7 
-]
-[u S103 . 1 `S84 1 . 1 0 `S93 1 . 1 0 `S100 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES103  1 e 1 @3998 ]
+[u S60 . 1 `S42 1 . 1 0 `S51 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES60  1 e 1 @3987 ]
 "9882
 [v _SSP1CON2 SSP1CON2 `VEuc  1 e 1 @4037 ]
-[s S128 . 1 `uc 1 SEN 1 0 :1:0 
-`uc 1 RSEN 1 0 :1:1 
-`uc 1 PEN 1 0 :1:2 
-`uc 1 RCEN 1 0 :1:3 
-`uc 1 ACKEN 1 0 :1:4 
-`uc 1 ACKDT 1 0 :1:5 
-`uc 1 ACKSTAT 1 0 :1:6 
-`uc 1 GCEN 1 0 :1:7 
-]
-"9930
-[s S137 . 1 `uc 1 SEN1 1 0 :1:0 
-`uc 1 ADMSK1 1 0 :1:1 
-`uc 1 ADMSK2 1 0 :1:2 
-`uc 1 ADMSK3 1 0 :1:3 
-`uc 1 ACKEN1 1 0 :1:4 
-`uc 1 ACKDT1 1 0 :1:5 
-`uc 1 ACKSTAT1 1 0 :1:6 
-`uc 1 GCEN1 1 0 :1:7 
-]
-[s S146 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 ADMSK11 1 0 :1:1 
-`uc 1 ADMSK21 1 0 :1:2 
-`uc 1 ADMSK31 1 0 :1:3 
-`uc 1 ADMSK4 1 0 :1:4 
-`uc 1 ADMSK5 1 0 :1:5 
-]
-[s S153 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 RSEN1 1 0 :1:1 
-`uc 1 PEN1 1 0 :1:2 
-`uc 1 RCEN1 1 0 :1:3 
-`uc 1 ADMSK41 1 0 :1:4 
-`uc 1 ADMSK51 1 0 :1:5 
-]
-[u S160 . 1 `S128 1 . 1 0 `S137 1 . 1 0 `S146 1 . 1 0 `S153 1 . 1 0 ]
-[v _SSP1CON2bits SSP1CON2bits `VES160  1 e 1 @4037 ]
 "10236
 [v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @4038 ]
 "10590
@@ -162,38 +97,49 @@
 [v _SSP1ADD SSP1ADD `VEuc  1 e 1 @4040 ]
 "11526
 [v _SSP1BUF SSP1BUF `VEuc  1 e 1 @4041 ]
-"11702
-[v _SSP1CON3 SSP1CON3 `VEuc  1 e 1 @4043 ]
-"134 C:\Users\usuario\Documents\GitHub\PIC18\C programming\i2c\I2C_LCD.X\main.c
+"110 C:\Users\usuario\Documents\GitHub\PIC18\C programming\I2C_LCD.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"189
+"124
 } 0
-"110
+"93
 [v _I2C_Master_Write I2C_Master_Write `(uc  1 e 1 0 ]
 {
 [v I2C_Master_Write@data data `uc  1 a 1 wreg ]
-"113
-[v I2C_Master_Write@temp temp `uc  1 a 1 2 ]
-"110
+"95
+[v I2C_Master_Write@newData newData `uc  1 a 1 6 ]
+"93
 [v I2C_Master_Write@data data `uc  1 a 1 wreg ]
-"114
-[v I2C_Master_Write@data data `uc  1 a 1 3 ]
-"132
+"95
+[v I2C_Master_Write@data data `uc  1 a 1 5 ]
+"100
+} 0
+"57
+[v _rotateByte rotateByte `(uc  1 e 1 0 ]
+{
+[v rotateByte@x x `uc  1 a 1 wreg ]
+"60
+[v rotateByte@i i `c  1 a 1 4 ]
+"59
+[v rotateByte@newByte newByte `uc  1 a 1 2 ]
+"57
+[v rotateByte@x x `uc  1 a 1 wreg ]
+"59
+[v rotateByte@x x `uc  1 a 1 3 ]
+"68
 } 0
 "102
 [v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
 {
-"108
+"106
 } 0
-"92
+"85
 [v _I2C_Master_Start I2C_Master_Start `(uc  1 e 1 0 ]
 {
-"100
+"91
 } 0
-"72
+"71
 [v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
 {
-[v I2C_Master_Init@clockSpeed clockSpeed `Cul  1 p 4 0 ]
-"84
+"83
 } 0

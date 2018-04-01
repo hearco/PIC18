@@ -7070,14 +7070,28 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 72 "main.c"
-void I2C_Master_Init(const unsigned long clockSpeed)
+# 57 "main.c"
+unsigned char rotateByte(unsigned char x)
+{
+unsigned char newByte = 0;
+signed char i;
+for(i = 7; i >= 0; i--)
+{
+newByte |= (unsigned char)((x & 0b10000000) >> i);
+x = (unsigned char)(x << 1);
+}
+
+return newByte;
+}
+
+
+void I2C_Master_Init()
 {
 SSP1CON1 = 0b00100000 | 0b00001000;
-SSP1CON2 = 0b00000000 | 0b00000000 | 0b00000000;
-SSP1CON3 |= 0b00001000;
+SSP1CON2 = 0;
 SSP1ADD = 0x27;
 SSP1STAT = 0b10000000;
+
 ANSELBbits.ANSB0 = 0;
 ANSELBbits.ANSB1 = 0;
 
@@ -7085,76 +7099,43 @@ TRISBbits.TRISB0 = 1;
 TRISBbits.TRISB1 = 1;
 }
 
-void I2C_Master_Wait()
-{
-
-while((SSP1STAT & 0b00000100) || (SSP1CON2 & (0b00010000 | 0b00001000 | 0b00000100 | 0b00000010 | 0b00000001)));
-}
-
 unsigned char I2C_Master_Start()
 {
+
 SSP1CON2 |= 0b00000001;
-while(!(PIR1 & 0b00001000));
+while(SSP1CON2 & 0b00000001);
+return 1;
+}
 
-PIR1bits.SSPIF = 0;
-
+unsigned char I2C_Master_Write(unsigned char data)
+{
+unsigned char newData = 0;
+newData = rotateByte(data);
+SSP1BUF = newData;
+while(SSP1STAT & 0b00000100);
 return 1;
 }
 
 void I2C_Master_Stop()
 {
-
 SSP1CON2 |= 0b00000100;
-while(!(PIR1 & 0b00001000));
-
+while(SSP1CON2 & 0b00000100);
 }
 
-unsigned char I2C_Master_Write(unsigned char data)
-{
 
-unsigned char temp;
-temp = (unsigned char)((((data) & 0x0F) << 4) | (((data) & 0xF0) >> 4));
-
-SSP1BUF = data;
-
-
-while(!(PIR1 & 0b00001000));
-
-
-if((!SSP1CON2bits.ACKSTAT))
-{
-
-return 1;
-}
-else
-{
-
-return 0;
-}
-}
 
 void main(void)
 {
-ANSELB = ANSELD = 0;
-TRISD = 0;
-TRISBbits.TRISB7 = 0;
-LATBbits.LATB7 = 0;
-
-I2C_Master_Init(100000);
-
-# 150
+I2C_Master_Init();
 (void)I2C_Master_Start();
 (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
-
-
-(void)I2C_Master_Write(0x0F);
-
-# 179
+(void)I2C_Master_Write(0b00010011);
 I2C_Master_Stop();
 
-# 185
 while(1)
 {
-LATD = 1;
+ANSELBbits.ANSB4 = 0;
+TRISBbits.TRISB4 = 0;
+LATBbits.LATB4 = 1;
 }
 }
