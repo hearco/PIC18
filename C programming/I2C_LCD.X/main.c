@@ -1,8 +1,8 @@
-#include <p18f45k50.h>
-#include <xc.h>
-#include <htc.h>
-#include <stdio.h>
-#include <string.h>
+//#include <p18f45k50.h>
+//#include <xc.h>
+//#include <htc.h>
+//#include <stdio.h>
+//#include <string.h>
 #include "i2c_LCD.h"
 #include "i2c.h"
 

@@ -31,21 +31,21 @@
 #ifndef HWCONFIG_HEADER
 #define	HWCONFIG_HEADER
 
-#define PIC18
+#define PIC18F45K50
 
-#ifdef PIC18
+#ifdef PIC18F45K50
     #include <p18f45k50.h>
     #include <xc.h>
     #include <htc.h>
     #include <stdio.h>
     #include <string.h>
-#endif
+#endif // PIC18F45K50
 
 #include "dataTypes.h"
 
-#ifdef PIC18
+#ifdef PIC18F45K50
     #define _XTAL_FREQ      16000000                // 16MH Fosc
-#endif
+#endif // PIC18F45K50
 
 #endif	/* HWCONFIG_HEADER */
 
