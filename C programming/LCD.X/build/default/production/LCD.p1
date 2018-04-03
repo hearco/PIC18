@@ -5368,14 +5368,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 58: extern char * strichr(const char *, int);
 [; ;string.h: 59: extern char * strrchr(const char *, int);
 [; ;string.h: 60: extern char * strrichr(const char *, int);
-[; ;dataTypes.h: 34: typedef unsigned char UInt8_T;
-[; ;dataTypes.h: 35: typedef unsigned short int UInt16_T;
-[; ;dataTypes.h: 36: typedef unsigned long int UInt32_T;
-[; ;dataTypes.h: 37: typedef unsigned long long int UInt64_T;
-[; ;dataTypes.h: 39: typedef signed char SInt8_T;
-[; ;dataTypes.h: 40: typedef signed short int SInt16_T;
-[; ;dataTypes.h: 41: typedef signed long int SInt32_T;
-[; ;dataTypes.h: 42: typedef signed long long int SInt64_T;
+[; ;dataTypes.h: 33: typedef unsigned char UInt8_T;
+[; ;dataTypes.h: 34: typedef unsigned short int UInt16_T;
+[; ;dataTypes.h: 35: typedef unsigned long int UInt32_T;
+[; ;dataTypes.h: 36: typedef unsigned long long int UInt64_T;
+[; ;dataTypes.h: 38: typedef signed char SInt8_T;
+[; ;dataTypes.h: 39: typedef signed short int SInt16_T;
+[; ;dataTypes.h: 40: typedef signed long int SInt32_T;
+[; ;dataTypes.h: 41: typedef signed long long int SInt64_T;
 [; ;LCD.h: 64: typedef enum {
 [; ;LCD.h: 65: LCD_COMMAND_WRITE,
 [; ;LCD.h: 66: LCD_DATA_WRITE

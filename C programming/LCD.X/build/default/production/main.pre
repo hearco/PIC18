@@ -7070,7 +7070,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 34 "dataTypes.h"
+# 33 "dataTypes.h"
 typedef unsigned char UInt8_T;
 typedef unsigned short int UInt16_T;
 typedef unsigned long int UInt32_T;
@@ -7092,11 +7092,13 @@ void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData);
 UInt8_T LCD_WriteMsg(UInt8_T * msg);
 UInt8_T LCD_Init(void);
 
-# 15 "main.c"
+# 11 "main.c"
 void main(void) {
 LCD_Init();
+(void)LCD_WriteMsg("Hello world");
 
-(void)LCD_WriteMsg("Hola Crayola jajejijoju");
+while(1)
+{
 
-while(0x01);
+}
 }

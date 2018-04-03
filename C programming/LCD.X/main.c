@@ -6,16 +6,14 @@
  */
 
 /****   LIBRARIES   ***************************/
-#include "hwconfig.h"
 #include "LCD.h"
-
-/****   GLOBAL DEFINES   **********************/
-#define STAY_HERE       0x01                    // For while loop only
 
 void main(void) {
     LCD_Init();
-    //set_cursor_pos(LCD_SECOND_ROW, 5);
-    (void)LCD_WriteMsg("Hola Crayola jajejijoju");
+    (void)LCD_WriteMsg("Hello world");
     
-    while(STAY_HERE);
+    while(1)
+    {
+        
+    }
 }

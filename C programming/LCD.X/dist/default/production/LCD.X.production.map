@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.42\dat\en_msgs.txt -cs \
   -h+dist/default/production\LCD.X.production.sym \
   --cmf=dist/default/production\LCD.X.production.cmf -z -Q18F45K50 \
-  -oC:\Users\usuario\AppData\Local\Temp\sk10.2 \
+  -oC:\Users\usuario\AppData\Local\Temp\s2d4s.2 \
   -Mdist/default/production/LCD.X.production.map -E1 -ver=XC8 \
   -ASTACK=060h-07ffh -pstack=STACK -ACODE=01000h-07FFFh \
   -ACONST=01000h-07FFFh -ASMALLCONST=01000h-010FFhx112 \
@@ -23,7 +23,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\usuario\AppData\Local\Temp\sk10.obj \
+  C:\Users\usuario\AppData\Local\Temp\s2d4s.obj \
   dist/default/production\LCD.X.production.obj 
 
 Object code version is 3.11
@@ -36,12 +36,12 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\usuario\AppData\Local\Temp\sk10.obj
+C:\Users\usuario\AppData\Local\Temp\s2d4s.obj
                 init                               1000     1000        4      800       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
 dist/default/production\LCD.X.production.obj
-                smallconst                         1004     1004       1A      802       0
+                smallconst                         1004     1004        E      802       0
                 text5                              7EA4     7EA4       54     3F52       0
                 text4                              7EF8     7EF8       62     3F7C       0
                 text3                              7E56     7E56       4E     3F2B       0
@@ -67,7 +67,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CONST          
 
         CLASS   SMALLCONST     
-                smallconst                         1004     1004       1A         0
+                smallconst                         1004     1004        E         0
 
         CLASS   MEDIUMCONST    
 
@@ -114,7 +114,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 cstackCOMRAM                   000001  000011  000012         1       1  COMRAM  
                 reset_vec                      001000  000004  001004       800       0  CODE    
-                smallconst                     001004  00001A  00101E       802       0  SMALLCON
+                smallconst                     001004  00000E  001012       802       0  SMALLCON
                 cinit                          007DFC  00000A  007E06      3EFE       0  CODE    
                 text0                          007E06  000012  007E18      3F03       0  CODE    
                 text2                          007E18  00003E  007E56      3F0C       0  CODE    
@@ -138,15 +138,15 @@ UNUSED ADDRESS RANGES
         BANK6            000600-0006FF              100
         BANK7            000700-0007FF              100
         BIGRAM           000012-0007FF              7EE
-        CODE             00101E-007DFB             6DDE
+        CODE             001012-007DFB             6DEA
         COMRAM           000012-00005F               4E
-        CONST            00101E-007DFB             6DDE
+        CONST            001012-007DFB             6DEA
         EEDATA           F00000-F000FF              100
         FARRAM           000000-000000                1
-        MEDIUMCONST      00101E-007DFB             6DDE
+        MEDIUMCONST      001012-007DFB             6DEA
         RAM              000060-0007FF              100
         SFR              000F53-000FFF                D
-        SMALLCONST       00101E-007DFB              100
+        SMALLCONST       001012-007DFB              100
         STACK            000060-0007FF              7A0
 
                                   Symbol Table
@@ -226,7 +226,7 @@ __Hrdata                  rdata        000000
 __Hreset_vec              reset_vec    001000
 __Hrparam                 rparam       000000
 __Hsfr                    sfr          000000
-__Hsmallconst             smallconst   00101E
+__Hsmallconst             smallconst   001012
 __Hspace_0                (abs)        30000E
 __Hspace_1                (abs)        000012
 __Hspace_2                (abs)        000000
@@ -359,7 +359,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 15 in file "main.c"
+		line 11 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -392,7 +392,7 @@ Total ram usage:        0 bytes
 		line 108 in file "LCD.c"
  Parameters:    Size  Location     Type
   msg             2    6[COMRAM] PTR unsigned char 
-		 -> STR_1(24), 
+		 -> STR_1(12), 
  Auto vars:     Size  Location     Type
   i               1   16[COMRAM] unsigned char 
   j               1   15[COMRAM] unsigned char 
@@ -431,10 +431,10 @@ Total ram usage:       11 bytes
 		line 4 in file "C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\strlen.c"
  Parameters:    Size  Location     Type
   s               2    0[COMRAM] PTR const unsigned char 
-		 -> STR_1(24), 
+		 -> STR_1(12), 
  Auto vars:     Size  Location     Type
   cp              2    4[COMRAM] PTR const unsigned char 
-		 -> STR_1(24), 
+		 -> STR_1(12), 
  Return value:  Size  Location     Type
                   2    0[COMRAM] unsigned int 
  Registers used:

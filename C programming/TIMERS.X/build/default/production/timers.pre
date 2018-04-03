@@ -1,5 +1,5 @@
 
-# 1 "LCD.c"
+# 1 "timers.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -7038,187 +7038,161 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 14 "C:\Program Files (x86)\Microchip\xc8\v1.42\include\string.h"
-extern void * memcpy(void *, const void *, size_t);
-extern void * memmove(void *, const void *, size_t);
-extern void * memset(void *, int, size_t);
+# 30 "timers.h"
+void config_TMR0(unsigned char check_flag_method, unsigned char clock_source){
 
-# 36
-extern char * strcat(char *, const char *);
-extern char * strcpy(char *, const char *);
-extern char * strncat(char *, const char *, size_t);
-extern char * strncpy(char *, const char *, size_t);
-extern char * strdup(const char *);
-extern char * strtok(char *, const char *);
-
-
-extern int memcmp(const void *, const void *, size_t);
-extern int strcmp(const char *, const char *);
-extern int stricmp(const char *, const char *);
-extern int strncmp(const char *, const char *, size_t);
-extern int strnicmp(const char *, const char *, size_t);
-extern void * memchr(const void *, int, size_t);
-extern size_t strcspn(const char *, const char *);
-extern char * strpbrk(const char *, const char *);
-extern size_t strspn(const char *, const char *);
-extern char * strstr(const char *, const char *);
-extern char * stristr(const char *, const char *);
-extern char * strerror(int);
-extern size_t strlen(const char *);
-extern char * strchr(const char *, int);
-extern char * strichr(const char *, int);
-extern char * strrchr(const char *, int);
-extern char * strrichr(const char *, int);
-
-# 33 "dataTypes.h"
-typedef unsigned char UInt8_T;
-typedef unsigned short int UInt16_T;
-typedef unsigned long int UInt32_T;
-typedef unsigned long long int UInt64_T;
-
-typedef signed char SInt8_T;
-typedef signed short int SInt16_T;
-typedef signed long int SInt32_T;
-typedef signed long long int SInt64_T;
-
-# 64 "LCD.h"
-typedef enum {
-LCD_COMMAND_WRITE,
-LCD_DATA_WRITE
-}LCDMODE_E;
-
-
-void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData);
-UInt8_T LCD_WriteMsg(UInt8_T * msg);
-UInt8_T LCD_Init(void);
-
-# 22 "LCD.c"
-static UInt8_T LCD_SetCursor(UInt8_T row, UInt8_T col)
-{
-if ((col > 16) || (row > 1))
-{
-return (0);
-}
-
+# 62
+if (check_flag_method)
+INTCONbits.TMR0IE = 1;
 else
-{
-switch(row)
-{
-case 0:
-LCD_WriteByte((UInt8_T)(0x80 + col), LCD_COMMAND_WRITE);
-break;
-case 1:
-LCD_WriteByte((UInt8_T)(0x80 + 0x40 + col), LCD_COMMAND_WRITE);
-break;
-default:
-LCD_WriteByte(0x02, LCD_COMMAND_WRITE);
-break;
-}
+INTCONbits.TMR0IE = 0;
 
-return (1);
-}
-}
+# 93
+T0CON = 0b00000111;
 
-# 61
-void LCD_WriteByte(UInt8_T InputValue, LCDMODE_E CommandData)
-{
-switch (CommandData)
-{
-case LCD_COMMAND_WRITE:
-LATAbits.LATA0 = 0;
-break;
-
-case LCD_DATA_WRITE:
-LATAbits.LATA0 = 1;
-break;
-
-default:
-break;
-}
-
-R_W = 0;
-
-# 85
-LATD = (UInt8_T)(InputValue & 0xF0);
-LATAbits.LATA2 = 1;
-_delay((unsigned long)((5)*(16000000/4000.0)));
-LATAbits.LATA2 = 0;
-
-LATD = (UInt8_T)((InputValue << 4) & 0xF0);
-LATAbits.LATA2 = 1;
-_delay((unsigned long)((5)*(16000000/4000.0)));
-LATAbits.LATA2 = 0;
-
-}
-
-# 108
-UInt8_T LCD_WriteMsg(UInt8_T * msg)
-{
-UInt8_T i, j;
-UInt8_T msgSize;
-UInt8_T lcdRowPos;
-UInt8_T lcdColPos;
-UInt8_T charsLeft;
-UInt8_T status = 1;
-
-msgSize = (UInt8_T)strlen(msg);
-
-
-LCD_WriteByte(0x02, LCD_COMMAND_WRITE);
-LCD_WriteByte(0x01, LCD_COMMAND_WRITE);
-
-lcdRowPos = 0;
-lcdColPos = 0;
-charsLeft = 0;
-for(i = 0; i <= 1; i++)
-{
-if(LCD_SetCursor(i, 0))
-{
-for(j = 0; (charsLeft < msgSize) && (j < 16); j++)
-{
-LCD_WriteByte(*(msg + 16 * i + j), LCD_DATA_WRITE);
-charsLeft++;
-}
-}
-
-
+if (clock_source)
+T0CONbits.T0CS = 1;
 else
-{
-status = 0;
+T0CONbits.T0CS = 0;
+}
+
+void start_TMR0ms(unsigned int milliseconds){
+unsigned int temp_time;
+
+if (milliseconds > 4000){
+TMR0H = 0;
+TMR0L = 0;
+}
+else{
+
+# 115
+temp_time = (unsigned int)(65536 - (milliseconds / 0.064));
+TMR0H = (unsigned char)(temp_time / 256);
+TMR0L = (unsigned char)temp_time;
+
+
+}
+
+T0CONbits.TMR0ON = 1;
+}
+
+void config_TMR1(unsigned char check_flag_method, unsigned char clock_source){
+if (check_flag_method)
+PIE1bits.TMR1IE = 1;
+else
+PIE1bits.TMR1IE = 0;
+
+# 161
+T1CON = 0b00110010;
+
+if (clock_source){
+T1CONbits.TMR1CS1 = 1;
+T1CONbits.TMR1CS0 = 0;
+}
+else{
+T1CONbits.TMR1CS1 = 0;
+T1CONbits.TMR1CS0 = 0;
 }
 }
 
-return status;
+void start_TMR1ms(unsigned int milliseconds){
+unsigned int temp_time;
+
+if (milliseconds > 130){
+TMR1H = 0;
+TMR1L = 0;
+}
+else{
+
+# 187
+temp_time = (unsigned int)(65536 - (milliseconds / 0.002));
+TMR1H = (unsigned char)(temp_time / 256);
+TMR1L = (unsigned char)temp_time;
 }
 
-# 160
-UInt8_T LCD_Init(void)
-{
-ANSELA = 0;
-ANSELD = 0;
+T1CONbits.TMR1ON = 1;
+}
 
-TRISA = 0;
-LATA = 0;
+void config_TMR3(unsigned char check_flag_method, unsigned char clock_source){
+if (check_flag_method){
+PIE2bits.TMR3IE = 1;
+}
+else{
+PIE2bits.TMR3IE = 0;
+}
 
-TRISD = 0;
-LATD = 0;
+# 233
+T3CON = 0b00110010;
 
+if (clock_source){
+T3CONbits.TMR3CS1 = 1;
+T3CONbits.TMR3CS0 = 0;
+}
+else{
+T3CONbits.TMR3CS1 = 0;
+T3CONbits.TMR3CS0 = 0;
+}
+}
 
+void start_TMR3ms(unsigned int milliseconds){
+unsigned int temp_time;
 
+if (milliseconds > 130){
+TMR3H = 0;
+TMR3L = 0;
+}
+else{
 
-LATAbits.LATA0 = 0;
-LATAbits.LATA1 = 0;
-LATD = 0x20;
-LATAbits.LATA2 = 1;
-_delay((unsigned long)((5)*(16000000/4000.0)));
-LATAbits.LATA2 = 0;
+# 259
+temp_time = (unsigned int)(65536 - (milliseconds / 0.002));
+TMR3H = (unsigned char)(temp_time / 256);
+TMR3L = (unsigned char)temp_time;
+}
 
-LCD_WriteByte(0x28, LCD_COMMAND_WRITE);
+T3CONbits.TMR3ON = 1;
+}
 
+# 19 "timers.c"
+void interrupt high_isr(void){
 
-LCD_WriteByte(0x0F, LCD_COMMAND_WRITE);
-LCD_WriteByte(0x02, LCD_COMMAND_WRITE);
-LCD_WriteByte(0x01, LCD_COMMAND_WRITE);
+if ((PIR1 & 1)){
+PIR1bits.TMR1IF = T1CONbits.TMR1ON = 0;
+LATB ^= 1;
+start_TMR1ms(25);
+}
 
-return 1;
+if ((PIR2 & (1 << 1))){
+PIR2bits.TMR3IF = T3CONbits.TMR3ON = 0;
+LATB ^= (1 << 1);
+start_TMR3ms(100);
+}
+
+if ((INTCON & (1 << 2))){
+INTCONbits.TMR0IF = T0CONbits.TMR0ON = 0;
+LATB ^= (1 << 2);
+start_TMR0ms(300);
+}
+
+}
+
+void interrupt low_priority low_isr(void){
+}
+
+void main(void) {
+
+ANSELB = TRISB = LATB = 0;
+
+INTCONbits.PEIE = 1;
+INTCONbits.GIE = 1;
+
+config_TMR0(1, 0);
+config_TMR1(1, 0);
+config_TMR3(1, 0);
+
+start_TMR0ms(300);
+start_TMR1ms(25);
+start_TMR3ms(100);
+
+while(0x01){
+}
 }

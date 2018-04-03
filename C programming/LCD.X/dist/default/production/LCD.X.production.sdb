@@ -38,7 +38,7 @@ LCD_DATA_WRITE 1
 [v _LCD_WriteMsg LCD_WriteMsg `(uc  1 e 1 0 ]
 "160
 [v _LCD_Init LCD_Init `(uc  1 e 1 0 ]
-"15 C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
+"11 C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
 [v _main main `(v  1 e 1 0 ]
 "230 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _ANSELA ANSELA `VEuc  1 e 1 @3931 ]
@@ -75,10 +75,10 @@ LCD_DATA_WRITE 1
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "15071
 [v _R_W R_W `VEb  1 e 0 @32314 ]
-"15 C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
+"11 C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"21
+"19
 } 0
 "108 C:\Users\usuario\Documents\GitHub\PIC18\C programming\LCD.X\LCD.c
 [v _LCD_WriteMsg LCD_WriteMsg `(uc  1 e 1 0 ]
