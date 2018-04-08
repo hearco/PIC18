@@ -7070,7 +7070,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 34 "dataTypes.h"
+# 35 "dataTypes.h"
 typedef unsigned char UInt8_T;
 typedef unsigned short int UInt16_T;
 typedef unsigned long int UInt32_T;
@@ -7081,8 +7081,15 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 53 "i2c_LCD.h"
+# 54 "i2c_LCD.h"
+typedef enum{
+I2C_LCD_SEND_DATA,
+I2C_LCD_SEND_COMMAND
+}I2C_LCD_SEND_TYPE_T;
+
+void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand);
 void I2C_LCD_Init();
+void I2C_LCD_SendMsg(UInt8_T byte);
 void I2C_LCD_ClearLCD();
 
 # 59 "i2c.h"
@@ -7094,11 +7101,13 @@ void I2C_Master_Stop();
 # 10 "main.c"
 void main(void)
 {
+UInt8_T data = 'A';
+
 I2C_Master_Init();
 (void)I2C_Master_Start();
 
 I2C_LCD_Init();
-I2C_LCD_ClearLCD();
+
 
 I2C_Master_Stop();
 

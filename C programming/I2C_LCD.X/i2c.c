@@ -29,30 +29,7 @@
  */
 
 // Private functions
-/********************************************************************************************
- * 
- *    Function: rotateByte
- * 
- * Description: Left-rotate byte to correct data transfer. This function may not be needed
- *              if i2c slave module has a different hardware layout.
- * 
- *  Parameters: UInt8_T byte
- * 
- *     Returns: UInt8_T rotatedByte
- * 
- ********************************************************************************************/
-static UInt8_T rotateByte(UInt8_T byte)
-{    
-    UInt8_T rotatedByte = 0;
-    SInt8_T i;                      // Keep it signed to meet the conditional exit of the for loop   
-    for(i = 7; i >= 0; i--)          
-    {                                
-        rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);  
-        byte = (UInt8_T)(byte << 1);                  
-    }                                
 
-    return rotatedByte;
-}
 
 // Public functions
 /********************************************************************************************
@@ -103,8 +80,7 @@ UInt8_T I2C_Master_Start()
  * 
  *    Function: I2C_Master_Write
  * 
- * Description: Sends data to i2c bus. If rotateByte function is no needed, SSPIBUF can take
- *              the value of data parameter directly. 
+ * Description: Sends data to i2c bus. 
  * 
  *  Parameters: UInt8_T data
  * 
@@ -113,9 +89,7 @@ UInt8_T I2C_Master_Start()
  ********************************************************************************************/
 UInt8_T I2C_Master_Write(UInt8_T data)
 {   
-    UInt8_T newData = 0;
-    newData = rotateByte(data);
-    SSP1BUF = newData;    
+    SSP1BUF = data;    
     while(SSP1STAT & I2C_RW_IN_PROGRESS); 
     return 1;
 }

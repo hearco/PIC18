@@ -7070,7 +7070,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 34 "dataTypes.h"
+# 35 "dataTypes.h"
 typedef unsigned char UInt8_T;
 typedef unsigned short int UInt16_T;
 typedef unsigned long int UInt32_T;
@@ -7081,8 +7081,15 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 53 "i2c_LCD.h"
+# 54 "i2c_LCD.h"
+typedef enum{
+I2C_LCD_SEND_DATA,
+I2C_LCD_SEND_COMMAND
+}I2C_LCD_SEND_TYPE_T;
+
+void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand);
 void I2C_LCD_Init();
+void I2C_LCD_SendMsg(UInt8_T byte);
 void I2C_LCD_ClearLCD();
 
 # 59 "i2c.h"
@@ -7091,54 +7098,88 @@ UInt8_T I2C_Master_Start();
 UInt8_T I2C_Master_Write(UInt8_T data);
 void I2C_Master_Stop();
 
-# 47 "i2c_LCD.c"
+# 17 "i2c_LCD.c"
+static UInt8_T rotateByte(UInt8_T byte)
+{
+UInt8_T rotatedByte = 0;
+SInt8_T i;
+for(i = 7; i >= 0; i--)
+{
+rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);
+byte = (UInt8_T)(byte << 1);
+}
+
+return rotatedByte;
+}
+
+# 72
+void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand)
+{
+UInt8_T byteToSend = 0;
+UInt8_T newByteToSend = 0;
+UInt8_T rotatedByte = 0;
+
+switch (dataOrCommand)
+{
+case I2C_LCD_SEND_DATA:
+byteToSend = (UInt8_T)0b10010000;
+break;
+case I2C_LCD_SEND_COMMAND:
+
+byteToSend = (UInt8_T)0b00010000;
+break;
+default:
+break;
+}
+
+newByteToSend = byteToSend | 0b00110000 | ((data & 0xF0) >> 4);
+rotatedByte = rotateByte(newByteToSend);
+(void)I2C_Master_Write(rotatedByte);
+newByteToSend = byteToSend | 0b00010000 | ((data & 0xF0) >> 4);
+rotatedByte = rotateByte(newByteToSend);
+(void)I2C_Master_Write(rotatedByte);
+
+
+newByteToSend = byteToSend | 0b00110000 | (data & 0x0F);
+rotatedByte = rotateByte(newByteToSend);
+(void)I2C_Master_Write(rotatedByte);
+newByteToSend = byteToSend | 0b00010000 | (data & 0x0F);
+rotatedByte = rotateByte(newByteToSend);
+(void)I2C_Master_Write(rotatedByte);
+}
+
+# 144
 void I2C_LCD_Init()
 {
 (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
 
 
-(void)I2C_Master_Write(0b00110000 | ((0x28 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00010000 | ((0x28 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00110000 | (0x28 & 0x0F));
-(void)I2C_Master_Write(0b00010000 | (0x28 & 0x0F));
+I2C_LCD_WriteByte(0x28, I2C_LCD_SEND_COMMAND);
 
 
-(void)I2C_Master_Write(0b00110000 | ((0x01 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00010000 | ((0x01 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00110000 | (0x01 & 0x0F));
-(void)I2C_Master_Write(0b00010000 | (0x01 & 0x0F));
+I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
 
 
-(void)I2C_Master_Write(0b00110000 | ((0x0F & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00010000 | ((0x0F & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00110000 | (0x0F & 0x0F));
-(void)I2C_Master_Write(0b00010000 | (0x0F & 0x0F));
+I2C_LCD_WriteByte(0x0F, I2C_LCD_SEND_COMMAND);
 
 
-(void)I2C_Master_Write(0b00110000 | ((0x02 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00010000 | ((0x02 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00110000 | (0x02 & 0x0F));
-(void)I2C_Master_Write(0b00010000 | (0x02 & 0x0F));
+I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
 
 
 
 }
 
-# 90
+void I2C_LCD_SendMsg(UInt8_T byte)
+{
+I2C_LCD_WriteByte(byte, I2C_LCD_SEND_DATA);
+}
+
+# 180
 void I2C_LCD_ClearLCD()
 {
 
-(void)I2C_Master_Write(0b00110000 | ((0x01 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00010000 | ((0x01 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00110000 | (0x01 & 0x0F));
-(void)I2C_Master_Write(0b00010000 | (0x01 & 0x0F));
+I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
 
 
-(void)I2C_Master_Write(0b00110000 | ((0x02 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00010000 | ((0x02 & 0xF0) >> 4));
-(void)I2C_Master_Write(0b00110000 | (0x02 & 0x0F));
-(void)I2C_Master_Write(0b00010000 | (0x02 & 0x0F));
-
-
+I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
 }
-

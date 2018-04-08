@@ -4,10 +4,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _I2C_Master_Init `(v ~T0 @X0 0 ef ]
 "60
 [v _I2C_Master_Start `(uc ~T0 @X0 0 ef ]
-"53 i2c_LCD.h
+"60 i2c_LCD.h
 [v _I2C_LCD_Init `(v ~T0 @X0 0 ef ]
-"54
-[v _I2C_LCD_ClearLCD `(v ~T0 @X0 0 ef ]
 "62 i2c.h
 [v _I2C_Master_Stop `(v ~T0 @X0 0 ef ]
 "281 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
@@ -5373,16 +5371,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 58: extern char * strichr(const char *, int);
 [; ;string.h: 59: extern char * strrchr(const char *, int);
 [; ;string.h: 60: extern char * strrichr(const char *, int);
-[; ;dataTypes.h: 34: typedef unsigned char UInt8_T;
-[; ;dataTypes.h: 35: typedef unsigned short int UInt16_T;
-[; ;dataTypes.h: 36: typedef unsigned long int UInt32_T;
-[; ;dataTypes.h: 37: typedef unsigned long long int UInt64_T;
-[; ;dataTypes.h: 39: typedef signed char SInt8_T;
-[; ;dataTypes.h: 40: typedef signed short int SInt16_T;
-[; ;dataTypes.h: 41: typedef signed long int SInt32_T;
-[; ;dataTypes.h: 42: typedef signed long long int SInt64_T;
-[; ;i2c_LCD.h: 53: void I2C_LCD_Init();
-[; ;i2c_LCD.h: 54: void I2C_LCD_ClearLCD();
+[; ;dataTypes.h: 35: typedef unsigned char UInt8_T;
+[; ;dataTypes.h: 36: typedef unsigned short int UInt16_T;
+[; ;dataTypes.h: 37: typedef unsigned long int UInt32_T;
+[; ;dataTypes.h: 38: typedef unsigned long long int UInt64_T;
+[; ;dataTypes.h: 40: typedef signed char SInt8_T;
+[; ;dataTypes.h: 41: typedef signed short int SInt16_T;
+[; ;dataTypes.h: 42: typedef signed long int SInt32_T;
+[; ;dataTypes.h: 43: typedef signed long long int SInt64_T;
+[; ;i2c_LCD.h: 54: typedef enum{
+[; ;i2c_LCD.h: 55: I2C_LCD_SEND_DATA,
+[; ;i2c_LCD.h: 56: I2C_LCD_SEND_COMMAND
+[; ;i2c_LCD.h: 57: }I2C_LCD_SEND_TYPE_T;
+[; ;i2c_LCD.h: 59: void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand);
+[; ;i2c_LCD.h: 60: void I2C_LCD_Init();
+[; ;i2c_LCD.h: 61: void I2C_LCD_SendMsg(UInt8_T byte);
+[; ;i2c_LCD.h: 62: void I2C_LCD_ClearLCD();
 [; ;i2c.h: 59: void I2C_Master_Init();
 [; ;i2c.h: 60: UInt8_T I2C_Master_Start();
 [; ;i2c.h: 61: UInt8_T I2C_Master_Write(UInt8_T data);
@@ -5396,44 +5400,45 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 11: {
 [e :U _main ]
 [f ]
-[; ;main.c: 12: I2C_Master_Init();
 "12
+[v _data `uc ~T0 @X0 1 a ]
+[; ;main.c: 12: UInt8_T data = 'A';
+[e = _data -> -> 65 `ui `uc ]
+[; ;main.c: 14: I2C_Master_Init();
+"14
 [e ( _I2C_Master_Init ..  ]
-[; ;main.c: 13: (void)I2C_Master_Start();
-"13
-[e ( _I2C_Master_Start ..  ]
-[; ;main.c: 15: I2C_LCD_Init();
+[; ;main.c: 15: (void)I2C_Master_Start();
 "15
+[e ( _I2C_Master_Start ..  ]
+[; ;main.c: 17: I2C_LCD_Init();
+"17
 [e ( _I2C_LCD_Init ..  ]
-[; ;main.c: 16: I2C_LCD_ClearLCD();
-"16
-[e ( _I2C_LCD_ClearLCD ..  ]
-[; ;main.c: 18: I2C_Master_Stop();
-"18
-[e ( _I2C_Master_Stop ..  ]
-[; ;main.c: 20: while(1)
+[; ;main.c: 20: I2C_Master_Stop();
 "20
-[e :U 634 ]
-[; ;main.c: 21: {
-"21
-{
-[; ;main.c: 22: ANSELBbits.ANSB4 = 0;
+[e ( _I2C_Master_Stop ..  ]
+[; ;main.c: 22: while(1)
 "22
-[e = . . _ANSELBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 23: TRISBbits.TRISB4 = 0;
+[e :U 634 ]
+[; ;main.c: 23: {
 "23
-[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 24: LATBbits.LATB4 = 1;
+{
+[; ;main.c: 24: ANSELBbits.ANSB4 = 0;
 "24
-[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
+[e = . . _ANSELBbits 0 4 -> -> 0 `i `uc ]
+[; ;main.c: 25: TRISBbits.TRISB4 = 0;
 "25
+[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
+[; ;main.c: 26: LATBbits.LATB4 = 1;
+"26
+[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
+"27
 }
 [e :U 633 ]
-"20
+"22
 [e $U 634  ]
 [e :U 635 ]
-[; ;main.c: 25: }
-[; ;main.c: 26: }
-"26
+[; ;main.c: 27: }
+[; ;main.c: 28: }
+"28
 [e :UE 632 ]
 }
