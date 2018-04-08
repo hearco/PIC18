@@ -1,6 +1,15 @@
+/* *************************************************************************
+ * 
+ *        File: dataTypes.h
+ * 
+ *      Author: Ariel Almendariz
+ * 
+ *    Comments: This file contains some data types definitions for PIC184550. 
+ * 
+ * Last update: Apr / 8 / 18
+ *
+ **************************************************************************/
 
-// This is a guard condition so that contents of this file are not included
-// more than once.  
 #ifndef DATATYPES_HEADER
 #define	DATATYPES_HEADER
 

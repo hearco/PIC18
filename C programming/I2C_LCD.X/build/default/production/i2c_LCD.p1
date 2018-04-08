@@ -1,8 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"73 i2c_LCD.c
+"56 i2c_LCD.c
 [c E5880 0 1 .. ]
 [n E5880 . I2C_LCD_SEND_DATA I2C_LCD_SEND_COMMAND  ]
-"61 i2c.h
+"44 i2c.h
 [v _I2C_Master_Write `(uc ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -5337,242 +5337,242 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 58: extern char * strichr(const char *, int);
 [; ;string.h: 59: extern char * strrchr(const char *, int);
 [; ;string.h: 60: extern char * strrichr(const char *, int);
-[; ;dataTypes.h: 35: typedef unsigned char UInt8_T;
-[; ;dataTypes.h: 36: typedef unsigned short int UInt16_T;
-[; ;dataTypes.h: 37: typedef unsigned long int UInt32_T;
-[; ;dataTypes.h: 38: typedef unsigned long long int UInt64_T;
-[; ;dataTypes.h: 40: typedef signed char SInt8_T;
-[; ;dataTypes.h: 41: typedef signed short int SInt16_T;
-[; ;dataTypes.h: 42: typedef signed long int SInt32_T;
-[; ;dataTypes.h: 43: typedef signed long long int SInt64_T;
-[; ;i2c_LCD.h: 54: typedef enum{
-[; ;i2c_LCD.h: 55: I2C_LCD_SEND_DATA,
-[; ;i2c_LCD.h: 56: I2C_LCD_SEND_COMMAND
-[; ;i2c_LCD.h: 57: }I2C_LCD_SEND_TYPE_T;
-[; ;i2c_LCD.h: 59: void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand);
-[; ;i2c_LCD.h: 60: void I2C_LCD_Init();
-[; ;i2c_LCD.h: 61: void I2C_LCD_SendMsg(UInt8_T byte);
-[; ;i2c_LCD.h: 62: void I2C_LCD_ClearLCD();
-[; ;i2c.h: 59: void I2C_Master_Init();
-[; ;i2c.h: 60: UInt8_T I2C_Master_Start();
-[; ;i2c.h: 61: UInt8_T I2C_Master_Write(UInt8_T data);
-[; ;i2c.h: 62: void I2C_Master_Stop();
-"17 i2c_LCD.c
+[; ;dataTypes.h: 17: typedef unsigned char UInt8_T;
+[; ;dataTypes.h: 18: typedef unsigned short int UInt16_T;
+[; ;dataTypes.h: 19: typedef unsigned long int UInt32_T;
+[; ;dataTypes.h: 20: typedef unsigned long long int UInt64_T;
+[; ;dataTypes.h: 22: typedef signed char SInt8_T;
+[; ;dataTypes.h: 23: typedef signed short int SInt16_T;
+[; ;dataTypes.h: 24: typedef signed long int SInt32_T;
+[; ;dataTypes.h: 25: typedef signed long long int SInt64_T;
+[; ;i2c_LCD.h: 37: typedef enum{
+[; ;i2c_LCD.h: 38: I2C_LCD_SEND_DATA,
+[; ;i2c_LCD.h: 39: I2C_LCD_SEND_COMMAND
+[; ;i2c_LCD.h: 40: }I2C_LCD_SEND_TYPE_T;
+[; ;i2c_LCD.h: 42: void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand);
+[; ;i2c_LCD.h: 43: void I2C_LCD_Init();
+[; ;i2c_LCD.h: 44: void I2C_LCD_SendMsg(UInt8_T byte);
+[; ;i2c_LCD.h: 45: void I2C_LCD_ClearLCD();
+[; ;i2c.h: 42: void I2C_Master_Init();
+[; ;i2c.h: 43: UInt8_T I2C_Master_Start();
+[; ;i2c.h: 44: UInt8_T I2C_Master_Write(UInt8_T data);
+[; ;i2c.h: 45: void I2C_Master_Stop();
+"30 i2c_LCD.c
 [v _rotateByte `(uc ~T0 @X0 1 sf1`uc ]
-"18
+"31
 {
-[; ;i2c_LCD.c: 17: static UInt8_T rotateByte(UInt8_T byte)
-[; ;i2c_LCD.c: 18: {
+[; ;i2c_LCD.c: 30: static UInt8_T rotateByte(UInt8_T byte)
+[; ;i2c_LCD.c: 31: {
 [e :U _rotateByte ]
-"17
+"30
 [v _byte `uc ~T0 @X0 1 r1 ]
-"18
+"31
 [f ]
-"19
+"32
 [v _rotatedByte `uc ~T0 @X0 1 a ]
-[; ;i2c_LCD.c: 19: UInt8_T rotatedByte = 0;
+[; ;i2c_LCD.c: 32: UInt8_T rotatedByte = 0;
 [e = _rotatedByte -> -> 0 `i `uc ]
-"20
+"33
 [v _i `c ~T0 @X0 1 a ]
-[; ;i2c_LCD.c: 20: SInt8_T i;
-[; ;i2c_LCD.c: 21: for(i = 7; i >= 0; i--)
-"21
+[; ;i2c_LCD.c: 33: SInt8_T i;
+[; ;i2c_LCD.c: 34: for(i = 7; i >= 0; i--)
+"34
 {
 [e = _i -> -> 7 `i `c ]
 [e $ >= -> _i `i -> 0 `i 633  ]
 [e $U 634  ]
-"22
+"35
 [e :U 633 ]
-[; ;i2c_LCD.c: 22: {
+[; ;i2c_LCD.c: 35: {
 {
-[; ;i2c_LCD.c: 23: rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);
-"23
+[; ;i2c_LCD.c: 36: rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);
+"36
 [e =| _rotatedByte -> >> & -> _byte `i -> 128 `i _i `uc ]
-[; ;i2c_LCD.c: 24: byte = (UInt8_T)(byte << 1);
-"24
+[; ;i2c_LCD.c: 37: byte = (UInt8_T)(byte << 1);
+"37
 [e = _byte -> << -> _byte `i -> 1 `i `uc ]
-"25
+"38
 }
-"21
+"34
 [e -- _i -> -> 1 `i `c ]
 [e $ >= -> _i `i -> 0 `i 633  ]
 [e :U 634 ]
-"25
+"38
 }
-[; ;i2c_LCD.c: 25: }
-[; ;i2c_LCD.c: 27: return rotatedByte;
-"27
+[; ;i2c_LCD.c: 38: }
+[; ;i2c_LCD.c: 40: return rotatedByte;
+"40
 [e ) _rotatedByte ]
 [e $UE 632  ]
-[; ;i2c_LCD.c: 28: }
-"28
+[; ;i2c_LCD.c: 41: }
+"41
 [e :UE 632 ]
 }
-"72
+"55
 [v _I2C_LCD_WriteByte `(v ~T0 @X0 1 ef2`uc`E5880 ]
-"73
+"56
 {
-[; ;i2c_LCD.c: 72: void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand)
-[; ;i2c_LCD.c: 73: {
+[; ;i2c_LCD.c: 55: void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand)
+[; ;i2c_LCD.c: 56: {
 [e :U _I2C_LCD_WriteByte ]
-"72
+"55
 [v _data `uc ~T0 @X0 1 r1 ]
 [v _dataOrCommand `E5880 ~T0 @X0 1 r2 ]
-"73
+"56
 [f ]
-"74
+"57
 [v _byteToSend `uc ~T0 @X0 1 a ]
-[; ;i2c_LCD.c: 74: UInt8_T byteToSend = 0;
+[; ;i2c_LCD.c: 57: UInt8_T byteToSend = 0;
 [e = _byteToSend -> -> 0 `i `uc ]
-"75
+"58
 [v _newByteToSend `uc ~T0 @X0 1 a ]
-[; ;i2c_LCD.c: 75: UInt8_T newByteToSend = 0;
+[; ;i2c_LCD.c: 58: UInt8_T newByteToSend = 0;
 [e = _newByteToSend -> -> 0 `i `uc ]
-"76
+"59
 [v _rotatedByte `uc ~T0 @X0 1 a ]
-[; ;i2c_LCD.c: 76: UInt8_T rotatedByte = 0;
+[; ;i2c_LCD.c: 59: UInt8_T rotatedByte = 0;
 [e = _rotatedByte -> -> 0 `i `uc ]
-[; ;i2c_LCD.c: 78: switch (dataOrCommand)
-"78
+[; ;i2c_LCD.c: 61: switch (dataOrCommand)
+"61
 [e $U 638  ]
-[; ;i2c_LCD.c: 79: {
-"79
+[; ;i2c_LCD.c: 62: {
+"62
 {
-[; ;i2c_LCD.c: 80: case I2C_LCD_SEND_DATA:
-"80
+[; ;i2c_LCD.c: 63: case I2C_LCD_SEND_DATA:
+"63
 [e :U 639 ]
-[; ;i2c_LCD.c: 81: byteToSend = (UInt8_T)0b10010000;
-"81
+[; ;i2c_LCD.c: 64: byteToSend = (UInt8_T)0b10010000;
+"64
 [e = _byteToSend -> -> 144 `i `uc ]
-[; ;i2c_LCD.c: 82: break;
-"82
+[; ;i2c_LCD.c: 65: break;
+"65
 [e $U 637  ]
-[; ;i2c_LCD.c: 83: case I2C_LCD_SEND_COMMAND:
-"83
+[; ;i2c_LCD.c: 66: case I2C_LCD_SEND_COMMAND:
+"66
 [e :U 640 ]
-[; ;i2c_LCD.c: 85: byteToSend = (UInt8_T)0b00010000;
-"85
+[; ;i2c_LCD.c: 67: byteToSend = (UInt8_T)0b00010000;
+"67
 [e = _byteToSend -> -> 16 `i `uc ]
-[; ;i2c_LCD.c: 86: break;
-"86
+[; ;i2c_LCD.c: 68: break;
+"68
 [e $U 637  ]
-[; ;i2c_LCD.c: 87: default:
-"87
+[; ;i2c_LCD.c: 69: default:
+"69
 [e :U 641 ]
-[; ;i2c_LCD.c: 88: break;
-"88
+[; ;i2c_LCD.c: 70: break;
+"70
 [e $U 637  ]
-"89
+"71
 }
-[; ;i2c_LCD.c: 89: }
+[; ;i2c_LCD.c: 71: }
 [e $U 637  ]
-"78
+"61
 [e :U 638 ]
 [e [\ _dataOrCommand , $ . `E5880 0 639
  , $ . `E5880 1 640
  641 ]
-"89
+"71
 [e :U 637 ]
-[; ;i2c_LCD.c: 91: newByteToSend = byteToSend | 0b00110000 | ((data & 0xF0) >> 4);
-"91
+[; ;i2c_LCD.c: 73: newByteToSend = (UInt8_T)(byteToSend | 0b00110000 | ((data & 0xF0) >> 4));
+"73
 [e = _newByteToSend -> | | -> _byteToSend `i -> 48 `i >> & -> _data `i -> 240 `i -> 4 `i `uc ]
-[; ;i2c_LCD.c: 92: rotatedByte = rotateByte(newByteToSend);
-"92
+[; ;i2c_LCD.c: 74: rotatedByte = rotateByte(newByteToSend);
+"74
 [e = _rotatedByte ( _rotateByte (1 _newByteToSend ]
-[; ;i2c_LCD.c: 93: (void)I2C_Master_Write(rotatedByte);
-"93
+[; ;i2c_LCD.c: 75: (void)I2C_Master_Write(rotatedByte);
+"75
 [e ( _I2C_Master_Write (1 _rotatedByte ]
-[; ;i2c_LCD.c: 94: newByteToSend = byteToSend | 0b00010000 | ((data & 0xF0) >> 4);
-"94
+[; ;i2c_LCD.c: 76: newByteToSend = (UInt8_T)(byteToSend | 0b00010000 | ((data & 0xF0) >> 4));
+"76
 [e = _newByteToSend -> | | -> _byteToSend `i -> 16 `i >> & -> _data `i -> 240 `i -> 4 `i `uc ]
-[; ;i2c_LCD.c: 95: rotatedByte = rotateByte(newByteToSend);
-"95
+[; ;i2c_LCD.c: 77: rotatedByte = rotateByte(newByteToSend);
+"77
 [e = _rotatedByte ( _rotateByte (1 _newByteToSend ]
-[; ;i2c_LCD.c: 96: (void)I2C_Master_Write(rotatedByte);
-"96
+[; ;i2c_LCD.c: 78: (void)I2C_Master_Write(rotatedByte);
+"78
 [e ( _I2C_Master_Write (1 _rotatedByte ]
-[; ;i2c_LCD.c: 99: newByteToSend = byteToSend | 0b00110000 | (data & 0x0F);
-"99
+[; ;i2c_LCD.c: 81: newByteToSend = (UInt8_T)(byteToSend | 0b00110000 | (data & 0x0F));
+"81
 [e = _newByteToSend -> | | -> _byteToSend `i -> 48 `i & -> _data `i -> 15 `i `uc ]
-[; ;i2c_LCD.c: 100: rotatedByte = rotateByte(newByteToSend);
-"100
+[; ;i2c_LCD.c: 82: rotatedByte = rotateByte(newByteToSend);
+"82
 [e = _rotatedByte ( _rotateByte (1 _newByteToSend ]
-[; ;i2c_LCD.c: 101: (void)I2C_Master_Write(rotatedByte);
-"101
+[; ;i2c_LCD.c: 83: (void)I2C_Master_Write(rotatedByte);
+"83
 [e ( _I2C_Master_Write (1 _rotatedByte ]
-[; ;i2c_LCD.c: 102: newByteToSend = byteToSend | 0b00010000 | (data & 0x0F);
-"102
+[; ;i2c_LCD.c: 84: newByteToSend = (UInt8_T)(byteToSend | 0b00010000 | (data & 0x0F));
+"84
 [e = _newByteToSend -> | | -> _byteToSend `i -> 16 `i & -> _data `i -> 15 `i `uc ]
-[; ;i2c_LCD.c: 103: rotatedByte = rotateByte(newByteToSend);
-"103
+[; ;i2c_LCD.c: 85: rotatedByte = rotateByte(newByteToSend);
+"85
 [e = _rotatedByte ( _rotateByte (1 _newByteToSend ]
-[; ;i2c_LCD.c: 104: (void)I2C_Master_Write(rotatedByte);
-"104
+[; ;i2c_LCD.c: 86: (void)I2C_Master_Write(rotatedByte);
+"86
 [e ( _I2C_Master_Write (1 _rotatedByte ]
-[; ;i2c_LCD.c: 105: }
-"105
+[; ;i2c_LCD.c: 87: }
+"87
 [e :UE 636 ]
 }
-"144
+"100
 [v _I2C_LCD_Init `(v ~T0 @X0 1 ef ]
-"145
+"101
 {
-[; ;i2c_LCD.c: 144: void I2C_LCD_Init()
-[; ;i2c_LCD.c: 145: {
+[; ;i2c_LCD.c: 100: void I2C_LCD_Init()
+[; ;i2c_LCD.c: 101: {
 [e :U _I2C_LCD_Init ]
 [f ]
-[; ;i2c_LCD.c: 146: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
-"146
+[; ;i2c_LCD.c: 103: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
+"103
 [e ( _I2C_Master_Write (1 -> | << -> 63 `i -> 1 `i -> 0 `i `uc ]
-[; ;i2c_LCD.c: 149: I2C_LCD_WriteByte(0x28, I2C_LCD_SEND_COMMAND);
-"149
+[; ;i2c_LCD.c: 106: I2C_LCD_WriteByte(0x28, I2C_LCD_SEND_COMMAND);
+"106
 [e ( _I2C_LCD_WriteByte (2 , -> -> 40 `i `uc . `E5880 1 ]
-[; ;i2c_LCD.c: 152: I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
-"152
+[; ;i2c_LCD.c: 109: I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
+"109
 [e ( _I2C_LCD_WriteByte (2 , -> -> 1 `i `uc . `E5880 1 ]
-[; ;i2c_LCD.c: 155: I2C_LCD_WriteByte(0x0F, I2C_LCD_SEND_COMMAND);
-"155
+[; ;i2c_LCD.c: 112: I2C_LCD_WriteByte(0x0F, I2C_LCD_SEND_COMMAND);
+"112
 [e ( _I2C_LCD_WriteByte (2 , -> -> 15 `i `uc . `E5880 1 ]
-[; ;i2c_LCD.c: 158: I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
-"158
+[; ;i2c_LCD.c: 115: I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
+"115
 [e ( _I2C_LCD_WriteByte (2 , -> -> 2 `i `uc . `E5880 1 ]
-[; ;i2c_LCD.c: 162: }
-"162
+[; ;i2c_LCD.c: 116: }
+"116
 [e :UE 642 ]
 }
-"164
+"131
 [v _I2C_LCD_SendMsg `(v ~T0 @X0 1 ef1`uc ]
-"165
+"132
 {
-[; ;i2c_LCD.c: 164: void I2C_LCD_SendMsg(UInt8_T byte)
-[; ;i2c_LCD.c: 165: {
+[; ;i2c_LCD.c: 131: void I2C_LCD_SendMsg(UInt8_T byte)
+[; ;i2c_LCD.c: 132: {
 [e :U _I2C_LCD_SendMsg ]
-"164
+"131
 [v _byte `uc ~T0 @X0 1 r1 ]
-"165
+"132
 [f ]
-[; ;i2c_LCD.c: 166: I2C_LCD_WriteByte(byte, I2C_LCD_SEND_DATA);
-"166
+[; ;i2c_LCD.c: 133: I2C_LCD_WriteByte(byte, I2C_LCD_SEND_DATA);
+"133
 [e ( _I2C_LCD_WriteByte (2 , _byte . `E5880 0 ]
-[; ;i2c_LCD.c: 167: }
-"167
+[; ;i2c_LCD.c: 134: }
+"134
 [e :UE 643 ]
 }
-"180
+"147
 [v _I2C_LCD_ClearLCD `(v ~T0 @X0 1 ef ]
-"181
+"148
 {
-[; ;i2c_LCD.c: 180: void I2C_LCD_ClearLCD()
-[; ;i2c_LCD.c: 181: {
+[; ;i2c_LCD.c: 147: void I2C_LCD_ClearLCD()
+[; ;i2c_LCD.c: 148: {
 [e :U _I2C_LCD_ClearLCD ]
 [f ]
-[; ;i2c_LCD.c: 183: I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
-"183
+[; ;i2c_LCD.c: 150: I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
+"150
 [e ( _I2C_LCD_WriteByte (2 , -> -> 1 `i `uc . `E5880 1 ]
-[; ;i2c_LCD.c: 186: I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
-"186
+[; ;i2c_LCD.c: 153: I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
+"153
 [e ( _I2C_LCD_WriteByte (2 , -> -> 2 `i `uc . `E5880 1 ]
-[; ;i2c_LCD.c: 187: }
-"187
+[; ;i2c_LCD.c: 154: }
+"154
 [e :UE 644 ]
 }

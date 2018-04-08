@@ -7070,7 +7070,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 35 "dataTypes.h"
+# 17 "dataTypes.h"
 typedef unsigned char UInt8_T;
 typedef unsigned short int UInt16_T;
 typedef unsigned long int UInt32_T;
@@ -7081,13 +7081,13 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 59 "i2c.h"
+# 42 "i2c.h"
 void I2C_Master_Init();
 UInt8_T I2C_Master_Start();
 UInt8_T I2C_Master_Write(UInt8_T data);
 void I2C_Master_Stop();
 
-# 46 "i2c.c"
+# 59 "i2c.c"
 void I2C_Master_Init()
 {
 SSP1CON1 = 0b00100000 | 0b00001000;
@@ -7102,7 +7102,7 @@ ANSELBbits.ANSB1 = 0;
 (TRISBbits.TRISB1) = 1;
 }
 
-# 71
+# 84
 UInt8_T I2C_Master_Start()
 {
 
@@ -7111,7 +7111,7 @@ while(SSP1CON2 & 0b00000001);
 return 1;
 }
 
-# 90
+# 103
 UInt8_T I2C_Master_Write(UInt8_T data)
 {
 SSP1BUF = data;
@@ -7119,7 +7119,7 @@ while(SSP1STAT & 0b00000100);
 return 1;
 }
 
-# 108
+# 121
 void I2C_Master_Stop()
 {
 SSP1CON2 |= 0b00000100;

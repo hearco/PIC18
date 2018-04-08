@@ -1,4 +1,16 @@
- 
+/* *************************************************************************
+ * 
+ *        File: i2c_LCD.h
+ * 
+ *      Author: Ariel Almendariz
+ * 
+ *    Comments: This file contains the function prototypes and constant
+ *              defines to handle the LCD via i2c. 
+ * 
+ * Last update: Apr / 8 / 18
+ *
+ **************************************************************************/
+
 #ifndef I2C_LCD_H
 #define	I2C_LCD_H
 

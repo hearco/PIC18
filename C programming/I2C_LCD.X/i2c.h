@@ -1,6 +1,16 @@
+/* *************************************************************************
+ * 
+ *        File: i2c.h
+ * 
+ *      Author: Ariel Almendariz
+ * 
+ *    Comments: This file contains the function prototypes and constant
+ *              defines to configure the i2c module. 
+ * 
+ * Last update: Apr / 8 / 18
+ *
+ **************************************************************************/
 
-// This is a guard condition so that contents of this file are not included
-// more than once.  
 #ifndef I2C_HEADER_H
 #define	I2C_HEADER_H
 

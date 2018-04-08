@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.42 build -159332390 
-                                                                                               Sun Apr 08 17:01:28 2018
+                                                                                               Sun Apr 08 17:24:34 2018
 
 Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130522
      1                           	processor	18F45K50
@@ -152,7 +152,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    138 ;;
    139 ;; *************** function _main *****************
    140 ;; Defined at:
-   141 ;;		line 10 in file "main.c"
+   141 ;;		line 5 in file "main.c"
    142 ;; Parameters:    Size  Location     Type
    143 ;;		None
    144 ;; Auto vars:     Size  Location     Type
@@ -188,36 +188,36 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    174  007EEC                     _main:
    175                           	opt stack 28
    176                           
-   177                           ;main.c: 12: UInt8_T data = 'A';
+   177                           ;main.c: 7: UInt8_T data = 'A';
    178                           
    179                           ;incstack = 0
    180  007EEC  0E41               	movlw	65
    181  007EEE  6E0B               	movwf	main@data,c
    182                           
-   183                           ;main.c: 14: I2C_Master_Init();
+   183                           ;main.c: 9: I2C_Master_Init();
    184  007EF0  EC67  F03F         	call	_I2C_Master_Init	;wreg free
    185                           
-   186                           ;main.c: 15: (void)I2C_Master_Start();
+   186                           ;main.c: 10: (void)I2C_Master_Start();
    187  007EF4  EC54  F03F         	call	_I2C_Master_Start	;wreg free
    188                           
-   189                           ;main.c: 17: I2C_LCD_Init();
+   189                           ;main.c: 12: I2C_LCD_Init();
    190  007EF8  EC85  F03F         	call	_I2C_LCD_Init	;wreg free
    191                           
-   192                           ;main.c: 20: I2C_Master_Stop();
+   192                           ;main.c: 15: I2C_Master_Stop();
    193  007EFC  EC58  F03F         	call	_I2C_Master_Stop	;wreg free
    194  007F00                     l845:
    195                           
-   196                           ;main.c: 23: {
-   197                           ;main.c: 24: ANSELBbits.ANSB4 = 0;
+   196                           ;main.c: 18: {
+   197                           ;main.c: 20: ANSELBbits.ANSB4 = 0;
    198  007F00  010F               	movlb	15	; () banked
    199  007F02  995C               	bcf	92,4,b	;volatile
    200                           
    201                           ; BSR set to: 15
-   202                           ;main.c: 25: TRISBbits.TRISB4 = 0;
+   202                           ;main.c: 21: TRISBbits.TRISB4 = 0;
    203  007F04  9893               	bcf	3987,4,c	;volatile
    204                           
    205                           ; BSR set to: 15
-   206                           ;main.c: 26: LATBbits.LATB4 = 1;
+   206                           ;main.c: 22: LATBbits.LATB4 = 1;
    207  007F06  888A               	bsf	3978,4,c	;volatile
    208                           
    209                           ; BSR set to: 15
@@ -228,7 +228,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    214                           
    215 ;; *************** function _I2C_Master_Stop *****************
    216 ;; Defined at:
-   217 ;;		line 108 in file "i2c.c"
+   217 ;;		line 121 in file "i2c.c"
    218 ;; Parameters:    Size  Location     Type
    219 ;;		None
    220 ;; Auto vars:     Size  Location     Type
@@ -261,7 +261,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    247  007EB0                     _I2C_Master_Stop:
    248                           	opt stack 30
    249                           
-   250                           ;i2c.c: 110: SSP1CON2 |= 0b00000100;
+   250                           ;i2c.c: 123: SSP1CON2 |= 0b00000100;
    251                           
    252                           ; BSR set to: 15
    253                           ;incstack = 0
@@ -276,7 +276,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    262                           
    263 ;; *************** function _I2C_Master_Start *****************
    264 ;; Defined at:
-   265 ;;		line 71 in file "i2c.c"
+   265 ;;		line 84 in file "i2c.c"
    266 ;; Parameters:    Size  Location     Type
    267 ;;		None
    268 ;; Auto vars:     Size  Location     Type
@@ -309,7 +309,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    295  007EA8                     _I2C_Master_Start:
    296                           	opt stack 30
    297                           
-   298                           ;i2c.c: 74: SSP1CON2 |= 0b00000001;
+   298                           ;i2c.c: 87: SSP1CON2 |= 0b00000001;
    299                           
    300                           ;incstack = 0
    301  007EA8  80C5               	bsf	4037,0,c	;volatile
@@ -323,7 +323,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    309                           
    310 ;; *************** function _I2C_Master_Init *****************
    311 ;; Defined at:
-   312 ;;		line 46 in file "i2c.c"
+   312 ;;		line 59 in file "i2c.c"
    313 ;; Parameters:    Size  Location     Type
    314 ;;		None
    315 ;; Auto vars:     Size  Location     Type
@@ -356,39 +356,39 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    342  007ECE                     _I2C_Master_Init:
    343                           	opt stack 30
    344                           
-   345                           ;i2c.c: 48: SSP1CON1 = 0b00100000 | 0b00001000;
+   345                           ;i2c.c: 61: SSP1CON1 = 0b00100000 | 0b00001000;
    346                           
    347                           ;incstack = 0
    348  007ECE  0E28               	movlw	40
    349  007ED0  6EC6               	movwf	4038,c	;volatile
    350                           
-   351                           ;i2c.c: 49: SSP1CON2 = 0;
+   351                           ;i2c.c: 62: SSP1CON2 = 0;
    352  007ED2  0E00               	movlw	0
    353  007ED4  6EC5               	movwf	4037,c	;volatile
    354                           
-   355                           ;i2c.c: 50: SSP1ADD = 0x27;
+   355                           ;i2c.c: 63: SSP1ADD = 0x27;
    356  007ED6  0E27               	movlw	39
    357  007ED8  6EC8               	movwf	4040,c	;volatile
    358                           
-   359                           ;i2c.c: 51: SSP1STAT = 0b10000000;
+   359                           ;i2c.c: 64: SSP1STAT = 0b10000000;
    360  007EDA  0E80               	movlw	128
    361  007EDC  6EC7               	movwf	4039,c	;volatile
    362                           
-   363                           ;i2c.c: 53: ANSELBbits.ANSB0 = 0;
+   363                           ;i2c.c: 66: ANSELBbits.ANSB0 = 0;
    364  007EDE  010F               	movlb	15	; () banked
    365  007EE0  915C               	bcf	92,0,b	;volatile
    366                           
    367                           ; BSR set to: 15
-   368                           ;i2c.c: 54: ANSELBbits.ANSB1 = 0;
+   368                           ;i2c.c: 67: ANSELBbits.ANSB1 = 0;
    369  007EE2  010F               	movlb	15	; () banked
    370  007EE4  935C               	bcf	92,1,b	;volatile
    371                           
    372                           ; BSR set to: 15
-   373                           ;i2c.c: 56: (TRISBbits.TRISB0) = 1;
+   373                           ;i2c.c: 69: (TRISBbits.TRISB0) = 1;
    374  007EE6  8093               	bsf	3987,0,c	;volatile
    375                           
    376                           ; BSR set to: 15
-   377                           ;i2c.c: 57: (TRISBbits.TRISB1) = 1;
+   377                           ;i2c.c: 70: (TRISBbits.TRISB1) = 1;
    378  007EE8  8293               	bsf	3987,1,c	;volatile
    379                           
    380                           ; BSR set to: 15
@@ -399,7 +399,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    385                           
    386 ;; *************** function _I2C_LCD_Init *****************
    387 ;; Defined at:
-   388 ;;		line 144 in file "i2c_LCD.c"
+   388 ;;		line 100 in file "i2c_LCD.c"
    389 ;; Parameters:    Size  Location     Type
    390 ;;		None
    391 ;; Auto vars:     Size  Location     Type
@@ -434,32 +434,32 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    420  007F0A                     _I2C_LCD_Init:
    421                           	opt stack 28
    422                           
-   423                           ;i2c_LCD.c: 146: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
+   423                           ;i2c_LCD.c: 103: (void)I2C_Master_Write((0x3F << 1) | 0b00000000);
    424                           
    425                           ; BSR set to: 15
    426                           ;incstack = 0
    427  007F0A  0E7E               	movlw	126
    428  007F0C  EC61  F03F         	call	_I2C_Master_Write
    429                           
-   430                           ;i2c_LCD.c: 149: I2C_LCD_WriteByte(0x28, I2C_LCD_SEND_COMMAND);
+   430                           ;i2c_LCD.c: 106: I2C_LCD_WriteByte(0x28, I2C_LCD_SEND_COMMAND);
    431  007F10  0E01               	movlw	1
    432  007F12  6E06               	movwf	I2C_LCD_WriteByte@dataOrCommand,c
    433  007F14  0E28               	movlw	40
    434  007F16  ECB9  F03F         	call	_I2C_LCD_WriteByte
    435                           
-   436                           ;i2c_LCD.c: 152: I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
+   436                           ;i2c_LCD.c: 109: I2C_LCD_WriteByte(0x01, I2C_LCD_SEND_COMMAND);
    437  007F1A  0E01               	movlw	1
    438  007F1C  6E06               	movwf	I2C_LCD_WriteByte@dataOrCommand,c
    439  007F1E  0E01               	movlw	1
    440  007F20  ECB9  F03F         	call	_I2C_LCD_WriteByte
    441                           
-   442                           ;i2c_LCD.c: 155: I2C_LCD_WriteByte(0x0F, I2C_LCD_SEND_COMMAND);
+   442                           ;i2c_LCD.c: 112: I2C_LCD_WriteByte(0x0F, I2C_LCD_SEND_COMMAND);
    443  007F24  0E01               	movlw	1
    444  007F26  6E06               	movwf	I2C_LCD_WriteByte@dataOrCommand,c
    445  007F28  0E0F               	movlw	15
    446  007F2A  ECB9  F03F         	call	_I2C_LCD_WriteByte
    447                           
-   448                           ;i2c_LCD.c: 158: I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
+   448                           ;i2c_LCD.c: 115: I2C_LCD_WriteByte(0x02, I2C_LCD_SEND_COMMAND);
    449  007F2E  0E01               	movlw	1
    450  007F30  6E06               	movwf	I2C_LCD_WriteByte@dataOrCommand,c
    451  007F32  0E02               	movlw	2
@@ -471,7 +471,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    457                           
    458 ;; *************** function _I2C_LCD_WriteByte *****************
    459 ;; Defined at:
-   460 ;;		line 72 in file "i2c_LCD.c"
+   460 ;;		line 55 in file "i2c_LCD.c"
    461 ;; Parameters:    Size  Location     Type
    462 ;;  data            1    wreg     unsigned char 
    463 ;;  dataOrComman    1    5[COMRAM] enum E5880
@@ -516,39 +516,39 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    502                           ;I2C_LCD_WriteByte@data stored from wreg
    503  007F72  6E07               	movwf	I2C_LCD_WriteByte@data,c
    504                           
-   505                           ;i2c_LCD.c: 74: UInt8_T byteToSend = 0;
+   505                           ;i2c_LCD.c: 57: UInt8_T byteToSend = 0;
    506  007F74  0E00               	movlw	0
    507  007F76  6E08               	movwf	I2C_LCD_WriteByte@byteToSend,c
    508                           
-   509                           ;i2c_LCD.c: 75: UInt8_T newByteToSend = 0;
+   509                           ;i2c_LCD.c: 58: UInt8_T newByteToSend = 0;
    510  007F78  0E00               	movlw	0
    511  007F7A  6E09               	movwf	I2C_LCD_WriteByte@newByteToSend,c
    512                           
-   513                           ;i2c_LCD.c: 76: UInt8_T rotatedByte = 0;
+   513                           ;i2c_LCD.c: 59: UInt8_T rotatedByte = 0;
    514  007F7C  0E00               	movlw	0
    515  007F7E  6E0A               	movwf	I2C_LCD_WriteByte@rotatedByte,c
    516                           
-   517                           ;i2c_LCD.c: 78: switch (dataOrCommand)
+   517                           ;i2c_LCD.c: 61: switch (dataOrCommand)
    518  007F80  D005               	goto	l803
    519  007F82                     l797:
    520                           
-   521                           ;i2c_LCD.c: 81: byteToSend = (UInt8_T)0b10010000;
+   521                           ;i2c_LCD.c: 64: byteToSend = (UInt8_T)0b10010000;
    522  007F82  0E90               	movlw	144
    523  007F84  D001               	goto	L1
    524  007F86                     l799:
    525                           
-   526                           ;i2c_LCD.c: 85: byteToSend = (UInt8_T)0b00010000;
+   526                           ;i2c_LCD.c: 67: byteToSend = (UInt8_T)0b00010000;
    527  007F86  0E10               	movlw	16
    528  007F88                     L1:
    529  007F88  6E08               	movwf	I2C_LCD_WriteByte@byteToSend,c
    530                           
-   531                           ;i2c_LCD.c: 89: }
+   531                           ;i2c_LCD.c: 71: }
    532                           
-   533                           ;i2c_LCD.c: 88: break;
+   533                           ;i2c_LCD.c: 70: break;
    534                           
-   535                           ;i2c_LCD.c: 87: default:
+   535                           ;i2c_LCD.c: 69: default:
    536                           
-   537                           ;i2c_LCD.c: 86: break;
+   537                           ;i2c_LCD.c: 68: break;
    538  007F8A  D007               	goto	l805
    539  007F8C                     l803:
    540  007F8C  5006               	movf	I2C_LCD_WriteByte@dataOrCommand,w,c
@@ -567,7 +567,8 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    553  007F98  D7F6               	goto	l799
    554  007F9A                     l805:
    555                           
-   556                           ;i2c_LCD.c: 91: newByteToSend = byteToSend | 0b00110000 | ((data & 0xF0) >> 4);
+   556                           ;i2c_LCD.c: 73: newByteToSend = (UInt8_T)(byteToSend | 0b00110000 | ((data & 0xF0) >> 4)
+      +                          );
    557  007F9A  3807               	swapf	I2C_LCD_WriteByte@data,w,c
    558  007F9C  0B0F               	andlw	15
    559  007F9E  0B0F               	andlw	15
@@ -575,16 +576,17 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    561  007FA2  0930               	iorlw	48
    562  007FA4  6E09               	movwf	I2C_LCD_WriteByte@newByteToSend,c
    563                           
-   564                           ;i2c_LCD.c: 92: rotatedByte = rotateByte(newByteToSend);
+   564                           ;i2c_LCD.c: 74: rotatedByte = rotateByte(newByteToSend);
    565  007FA6  5009               	movf	I2C_LCD_WriteByte@newByteToSend,w,c
    566  007FA8  EC9D  F03F         	call	_rotateByte
    567  007FAC  6E0A               	movwf	I2C_LCD_WriteByte@rotatedByte,c
    568                           
-   569                           ;i2c_LCD.c: 93: (void)I2C_Master_Write(rotatedByte);
+   569                           ;i2c_LCD.c: 75: (void)I2C_Master_Write(rotatedByte);
    570  007FAE  500A               	movf	I2C_LCD_WriteByte@rotatedByte,w,c
    571  007FB0  EC61  F03F         	call	_I2C_Master_Write
    572                           
-   573                           ;i2c_LCD.c: 94: newByteToSend = byteToSend | 0b00010000 | ((data & 0xF0) >> 4);
+   573                           ;i2c_LCD.c: 76: newByteToSend = (UInt8_T)(byteToSend | 0b00010000 | ((data & 0xF0) >> 4)
+      +                          );
    574  007FB4  3807               	swapf	I2C_LCD_WriteByte@data,w,c
    575  007FB6  0B0F               	andlw	15
    576  007FB8  0B0F               	andlw	15
@@ -592,44 +594,44 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    578  007FBC  0910               	iorlw	16
    579  007FBE  6E09               	movwf	I2C_LCD_WriteByte@newByteToSend,c
    580                           
-   581                           ;i2c_LCD.c: 95: rotatedByte = rotateByte(newByteToSend);
+   581                           ;i2c_LCD.c: 77: rotatedByte = rotateByte(newByteToSend);
    582  007FC0  5009               	movf	I2C_LCD_WriteByte@newByteToSend,w,c
    583  007FC2  EC9D  F03F         	call	_rotateByte
    584  007FC6  6E0A               	movwf	I2C_LCD_WriteByte@rotatedByte,c
    585                           
-   586                           ;i2c_LCD.c: 96: (void)I2C_Master_Write(rotatedByte);
+   586                           ;i2c_LCD.c: 78: (void)I2C_Master_Write(rotatedByte);
    587  007FC8  500A               	movf	I2C_LCD_WriteByte@rotatedByte,w,c
    588  007FCA  EC61  F03F         	call	_I2C_Master_Write
    589                           
-   590                           ;i2c_LCD.c: 99: newByteToSend = byteToSend | 0b00110000 | (data & 0x0F);
+   590                           ;i2c_LCD.c: 81: newByteToSend = (UInt8_T)(byteToSend | 0b00110000 | (data & 0x0F));
    591  007FCE  5007               	movf	I2C_LCD_WriteByte@data,w,c
    592  007FD0  0B0F               	andlw	15
    593  007FD2  1008               	iorwf	I2C_LCD_WriteByte@byteToSend,w,c
    594  007FD4  0930               	iorlw	48
    595  007FD6  6E09               	movwf	I2C_LCD_WriteByte@newByteToSend,c
    596                           
-   597                           ;i2c_LCD.c: 100: rotatedByte = rotateByte(newByteToSend);
+   597                           ;i2c_LCD.c: 82: rotatedByte = rotateByte(newByteToSend);
    598  007FD8  5009               	movf	I2C_LCD_WriteByte@newByteToSend,w,c
    599  007FDA  EC9D  F03F         	call	_rotateByte
    600  007FDE  6E0A               	movwf	I2C_LCD_WriteByte@rotatedByte,c
    601                           
-   602                           ;i2c_LCD.c: 101: (void)I2C_Master_Write(rotatedByte);
+   602                           ;i2c_LCD.c: 83: (void)I2C_Master_Write(rotatedByte);
    603  007FE0  500A               	movf	I2C_LCD_WriteByte@rotatedByte,w,c
    604  007FE2  EC61  F03F         	call	_I2C_Master_Write
    605                           
-   606                           ;i2c_LCD.c: 102: newByteToSend = byteToSend | 0b00010000 | (data & 0x0F);
+   606                           ;i2c_LCD.c: 84: newByteToSend = (UInt8_T)(byteToSend | 0b00010000 | (data & 0x0F));
    607  007FE6  5007               	movf	I2C_LCD_WriteByte@data,w,c
    608  007FE8  0B0F               	andlw	15
    609  007FEA  1008               	iorwf	I2C_LCD_WriteByte@byteToSend,w,c
    610  007FEC  0910               	iorlw	16
    611  007FEE  6E09               	movwf	I2C_LCD_WriteByte@newByteToSend,c
    612                           
-   613                           ;i2c_LCD.c: 103: rotatedByte = rotateByte(newByteToSend);
+   613                           ;i2c_LCD.c: 85: rotatedByte = rotateByte(newByteToSend);
    614  007FF0  5009               	movf	I2C_LCD_WriteByte@newByteToSend,w,c
    615  007FF2  EC9D  F03F         	call	_rotateByte
    616  007FF6  6E0A               	movwf	I2C_LCD_WriteByte@rotatedByte,c
    617                           
-   618                           ;i2c_LCD.c: 104: (void)I2C_Master_Write(rotatedByte);
+   618                           ;i2c_LCD.c: 86: (void)I2C_Master_Write(rotatedByte);
    619  007FF8  500A               	movf	I2C_LCD_WriteByte@rotatedByte,w,c
    620  007FFA  EC61  F03F         	call	_I2C_Master_Write
    621  007FFE  0012               	return		;funcret
@@ -640,7 +642,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    626                           
    627 ;; *************** function _rotateByte *****************
    628 ;; Defined at:
-   629 ;;		line 17 in file "i2c_LCD.c"
+   629 ;;		line 30 in file "i2c_LCD.c"
    630 ;; Parameters:    Size  Location     Type
    631 ;;  byte            1    wreg     unsigned char 
    632 ;; Auto vars:     Size  Location     Type
@@ -679,20 +681,20 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    665                           ;rotateByte@byte stored from wreg
    666  007F3A  6E04               	movwf	rotateByte@byte,c
    667                           
-   668                           ;i2c_LCD.c: 19: UInt8_T rotatedByte = 0;
+   668                           ;i2c_LCD.c: 32: UInt8_T rotatedByte = 0;
    669  007F3C  0E00               	movlw	0
    670  007F3E  6E03               	movwf	rotateByte@rotatedByte,c
    671                           
-   672                           ;i2c_LCD.c: 20: SInt8_T i;
-   673                           ;i2c_LCD.c: 21: for(i = 7; i >= 0; i--)
+   672                           ;i2c_LCD.c: 33: SInt8_T i;
+   673                           ;i2c_LCD.c: 34: for(i = 7; i >= 0; i--)
    674  007F40  0E07               	movlw	7
    675  007F42  6E05               	movwf	rotateByte@i,c
    676  007F44                     l707:
    677  007F44  BE05               	btfsc	rotateByte@i,7,c
    678  007F46  D013               	goto	l717
    679                           
-   680                           ;i2c_LCD.c: 22: {
-   681                           ;i2c_LCD.c: 23: rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);
+   680                           ;i2c_LCD.c: 35: {
+   681                           ;i2c_LCD.c: 36: rotatedByte |= (UInt8_T)((byte & 0b10000000) >> i);
    682  007F48  C005  F001         	movff	rotateByte@i,??_rotateByte
    683  007F4C  C004  F002         	movff	rotateByte@byte,??_rotateByte+1
    684  007F50  0E80               	movlw	128
@@ -708,7 +710,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    694  007F60  5002               	movf	??_rotateByte+1,w,c
    695  007F62  1203               	iorwf	rotateByte@rotatedByte,f,c
    696                           
-   697                           ;i2c_LCD.c: 24: byte = (UInt8_T)(byte << 1);
+   697                           ;i2c_LCD.c: 37: byte = (UInt8_T)(byte << 1);
    698  007F64  5004               	movf	rotateByte@byte,w,c
    699  007F66  2404               	addwf	rotateByte@byte,w,c
    700  007F68  6E04               	movwf	rotateByte@byte,c
@@ -716,8 +718,8 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    702  007F6C  D7EB               	goto	l707
    703  007F6E                     l717:
    704                           
-   705                           ;i2c_LCD.c: 25: }
-   706                           ;i2c_LCD.c: 27: return rotatedByte;
+   705                           ;i2c_LCD.c: 38: }
+   706                           ;i2c_LCD.c: 40: return rotatedByte;
    707  007F6E  5003               	movf	rotateByte@rotatedByte,w,c
    708  007F70  0012               	return	
    709  007F72                     __end_of_rotateByte:
@@ -727,7 +729,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    713                           
    714 ;; *************** function _I2C_Master_Write *****************
    715 ;; Defined at:
-   716 ;;		line 90 in file "i2c.c"
+   716 ;;		line 103 in file "i2c.c"
    717 ;; Parameters:    Size  Location     Type
    718 ;;  data            1    wreg     unsigned char 
    719 ;; Auto vars:     Size  Location     Type
@@ -765,7 +767,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    751                           ;I2C_Master_Write@data stored from wreg
    752  007EC2  6E01               	movwf	I2C_Master_Write@data,c
    753                           
-   754                           ;i2c.c: 92: SSP1BUF = data;
+   754                           ;i2c.c: 105: SSP1BUF = data;
    755  007EC4  C001  FFC9         	movff	I2C_Master_Write@data,4041	;volatile
    756  007EC8                     l48:
    757  007EC8  A4C7               	btfss	4039,2,c	;volatile
@@ -926,7 +928,7 @@ SFR                  0      0       0     200        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                   Sun Apr 08 17:01:28 2018
+Symbol Table                                                                                   Sun Apr 08 17:24:34 2018
 
                             l42 7EAA                              l54 7EB2                              l48 7EC8  
                             u34 7F5C                              u35 7F58                             l707 7F44  

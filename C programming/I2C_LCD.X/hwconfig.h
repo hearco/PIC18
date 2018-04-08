@@ -1,6 +1,15 @@
+/* *************************************************************************
+ * 
+ *        File: hwconfig.h
+ * 
+ *      Author: Ariel Almendariz
+ * 
+ *    Comments: This file contains some configurations for specified uC. 
+ * 
+ * Last update: Apr / 8 / 18
+ *
+ **************************************************************************/
 
-// This is a guard condition so that contents of this file are not included
-// more than once.  
 #ifndef HWCONFIG_HEADER
 #define	HWCONFIG_HEADER
 

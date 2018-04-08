@@ -1,3 +1,16 @@
+/* *****************************************************************
+ * 
+ *        File: i2c_LCD.c
+ * 
+ *      Author: Ariel Almendariz
+ * 
+ *    Comments: This file contains the function definitions to
+ *              handle the LCD via i2c. 
+ * 
+ * Last update: Apr / 8 / 18
+ *
+ ******************************************************************/
+
 #include "i2c_LCD.h"
 #include "i2c.h"
 
@@ -57,18 +70,18 @@ void I2C_LCD_WriteByte(UInt8_T data, I2C_LCD_SEND_TYPE_T dataOrCommand)
             break;
     }
     // Send high nibble
-    newByteToSend = byteToSend | ENABLE_HIGH | ((data & 0xF0) >> 4);
+    newByteToSend = (UInt8_T)(byteToSend | ENABLE_HIGH | ((data & 0xF0) >> 4));
     rotatedByte = rotateByte(newByteToSend);
     (void)I2C_Master_Write(rotatedByte);
-    newByteToSend = byteToSend | ENABLE_LOW | ((data & 0xF0) >> 4);
+    newByteToSend = (UInt8_T)(byteToSend | ENABLE_LOW | ((data & 0xF0) >> 4));
     rotatedByte = rotateByte(newByteToSend);
     (void)I2C_Master_Write(rotatedByte);
     
     // Send low nibble
-    newByteToSend = byteToSend | ENABLE_HIGH | (data & 0x0F);
+    newByteToSend = (UInt8_T)(byteToSend | ENABLE_HIGH | (data & 0x0F));
     rotatedByte = rotateByte(newByteToSend);
     (void)I2C_Master_Write(rotatedByte);
-    newByteToSend = byteToSend | ENABLE_LOW | (data & 0x0F);
+    newByteToSend = (UInt8_T)(byteToSend | ENABLE_LOW | (data & 0x0F));
     rotatedByte = rotateByte(newByteToSend);
     (void)I2C_Master_Write(rotatedByte);
 }

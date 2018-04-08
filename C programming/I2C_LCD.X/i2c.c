@@ -1,3 +1,16 @@
+/* *****************************************************************
+ * 
+ *        File: i2c.c
+ * 
+ *      Author: Ariel Almendariz
+ * 
+ *    Comments: This file contains the function definitions to
+ *              configure the i2c module. 
+ * 
+ * Last update: Apr / 8 / 18
+ *
+ ******************************************************************/
+
 #include "i2c.h"
 
 /*
