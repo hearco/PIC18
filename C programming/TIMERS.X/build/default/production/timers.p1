@@ -1,16 +1,29 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"28 timers.c
+"26 timers.c
 [c E5890 0 1 .. ]
 [n E5890 . TMR0_CLOCK_SOURCE_INTERNAL TMR0_CLOCK_SOURCE_T0CKI_PIN  ]
-[c E5880 0 1 2 3 4 5 6 7 .. ]
-[n E5880 . TMR0_PREESCALER_OF_2 TMR0_PREESCALER_OF_4 TMR0_PREESCALER_OF_8 TMR0_PREESCALER_OF_16 TMR0_PREESCALER_OF_32 TMR0_PREESCALER_OF_64 TMR0_PREESCALER_OF_128 TMR0_PREESCALER_OF_256  ]
-[c E5894 0 1 .. ]
-[n E5894 . TMR0_RW_MODE_16BIT TMR0_RW_MODE_8BIT  ]
-"13223 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
-[v _INTCON `Vuc ~T0 @X0 0 e@4082 ]
+"13229 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
+[s S607 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S607 . IOCIF INT0IF TMR0IF IOCIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"13239
+[s S608 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S608 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"13249
+[s S609 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S609 . . GIEL GIEH ]
+"13228
+[u S606 `S607 1 `S608 1 `S609 1 ]
+[n S606 . . . . ]
+"13255
+[v _INTCONbits `VS606 ~T0 @X0 0 e@4082 ]
 "12437
 [v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
-"12534
+"107 timers.c
+[c E5894 0 1 .. ]
+[n E5894 . TMR0_RW_MODE_16BIT TMR0_RW_MODE_8BIT  ]
+[c E5880 0 1 2 3 4 5 6 7 .. ]
+[n E5880 . TMR0_PREESCALER_OF_2 TMR0_PREESCALER_OF_4 TMR0_PREESCALER_OF_8 TMR0_PREESCALER_OF_16 TMR0_PREESCALER_OF_32 TMR0_PREESCALER_OF_64 TMR0_PREESCALER_OF_128 TMR0_PREESCALER_OF_256  ]
+"12534 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
 "12514
 [v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
@@ -25,13 +38,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S551 . . . ]
 "12457
 [v _T0CONbits `VS551 ~T0 @X0 0 e@4053 ]
-"150 timers.c
+"161 timers.c
 [c E5904 0 1 2 .. ]
 [n E5904 . TMR1_CLOCK_SOURCE_FOSC4 TMR1_CLOCK_SOURCE_FOSC TMR1_CLOCK_SOURCE_PIN_OSC  ]
-[c E5898 0 1 2 3 .. ]
-[n E5898 . TMR1_PREESCALER_OF_1 TMR1_PREESCALER_OF_2 TMR1_PREESCALER_OF_4 TMR1_PREESCALER_OF_8  ]
-[c E5909 0 1 .. ]
-[n E5909 . TMR1_RW_MODE_8BIT TMR1_RW_MODE_16BIT  ]
 "6194 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [s S246 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S246 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE ACTIE ]
@@ -48,7 +57,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PIE1bits `VS245 ~T0 @X0 0 e@3997 ]
 "11955
 [v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
-"12111
+"221 timers.c
+[c E5898 0 1 2 3 .. ]
+[n E5898 . TMR1_PREESCALER_OF_1 TMR1_PREESCALER_OF_2 TMR1_PREESCALER_OF_4 TMR1_PREESCALER_OF_8  ]
+[c E5909 0 1 .. ]
+[n E5909 . TMR1_RW_MODE_8BIT TMR1_RW_MODE_16BIT  ]
+"12111 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
 "12091
 [v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
@@ -72,13 +86,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S525 . . . . . . ]
 "11994
 [v _T1CONbits `VS525 ~T0 @X0 0 e@4045 ]
-"243 timers.c
+"275 timers.c
 [c E5919 0 1 2 .. ]
 [n E5919 . TMR3_CLOCK_SOURCE_FOSC4 TMR3_CLOCK_SOURCE_FOSC TMR3_CLOCK_SOURCE_PIN_OSC  ]
-[c E5913 0 1 2 3 .. ]
-[n E5913 . TMR3_PREESCALER_OF_1 TMR3_PREESCALER_OF_2 TMR3_PREESCALER_OF_4 TMR3_PREESCALER_OF_8  ]
-[c E5924 0 1 .. ]
-[n E5924 . TMR3_RW_MODE_8BIT TMR3_RW_MODE_16BIT  ]
 "6491 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [s S258 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S258 . CCP2IE TMR3IE HLVDIE BCLIE EEIE C2IE C1IE OSCFIE ]
@@ -95,7 +105,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PIE2bits `VS257 ~T0 @X0 0 e@4000 ]
 "7901
 [v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
-"8057
+"337 timers.c
+[c E5913 0 1 2 3 .. ]
+[n E5913 . TMR3_PREESCALER_OF_1 TMR3_PREESCALER_OF_2 TMR3_PREESCALER_OF_4 TMR3_PREESCALER_OF_8  ]
+[c E5924 0 1 .. ]
+[n E5924 . TMR3_RW_MODE_8BIT TMR3_RW_MODE_16BIT  ]
+"8057 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
 "8037
 [v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
@@ -5460,304 +5475,280 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dataTypes.h: 20: typedef signed short int SInt16_T;
 [; ;dataTypes.h: 21: typedef signed long int SInt32_T;
 [; ;dataTypes.h: 22: typedef signed long long int SInt64_T;
-[; ;timers.h: 47: typedef enum{
-[; ;timers.h: 48: TMR0_PREESCALER_OF_2,
-[; ;timers.h: 49: TMR0_PREESCALER_OF_4,
-[; ;timers.h: 50: TMR0_PREESCALER_OF_8,
-[; ;timers.h: 51: TMR0_PREESCALER_OF_16,
-[; ;timers.h: 52: TMR0_PREESCALER_OF_32,
-[; ;timers.h: 53: TMR0_PREESCALER_OF_64,
-[; ;timers.h: 54: TMR0_PREESCALER_OF_128,
-[; ;timers.h: 55: TMR0_PREESCALER_OF_256
-[; ;timers.h: 56: }TMR0_PREESCALER_VALUES_T;
-[; ;timers.h: 58: typedef enum{
-[; ;timers.h: 59: TMR0_CLOCK_SOURCE_INTERNAL,
-[; ;timers.h: 60: TMR0_CLOCK_SOURCE_T0CKI_PIN
-[; ;timers.h: 61: }TMR0_CLOCK_SOURCE_VALUES_T;
-[; ;timers.h: 63: typedef enum{
-[; ;timers.h: 64: TMR0_RW_MODE_16BIT,
-[; ;timers.h: 65: TMR0_RW_MODE_8BIT
-[; ;timers.h: 66: }TMR0_RW_MODE_T;
-[; ;timers.h: 69: typedef enum{
-[; ;timers.h: 70: TMR1_PREESCALER_OF_1,
-[; ;timers.h: 71: TMR1_PREESCALER_OF_2,
-[; ;timers.h: 72: TMR1_PREESCALER_OF_4,
-[; ;timers.h: 73: TMR1_PREESCALER_OF_8
-[; ;timers.h: 74: }TMR1_PREESCALER_VALUES_T;
+[; ;timers.h: 54: typedef enum{
+[; ;timers.h: 55: TMR0_PREESCALER_OF_2,
+[; ;timers.h: 56: TMR0_PREESCALER_OF_4,
+[; ;timers.h: 57: TMR0_PREESCALER_OF_8,
+[; ;timers.h: 58: TMR0_PREESCALER_OF_16,
+[; ;timers.h: 59: TMR0_PREESCALER_OF_32,
+[; ;timers.h: 60: TMR0_PREESCALER_OF_64,
+[; ;timers.h: 61: TMR0_PREESCALER_OF_128,
+[; ;timers.h: 62: TMR0_PREESCALER_OF_256
+[; ;timers.h: 63: }TMR0_PREESCALER_VALUES_T;
+[; ;timers.h: 65: typedef enum{
+[; ;timers.h: 66: TMR0_CLOCK_SOURCE_INTERNAL,
+[; ;timers.h: 67: TMR0_CLOCK_SOURCE_T0CKI_PIN
+[; ;timers.h: 68: }TMR0_CLOCK_SOURCE_VALUES_T;
+[; ;timers.h: 70: typedef enum{
+[; ;timers.h: 71: TMR0_RW_MODE_16BIT,
+[; ;timers.h: 72: TMR0_RW_MODE_8BIT
+[; ;timers.h: 73: }TMR0_RW_MODE_T;
 [; ;timers.h: 76: typedef enum{
-[; ;timers.h: 77: TMR1_CLOCK_SOURCE_FOSC4,
-[; ;timers.h: 78: TMR1_CLOCK_SOURCE_FOSC,
-[; ;timers.h: 79: TMR1_CLOCK_SOURCE_PIN_OSC
-[; ;timers.h: 80: }TMR1_CLOCK_SOURCE_VALUES_T;
-[; ;timers.h: 82: typedef enum{
-[; ;timers.h: 83: TMR1_RW_MODE_8BIT,
-[; ;timers.h: 84: TMR1_RW_MODE_16BIT
-[; ;timers.h: 85: }TMR1_RW_MODE_T;
-[; ;timers.h: 88: typedef enum{
-[; ;timers.h: 89: TMR3_PREESCALER_OF_1,
-[; ;timers.h: 90: TMR3_PREESCALER_OF_2,
-[; ;timers.h: 91: TMR3_PREESCALER_OF_4,
-[; ;timers.h: 92: TMR3_PREESCALER_OF_8
-[; ;timers.h: 93: }TMR3_PREESCALER_VALUES_T;
+[; ;timers.h: 77: TMR1_PREESCALER_OF_1,
+[; ;timers.h: 78: TMR1_PREESCALER_OF_2,
+[; ;timers.h: 79: TMR1_PREESCALER_OF_4,
+[; ;timers.h: 80: TMR1_PREESCALER_OF_8
+[; ;timers.h: 81: }TMR1_PREESCALER_VALUES_T;
+[; ;timers.h: 83: typedef enum{
+[; ;timers.h: 84: TMR1_CLOCK_SOURCE_FOSC4,
+[; ;timers.h: 85: TMR1_CLOCK_SOURCE_FOSC,
+[; ;timers.h: 86: TMR1_CLOCK_SOURCE_PIN_OSC
+[; ;timers.h: 87: }TMR1_CLOCK_SOURCE_VALUES_T;
+[; ;timers.h: 89: typedef enum{
+[; ;timers.h: 90: TMR1_RW_MODE_8BIT,
+[; ;timers.h: 91: TMR1_RW_MODE_16BIT
+[; ;timers.h: 92: }TMR1_RW_MODE_T;
 [; ;timers.h: 95: typedef enum{
-[; ;timers.h: 96: TMR3_CLOCK_SOURCE_FOSC4,
-[; ;timers.h: 97: TMR3_CLOCK_SOURCE_FOSC,
-[; ;timers.h: 98: TMR3_CLOCK_SOURCE_PIN_OSC
-[; ;timers.h: 99: }TMR3_CLOCK_SOURCE_VALUES_T;
-[; ;timers.h: 101: typedef enum{
-[; ;timers.h: 102: TMR3_RW_MODE_8BIT,
-[; ;timers.h: 103: TMR3_RW_MODE_16BIT
-[; ;timers.h: 104: }TMR3_RW_MODE_T;
-[; ;timers.h: 107: void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode);
-[; ;timers.h: 108: void TMR0_StartCount(UInt16_T milliseconds);
-[; ;timers.h: 109: void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode);
-[; ;timers.h: 110: void TMR1_StartCount(UInt16_T milliseconds);
-[; ;timers.h: 111: void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode);
-[; ;timers.h: 112: void TMR3_StartCount(UInt16_T milliseconds);
-"5 timers.c
-[v _TMR0_PreescalerValue `uc ~T0 @X0 1 s ]
-[; ;timers.c: 5: static UInt8_T TMR0_PreescalerValue;
-"6
-[v _TMR1_PreescalerValue `uc ~T0 @X0 1 s ]
-[; ;timers.c: 6: static UInt8_T TMR1_PreescalerValue;
-"7
-[v _TMR3_PreescalerValue `uc ~T0 @X0 1 s ]
-[; ;timers.c: 7: static UInt8_T TMR3_PreescalerValue;
-"27
-[v _TMR0_Config `(v ~T0 @X0 1 ef3`E5890`E5880`E5894 ]
-"28
+[; ;timers.h: 96: TMR3_PREESCALER_OF_1,
+[; ;timers.h: 97: TMR3_PREESCALER_OF_2,
+[; ;timers.h: 98: TMR3_PREESCALER_OF_4,
+[; ;timers.h: 99: TMR3_PREESCALER_OF_8
+[; ;timers.h: 100: }TMR3_PREESCALER_VALUES_T;
+[; ;timers.h: 102: typedef enum{
+[; ;timers.h: 103: TMR3_CLOCK_SOURCE_FOSC4,
+[; ;timers.h: 104: TMR3_CLOCK_SOURCE_FOSC,
+[; ;timers.h: 105: TMR3_CLOCK_SOURCE_PIN_OSC
+[; ;timers.h: 106: }TMR3_CLOCK_SOURCE_VALUES_T;
+[; ;timers.h: 108: typedef enum{
+[; ;timers.h: 109: TMR3_RW_MODE_8BIT,
+[; ;timers.h: 110: TMR3_RW_MODE_16BIT
+[; ;timers.h: 111: }TMR3_RW_MODE_T;
+[; ;timers.h: 114: void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
+[; ;timers.h: 115: void TMR0_StartCount(UInt16_T milliseconds);
+[; ;timers.h: 116: void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
+[; ;timers.h: 117: void TMR1_StartCount(UInt16_T milliseconds);
+[; ;timers.h: 118: void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
+[; ;timers.h: 119: void TMR3_StartCount(UInt16_T milliseconds);
+"25 timers.c
+[v _TMR0_Config `(v ~T0 @X0 1 ef1`E5890 ]
+"26
 {
-[; ;timers.c: 27: void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode)
-[; ;timers.c: 28: {
+[; ;timers.c: 25: void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source)
+[; ;timers.c: 26: {
 [e :U _TMR0_Config ]
-"27
+"25
 [v _clock_source `E5890 ~T0 @X0 1 r1 ]
-[v _preescaler `E5880 ~T0 @X0 1 r2 ]
-[v _ReadWrite_Mode `E5894 ~T0 @X0 1 r3 ]
-"28
+"26
 [f ]
-[; ;timers.c: 30: INTCON |= (1 << 5);
-"30
-[e =| _INTCON -> << -> 1 `i -> 5 `i `uc ]
-[; ;timers.c: 36: TMR0_PreescalerValue = (UInt8_T)preescaler;
-"36
-[e = _TMR0_PreescalerValue -> _preescaler `uc ]
-[; ;timers.c: 96: T0CON = (ReadWrite_Mode << 6) | (clock_source << 5) | preescaler;
-"96
-[e = _T0CON -> | | << -> _ReadWrite_Mode `i -> 6 `i << -> _clock_source `i -> 5 `i -> _preescaler `i `uc ]
-[; ;timers.c: 97: }
-"97
+[; ;timers.c: 46: INTCONbits.TMR0IE = 0;
+"46
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+[; ;timers.c: 107: T0CON = (TMR0_RW_MODE_16BIT << 6) | (clock_source << 5) | TMR0_PREESCALER_OF_256;
+"107
+[e = _T0CON -> | | << -> . `E5894 0 `i -> 6 `i << -> _clock_source `i -> 5 `i -> . `E5880 7 `i `uc ]
+[; ;timers.c: 108: }
+"108
 [e :UE 632 ]
 }
-"110
+"121
 [v _TMR0_StartCount `(v ~T0 @X0 1 ef1`us ]
-"111
+"122
 {
-[; ;timers.c: 110: void TMR0_StartCount(UInt16_T milliseconds)
-[; ;timers.c: 111: {
+[; ;timers.c: 121: void TMR0_StartCount(UInt16_T milliseconds)
+[; ;timers.c: 122: {
 [e :U _TMR0_StartCount ]
-"110
+"121
 [v _milliseconds `us ~T0 @X0 1 r1 ]
-"111
+"122
 [f ]
-"112
+"123
 [v _temp_time `us ~T0 @X0 1 a ]
-[; ;timers.c: 112: UInt16_T temp_time;
-[; ;timers.c: 114: if (milliseconds > 4193)
-"114
+[; ;timers.c: 123: UInt16_T temp_time;
+[; ;timers.c: 125: if (milliseconds > 4193)
+"125
 [e $ ! > -> _milliseconds `ui -> -> 4193 `i `ui 634  ]
-[; ;timers.c: 115: {
-"115
+[; ;timers.c: 126: {
+"126
 {
-[; ;timers.c: 116: TMR0H = 0;
-"116
-[e = _TMR0H -> -> 0 `i `uc ]
-[; ;timers.c: 117: TMR0L = 0;
-"117
-[e = _TMR0L -> -> 0 `i `uc ]
-"118
-}
-[; ;timers.c: 118: }
-[e $U 635  ]
-"119
-[e :U 634 ]
-[; ;timers.c: 119: else
-[; ;timers.c: 120: {
-"120
-{
-[; ;timers.c: 127: temp_time = (UInt16_T)(65536 - (milliseconds / 0.064));
+[; ;timers.c: 127: TMR0H = 0;
 "127
-[e = _temp_time -> - -> -> 65536 `l `d / -> _milliseconds `d .0.064 `us ]
-[; ;timers.c: 128: TMR0H = (UInt8_T)(temp_time / 256);
+[e = _TMR0H -> -> 0 `i `uc ]
+[; ;timers.c: 128: TMR0L = 0;
 "128
-[e = _TMR0H -> / -> _temp_time `ui -> -> 256 `i `ui `uc ]
-[; ;timers.c: 129: TMR0L = (UInt8_T)temp_time;
+[e = _TMR0L -> -> 0 `i `uc ]
 "129
-[e = _TMR0L -> _temp_time `uc ]
+}
+[; ;timers.c: 129: }
+[e $U 635  ]
 "130
+[e :U 634 ]
+[; ;timers.c: 130: else
+[; ;timers.c: 131: {
+"131
+{
+[; ;timers.c: 138: temp_time = (UInt16_T)(65536 - (milliseconds / 0.064));
+"138
+[e = _temp_time -> - -> -> 65536 `l `d / -> _milliseconds `d .0.064 `us ]
+[; ;timers.c: 139: TMR0H = (UInt8_T)(temp_time / 256);
+"139
+[e = _TMR0H -> / -> _temp_time `ui -> -> 256 `i `ui `uc ]
+[; ;timers.c: 140: TMR0L = (UInt8_T)temp_time;
+"140
+[e = _TMR0L -> _temp_time `uc ]
+"141
 }
 [e :U 635 ]
-[; ;timers.c: 130: }
-[; ;timers.c: 132: T0CONbits.TMR0ON = 1;
-"132
+[; ;timers.c: 141: }
+[; ;timers.c: 143: T0CONbits.TMR0ON = 1;
+"143
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;timers.c: 133: }
-"133
+[; ;timers.c: 144: }
+"144
 [e :UE 633 ]
 }
-"149
-[v _TMR1_Config `(v ~T0 @X0 1 ef3`E5904`E5898`E5909 ]
-"150
+"160
+[v _TMR1_Config `(v ~T0 @X0 1 ef1`E5904 ]
+"161
 {
-[; ;timers.c: 149: void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode)
-[; ;timers.c: 150: {
+[; ;timers.c: 160: void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source)
+[; ;timers.c: 161: {
 [e :U _TMR1_Config ]
-"149
+"160
 [v _clock_source `E5904 ~T0 @X0 1 r1 ]
-[v _preescaler `E5898 ~T0 @X0 1 r2 ]
-[v _ReadWrite_Mode `E5909 ~T0 @X0 1 r3 ]
-"150
+"161
 [f ]
-[; ;timers.c: 152: PIE1bits.TMR1IE = 1;
-"152
-[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-[; ;timers.c: 158: TMR1_PreescalerValue = (UInt8_T)preescaler;
-"158
-[e = _TMR1_PreescalerValue -> _preescaler `uc ]
-[; ;timers.c: 189: T1CON = (clock_source << 6) | (preescaler << 4) | (ReadWrite_Mode << 1);
+[; ;timers.c: 189: PIE1bits.TMR1IE = 0;
 "189
-[e = _T1CON -> | | << -> _clock_source `i -> 6 `i << -> _preescaler `i -> 4 `i << -> _ReadWrite_Mode `i -> 1 `i `uc ]
-[; ;timers.c: 190: }
-"190
+[e = . . _PIE1bits 0 0 -> -> 0 `i `uc ]
+[; ;timers.c: 221: T1CON = (clock_source << 6) | (TMR1_PREESCALER_OF_8 << 4) | (TMR1_RW_MODE_16BIT << 1);
+"221
+[e = _T1CON -> | | << -> _clock_source `i -> 6 `i << -> . `E5898 3 `i -> 4 `i << -> . `E5909 1 `i -> 1 `i `uc ]
+[; ;timers.c: 222: }
+"222
 [e :UE 636 ]
 }
-"203
+"235
 [v _TMR1_StartCount `(v ~T0 @X0 1 ef1`us ]
-"204
+"236
 {
-[; ;timers.c: 203: void TMR1_StartCount(UInt16_T milliseconds)
-[; ;timers.c: 204: {
+[; ;timers.c: 235: void TMR1_StartCount(UInt16_T milliseconds)
+[; ;timers.c: 236: {
 [e :U _TMR1_StartCount ]
-"203
+"235
 [v _milliseconds `us ~T0 @X0 1 r1 ]
-"204
+"236
 [f ]
-"205
+"237
 [v _temp_time `us ~T0 @X0 1 a ]
-[; ;timers.c: 205: UInt16_T temp_time;
-[; ;timers.c: 207: if (milliseconds > 130)
-"207
-[e $ ! > -> _milliseconds `ui -> -> 130 `i `ui 638  ]
-[; ;timers.c: 208: {
-"208
+[; ;timers.c: 237: UInt16_T temp_time;
+[; ;timers.c: 239: if (milliseconds > 131)
+"239
+[e $ ! > -> _milliseconds `ui -> -> 131 `i `ui 638  ]
+[; ;timers.c: 240: {
+"240
 {
-[; ;timers.c: 209: TMR1H = 0;
-"209
+[; ;timers.c: 241: TMR1H = 0;
+"241
 [e = _TMR1H -> -> 0 `i `uc ]
-[; ;timers.c: 210: TMR1L = 0;
-"210
+[; ;timers.c: 242: TMR1L = 0;
+"242
 [e = _TMR1L -> -> 0 `i `uc ]
-"211
+"243
 }
-[; ;timers.c: 211: }
+[; ;timers.c: 243: }
 [e $U 639  ]
-"212
+"244
 [e :U 638 ]
-[; ;timers.c: 212: else
-[; ;timers.c: 213: {
-"213
+[; ;timers.c: 244: else
+[; ;timers.c: 245: {
+"245
 {
-[; ;timers.c: 220: temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
-"220
+[; ;timers.c: 252: temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
+"252
 [e = _temp_time -> - -> -> 65536 `l `d / -> _milliseconds `d .0.002 `us ]
-[; ;timers.c: 221: TMR1H = (UInt8_T)(temp_time / 256);
-"221
+[; ;timers.c: 253: TMR1H = (UInt8_T)(temp_time / 256);
+"253
 [e = _TMR1H -> / -> _temp_time `ui -> -> 256 `i `ui `uc ]
-[; ;timers.c: 222: TMR1L = (UInt8_T)temp_time;
-"222
+[; ;timers.c: 254: TMR1L = (UInt8_T)temp_time;
+"254
 [e = _TMR1L -> _temp_time `uc ]
-"223
+"255
 }
 [e :U 639 ]
-[; ;timers.c: 223: }
-[; ;timers.c: 225: T1CONbits.TMR1ON = 1;
-"225
+[; ;timers.c: 255: }
+[; ;timers.c: 257: T1CONbits.TMR1ON = 1;
+"257
 [e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
-[; ;timers.c: 226: }
-"226
+[; ;timers.c: 258: }
+"258
 [e :UE 637 ]
 }
-"242
-[v _TMR3_Config `(v ~T0 @X0 1 ef3`E5919`E5913`E5924 ]
-"243
+"274
+[v _TMR3_Config `(v ~T0 @X0 1 ef1`E5919 ]
+"275
 {
-[; ;timers.c: 242: void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode)
-[; ;timers.c: 243: {
+[; ;timers.c: 274: void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source)
+[; ;timers.c: 275: {
 [e :U _TMR3_Config ]
-"242
+"274
 [v _clock_source `E5919 ~T0 @X0 1 r1 ]
-[v _preescaler `E5913 ~T0 @X0 1 r2 ]
-[v _ReadWrite_Mode `E5924 ~T0 @X0 1 r3 ]
-"243
+"275
 [f ]
-[; ;timers.c: 245: PIE2bits.TMR3IE = 1;
-"245
-[e = . . _PIE2bits 0 1 -> -> 1 `i `uc ]
-[; ;timers.c: 251: TMR3_PreescalerValue = (UInt8_T)preescaler;
-"251
-[e = _TMR3_PreescalerValue -> _preescaler `uc ]
-[; ;timers.c: 284: T3CON = (clock_source << 6) | (preescaler << 4) | (ReadWrite_Mode << 1);
-"284
-[e = _T3CON -> | | << -> _clock_source `i -> 6 `i << -> _preescaler `i -> 4 `i << -> _ReadWrite_Mode `i -> 1 `i `uc ]
-[; ;timers.c: 285: }
-"285
+[; ;timers.c: 303: PIE2bits.TMR3IE = 0;
+"303
+[e = . . _PIE2bits 0 1 -> -> 0 `i `uc ]
+[; ;timers.c: 337: T3CON = (clock_source << 6) | (TMR3_PREESCALER_OF_8 << 4) | (TMR3_RW_MODE_16BIT << 1);
+"337
+[e = _T3CON -> | | << -> _clock_source `i -> 6 `i << -> . `E5913 3 `i -> 4 `i << -> . `E5924 1 `i -> 1 `i `uc ]
+[; ;timers.c: 338: }
+"338
 [e :UE 640 ]
 }
-"298
+"351
 [v _TMR3_StartCount `(v ~T0 @X0 1 ef1`us ]
 {
-[; ;timers.c: 298: void TMR3_StartCount(UInt16_T milliseconds){
+[; ;timers.c: 351: void TMR3_StartCount(UInt16_T milliseconds){
 [e :U _TMR3_StartCount ]
 [v _milliseconds `us ~T0 @X0 1 r1 ]
 [f ]
-"299
+"352
 [v _temp_time `us ~T0 @X0 1 a ]
-[; ;timers.c: 299: UInt16_T temp_time;
-[; ;timers.c: 301: if (milliseconds > 130){
-"301
-[e $ ! > -> _milliseconds `ui -> -> 130 `i `ui 642  ]
+[; ;timers.c: 352: UInt16_T temp_time;
+[; ;timers.c: 354: if (milliseconds > 131){
+"354
+[e $ ! > -> _milliseconds `ui -> -> 131 `i `ui 642  ]
 {
-[; ;timers.c: 302: TMR3H = 0;
-"302
+[; ;timers.c: 355: TMR3H = 0;
+"355
 [e = _TMR3H -> -> 0 `i `uc ]
-[; ;timers.c: 303: TMR3L = 0;
-"303
+[; ;timers.c: 356: TMR3L = 0;
+"356
 [e = _TMR3L -> -> 0 `i `uc ]
-"304
+"357
 }
-[; ;timers.c: 304: }
+[; ;timers.c: 357: }
 [e $U 643  ]
-"305
+"358
 [e :U 642 ]
-[; ;timers.c: 305: else{
+[; ;timers.c: 358: else{
 {
-[; ;timers.c: 312: temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
-"312
+[; ;timers.c: 365: temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
+"365
 [e = _temp_time -> - -> -> 65536 `l `d / -> _milliseconds `d .0.002 `us ]
-[; ;timers.c: 313: TMR3H = (UInt8_T)(temp_time / 256);
-"313
+[; ;timers.c: 366: TMR3H = (UInt8_T)(temp_time / 256);
+"366
 [e = _TMR3H -> / -> _temp_time `ui -> -> 256 `i `ui `uc ]
-[; ;timers.c: 314: TMR3L = (UInt8_T)temp_time;
-"314
+[; ;timers.c: 367: TMR3L = (UInt8_T)temp_time;
+"367
 [e = _TMR3L -> _temp_time `uc ]
-"315
+"368
 }
 [e :U 643 ]
-[; ;timers.c: 315: }
-[; ;timers.c: 317: T3CONbits.TMR3ON = 1;
-"317
+[; ;timers.c: 368: }
+[; ;timers.c: 370: T3CONbits.TMR3ON = 1;
+"370
 [e = . . _T3CONbits 1 0 -> -> 1 `i `uc ]
-[; ;timers.c: 318: }
-"318
+[; ;timers.c: 371: }
+"371
 [e :UE 641 ]
 }

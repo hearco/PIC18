@@ -7081,7 +7081,7 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 47 "timers.h"
+# 54 "timers.h"
 typedef enum{
 TMR0_PREESCALER_OF_2,
 TMR0_PREESCALER_OF_4,
@@ -7142,49 +7142,22 @@ TMR3_RW_MODE_16BIT
 }TMR3_RW_MODE_T;
 
 
-void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode);
+void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR0_StartCount(UInt16_T milliseconds);
-void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode);
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR1_StartCount(UInt16_T milliseconds);
-void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode);
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR3_StartCount(UInt16_T milliseconds);
 
-# 11 "main.c"
-void interrupt high_isr(void){
-
-if ((PIR1 & 1)){
-(PIR1bits.TMR1IF = T1CONbits.TMR1ON = 0);
-LATB ^= 1;
-TMR1_StartCount(25);
-}
-
-if ((PIR2 & (1 << 1))){
-(PIR2bits.TMR3IF = T3CONbits.TMR3ON = 0);
-LATB ^= (1 << 1);
-TMR3_StartCount(100);
-}
-
-if ((INTCON & (1 << 2))){
-(INTCONbits.TMR0IF = T0CONbits.TMR0ON = 0);
-LATB ^= (1 << 2);
-TMR0_StartCount(300);
-}
-
-}
-
-# 39
+# 21 "main.c"
 void main(void) {
 
 ANSELB = TRISB = LATB = 0;
 
-
-INTCONbits.PEIE = 1;
-INTCONbits.GIE = 1;
-
-
-TMR0_Config(TMR0_CLOCK_SOURCE_INTERNAL, TMR0_PREESCALER_OF_256, TMR0_RW_MODE_16BIT);
-TMR1_Config(TMR1_CLOCK_SOURCE_FOSC4, TMR1_PREESCALER_OF_8, TMR1_RW_MODE_16BIT);
-TMR3_Config(TMR3_CLOCK_SOURCE_FOSC4, TMR3_PREESCALER_OF_8, TMR3_RW_MODE_16BIT);
+# 30
+TMR0_Config(TMR0_CLOCK_SOURCE_INTERNAL);
+TMR1_Config(TMR1_CLOCK_SOURCE_FOSC4);
+TMR3_Config(TMR3_CLOCK_SOURCE_FOSC4);
 
 TMR0_StartCount(300);
 TMR1_StartCount(25);
@@ -7192,6 +7165,25 @@ TMR3_StartCount(100);
 
 while(1)
 {
+if ((PIR1 & 1))
+{
+(PIR1bits.TMR1IF = T1CONbits.TMR1ON = 0);
+LATB ^= 1;
+TMR1_StartCount(25);
+}
 
+if ((PIR2 & (1 << 1)))
+{
+(PIR2bits.TMR3IF = T3CONbits.TMR3ON = 0);
+LATB ^= (1 << 1);
+TMR3_StartCount(100);
+}
+
+if ((INTCON & (1 << 2)))
+{
+(INTCONbits.TMR0IF = T0CONbits.TMR0ON = 0);
+LATB ^= (1 << 2);
+TMR0_StartCount(300);
+}
 }
 }

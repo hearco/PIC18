@@ -24,20 +24,20 @@
 #define OFF 0
 
 
-#define GLOBAL_INTERRUPT_ENABLE   // ON, OFF
-#ifdef GLOBAL_INTERRUPT_ENABLE
-        #define INTERRUPT_PRIORITY_ENABLE OFF
-    #endif
-
-    #if (INTERRUPT_PRIORITY_ENABLE == ON)
-        #define HIGH_PRIORITY_ENABLE
-        #define LOW_PRIORITY_ENABLE
-
-    #else // Normal priority
-        #define INTERRUPT_ENABLE_TIMER0 ON
-        #define INTERRUPT_ENABLE_TIMER1 ON
-        #define INTERRUPT_ENABLE_TIMER3 ON
-    #endif // 
+//#define GLOBAL_INTERRUPT_ENABLE   // ON, OFF
+//#ifdef GLOBAL_INTERRUPT_ENABLE
+//    #define INTERRUPT_PRIORITY_ENABLE OFF
+//#endif
+//
+//#if (INTERRUPT_PRIORITY_ENABLE == ON)
+//    #define HIGH_PRIORITY_ENABLE
+//    #define LOW_PRIORITY_ENABLE
+//
+//#else // Normal priority
+//    #define INTERRUPT_ENABLE_TIMER0 ON
+//    #define INTERRUPT_ENABLE_TIMER1 ON
+//    #define INTERRUPT_ENABLE_TIMER3 ON
+//#endif // 
 
 #include "dataTypes.h"
 

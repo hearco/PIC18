@@ -2,9 +2,7 @@
 #include "timers.h"
 
 /**** Private variables ****/
-static UInt8_T TMR0_PreescalerValue;
-static UInt8_T TMR1_PreescalerValue;
-static UInt8_T TMR3_PreescalerValue;
+
 
 /**** Private functions ****/
 
@@ -24,16 +22,29 @@ static UInt8_T TMR3_PreescalerValue;
  *     Returns: N/A
  * 
  ***************************************************************************************/
-void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode)
+void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source)
 {
-#if (INTERRUPT_ENABLE_TIMER0 == ON)
-    INTCON |= TMR0_OVERFLOW_INTERRUPT_EN;
-#else
-    INTCONbits.TMR0IE = 0;
-#endif
+    /**************** Registers associated with Timer 0 *****************
+     * 
+     * Table 12-1, page 163 of datasheet
+     * 
+     * Register  Page  Bits
+     * 
+     *  INTCON   120   GIE/GIEH(7), PEIE/GIEL(6), TMR0IE(5), TMR0IF(2)
+     * INTCON2   121   TMR0IP(2)
+     *   T0CON   161   All
+     *   TMR0H   -     Timer0 High byte value
+     *   TMR0L   -     Timer0 low byte value
+     *   TRISA   156   TRISA4
+     * 
+     ********************************************************************/
     
-    // Keep track of preescaler value for use in other functions
-    TMR0_PreescalerValue = (UInt8_T)preescaler;
+    
+//#if (INTERRUPT_ENABLE_TIMER0 == ON)
+//    INTCON |= TMR0_OVERFLOW_INTERRUPT_EN;
+//#else
+    INTCONbits.TMR0IE = 0;
+//#endif
     
     /* ******************************* INTCON register **********************************************
      * 
@@ -93,7 +104,7 @@ void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES
      *              000 -> 1:2                                                  *
      *                                                                          *
      ****************************************************************************/
-    T0CON = (ReadWrite_Mode << 6) | (clock_source << 5) | preescaler;
+    T0CON = (TMR0_RW_MODE_16BIT << 6) | (clock_source << 5) | TMR0_PREESCALER_OF_256;
 }
 
 /***************************************************************************************
@@ -111,7 +122,7 @@ void TMR0_StartCount(UInt16_T milliseconds)
 {
     UInt16_T temp_time;
     
-    if (milliseconds > 4193)
+    if (milliseconds > TMR0_MAX_TIME)
     {
         TMR0H = 0;
         TMR0L = 0;
@@ -124,7 +135,7 @@ void TMR0_StartCount(UInt16_T milliseconds)
          *  TMR0H:TMR0L = seconds / ((4 / _XTAL_FREQ) * Preescalador)
          * 
          */
-        temp_time = (UInt16_T)(65536 - (milliseconds / 0.064));
+        temp_time = (UInt16_T)(TIMERS_MAX_VALUE_16bits - (milliseconds / 0.064));
         TMR0H = (UInt8_T)(temp_time / 256);
         TMR0L = (UInt8_T)temp_time;
     }
@@ -146,16 +157,37 @@ void TMR0_StartCount(UInt16_T milliseconds)
  *     Returns: N/A
  * 
  ***************************************************************************************/
-void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode)
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source)
 {
-#if (INTERRUPT_ENABLE_TIMER1 == ON)
-        PIE1bits.TMR1IE = 1;
-#else
-        PIE1bits.TMR1IE = 0;
-#endif
+    /**************** Registers associated with Timer 1 *****************
+     * 
+     * Table 13-5, page 176 of datasheet
+     * 
+     * Register  Page  Bits
+     * 
+     * ANSELB    155   ANSB5(5)
+     * INTCON    120   GIE/GIEH(7), PEIE/GIEL(6)
+     *   IPR1    129   TMR1IP(0)
+     *   IPR3    131   TMR1GIP(1)
+     *   PIE1    126   TMR1IE(0)
+     *   PIE3    128   TMR1GIE(0)
+     *   PIR1    123   TMR1IF(0)
+     *   PIR3    125   TMR1GIF(0)
+     *   PMD0    64    TMR1MD(0)
+     *  T1CON    174   All
+     * T1GCON    175   All
+     *  TMRxH    -     Timer1 High byte value
+     *  TMRxL    -     Timer1 Low byte value
+     *  TRISB    156   TRISB5
+     *  TRISC    156   TRISC1(1), TRISC0(0)
+     * 
+     ********************************************************************/
     
-    // Keep track of preescaler value for use in other functions
-    TMR1_PreescalerValue = (UInt8_T)preescaler;
+//#if (INTERRUPT_ENABLE_TIMER1 == ON)
+//        PIE1bits.TMR1IE = 1;
+//#else
+        PIE1bits.TMR1IE = 0;
+//#endif
     
    /* -------------------------------------------------------------------------------------------------*
     *  b7          b6          b5          b4          b3      b2          b1      b0                  *
@@ -186,7 +218,7 @@ void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES
     *  TMR1ON:         1 -> Enables Timer1                                                             *
     *                  0 -> Stops Timer1; clears Timer1 gate flip-flop                                 *
     * -------------------------------------------------------------------------------------------------*/
-    T1CON = (clock_source << 6) | (preescaler << 4) | (ReadWrite_Mode << 1);
+    T1CON = (clock_source << 6) | (TMR1_PREESCALER_OF_8 << 4) | (TMR1_RW_MODE_16BIT << 1);
 }
 
 /***************************************************************************************
@@ -204,7 +236,7 @@ void TMR1_StartCount(UInt16_T milliseconds)
 {
     UInt16_T temp_time;
     
-    if (milliseconds > 130)
+    if (milliseconds > TMR1_MAX_TIME)
     {
         TMR1H = 0;
         TMR1L = 0;
@@ -217,7 +249,7 @@ void TMR1_StartCount(UInt16_T milliseconds)
          *  TMR0H:TMR0L = seconds / ((4 / _XTAL_FREQ) * Preescalador)
          * 
          */
-        temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
+        temp_time = (UInt16_T)(TIMERS_MAX_VALUE_16bits - (milliseconds / 0.002));
         TMR1H = (UInt8_T)(temp_time / 256);
         TMR1L = (UInt8_T)temp_time;
     }
@@ -239,16 +271,37 @@ void TMR1_StartCount(UInt16_T milliseconds)
  *     Returns: N/A
  * 
  ***************************************************************************************/
-void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode)
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source)
 {
-#if (INTERRUPT_ENABLE_TIMER3 == ON)
-        PIE2bits.TMR3IE = 1;
-#else
-        PIE2bits.TMR3IE = 0;
-#endif
+    /**************** Registers associated with Timer 3 *****************
+     * 
+     * Table 13-5, page 176 of datasheet
+     * 
+     * Register  Page  Bits
+     * 
+     * ANSELB    155   ANSB5(5)
+     * INTCON    120   GIE/GIEH(7), PEIE/GIEL(6)
+     *   IPR2    130   TMR3IP(1)
+     *   IPR3    131   TMR3GIP(1)
+     *   PIE2    127   TMR3IE(1)
+     *   PIE3    128   TMR3GIE(1)
+     *   PIR2    124   TMR3IF(1)
+     *   PIR3    125   TMR3GIF(1)
+     *   PMD0    64    TMR3MD(2)
+     *  T3CON    174   All
+     * T3GCON    175   All
+     *  TMRxH    -     Timer3 High byte value
+     *  TMRxL    -     Timer3 Low byte value
+     *  TRISB    156   TRISB5
+     *  TRISC    156   TRISC1(1), TRISC0(0)
+     * 
+     ********************************************************************/
     
-    // Keep track of preescaler value for use in other functions
-    TMR3_PreescalerValue = (UInt8_T)preescaler;
+//#if (INTERRUPT_ENABLE_TIMER3 == ON)
+//        PIE2bits.TMR3IE = 1;
+//#else
+        PIE2bits.TMR3IE = 0;
+//#endif
     
     /* -------------------------------------------------------------------------------------------------*
      *  b7          b6          b5          b4          b3      b2          b1      b0                  *
@@ -281,7 +334,7 @@ void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES
      * -------------------------------------------------------------------------------------------------*
      */
     //T3CON = 0b00110010;
-    T3CON = (clock_source << 6) | (preescaler << 4) | (ReadWrite_Mode << 1);
+    T3CON = (clock_source << 6) | (TMR3_PREESCALER_OF_8 << 4) | (TMR3_RW_MODE_16BIT << 1);
 }
 
 /***************************************************************************************
@@ -298,7 +351,7 @@ void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES
 void TMR3_StartCount(UInt16_T milliseconds){
     UInt16_T temp_time;
     
-    if (milliseconds > 130){
+    if (milliseconds > TMR3_MAX_TIME){
         TMR3H = 0;
         TMR3L = 0;
     }
@@ -309,7 +362,7 @@ void TMR3_StartCount(UInt16_T milliseconds){
          *  TMR0H:TMR0L = seconds / ((4 / _XTAL_FREQ) * Preescalador)
          * 
          */
-        temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
+        temp_time = (UInt16_T)(TIMERS_MAX_VALUE_16bits - (milliseconds / 0.002));
         TMR3H = (UInt8_T)(temp_time / 256);
         TMR3L = (UInt8_T)temp_time;
     }

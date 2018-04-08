@@ -17,6 +17,13 @@
 #define TMR1_OVERFLOW               (PIR1 & 1)
 #define TMR3_OVERFLOW               (PIR2 & (1 << 1))
 
+#define TMR0_MAX_TIME               4193
+#define TMR1_MAX_TIME               131
+#define TMR3_MAX_TIME               131
+
+#define TIMERS_MAX_VALUE_16bits     65536
+#define TIMERS_MAX_VALUE_8bits      256
+
 /** Clear flags **/
 #define IOC_CLEAR_FLAG              (INTCON &~(1 << 0))
 #define INT0_CLEAR_FLAG             (INTCON &~(1 << 1))
@@ -104,12 +111,14 @@ typedef enum{
 }TMR3_RW_MODE_T;
 
 /** Function prototypes **/
-void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode);
+void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR0_StartCount(UInt16_T milliseconds);
-void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode);
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR1_StartCount(UInt16_T milliseconds);
-void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode);
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR3_StartCount(UInt16_T milliseconds);
+
+// TODO: Implement functions for Timer 2
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

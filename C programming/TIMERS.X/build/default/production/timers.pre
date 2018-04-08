@@ -7081,7 +7081,7 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 47 "timers.h"
+# 54 "timers.h"
 typedef enum{
 TMR0_PREESCALER_OF_2,
 TMR0_PREESCALER_OF_4,
@@ -7142,32 +7142,25 @@ TMR3_RW_MODE_16BIT
 }TMR3_RW_MODE_T;
 
 
-void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode);
+void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR0_StartCount(UInt16_T milliseconds);
-void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode);
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR1_StartCount(UInt16_T milliseconds);
-void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode);
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR3_StartCount(UInt16_T milliseconds);
 
-# 5 "timers.c"
-static UInt8_T TMR0_PreescalerValue;
-static UInt8_T TMR1_PreescalerValue;
-static UInt8_T TMR3_PreescalerValue;
-
-# 27
-void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode)
+# 25 "timers.c"
+void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source)
 {
 
-INTCON |= (1 << 5);
+# 46
+INTCONbits.TMR0IE = 0;
 
-# 36
-TMR0_PreescalerValue = (UInt8_T)preescaler;
-
-# 96
-T0CON = (ReadWrite_Mode << 6) | (clock_source << 5) | preescaler;
+# 107
+T0CON = (TMR0_RW_MODE_16BIT << 6) | (clock_source << 5) | TMR0_PREESCALER_OF_256;
 }
 
-# 110
+# 121
 void TMR0_StartCount(UInt16_T milliseconds)
 {
 UInt16_T temp_time;
@@ -7180,7 +7173,7 @@ TMR0L = 0;
 else
 {
 
-# 127
+# 138
 temp_time = (UInt16_T)(65536 - (milliseconds / 0.064));
 TMR0H = (UInt8_T)(temp_time / 256);
 TMR0L = (UInt8_T)temp_time;
@@ -7189,25 +7182,23 @@ TMR0L = (UInt8_T)temp_time;
 T0CONbits.TMR0ON = 1;
 }
 
-# 149
-void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode)
+# 160
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source)
 {
 
-PIE1bits.TMR1IE = 1;
-
-# 158
-TMR1_PreescalerValue = (UInt8_T)preescaler;
-
 # 189
-T1CON = (clock_source << 6) | (preescaler << 4) | (ReadWrite_Mode << 1);
+PIE1bits.TMR1IE = 0;
+
+# 221
+T1CON = (clock_source << 6) | (TMR1_PREESCALER_OF_8 << 4) | (TMR1_RW_MODE_16BIT << 1);
 }
 
-# 203
+# 235
 void TMR1_StartCount(UInt16_T milliseconds)
 {
 UInt16_T temp_time;
 
-if (milliseconds > 130)
+if (milliseconds > 131)
 {
 TMR1H = 0;
 TMR1L = 0;
@@ -7215,7 +7206,7 @@ TMR1L = 0;
 else
 {
 
-# 220
+# 252
 temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
 TMR1H = (UInt8_T)(temp_time / 256);
 TMR1L = (UInt8_T)temp_time;
@@ -7224,30 +7215,28 @@ TMR1L = (UInt8_T)temp_time;
 T1CONbits.TMR1ON = 1;
 }
 
-# 242
-void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode)
+# 274
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source)
 {
 
-PIE2bits.TMR3IE = 1;
+# 303
+PIE2bits.TMR3IE = 0;
 
-# 251
-TMR3_PreescalerValue = (UInt8_T)preescaler;
-
-# 284
-T3CON = (clock_source << 6) | (preescaler << 4) | (ReadWrite_Mode << 1);
+# 337
+T3CON = (clock_source << 6) | (TMR3_PREESCALER_OF_8 << 4) | (TMR3_RW_MODE_16BIT << 1);
 }
 
-# 298
+# 351
 void TMR3_StartCount(UInt16_T milliseconds){
 UInt16_T temp_time;
 
-if (milliseconds > 130){
+if (milliseconds > 131){
 TMR3H = 0;
 TMR3L = 0;
 }
 else{
 
-# 312
+# 365
 temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
 TMR3H = (UInt8_T)(temp_time / 256);
 TMR3L = (UInt8_T)temp_time;
