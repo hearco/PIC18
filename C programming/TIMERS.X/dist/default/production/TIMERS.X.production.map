@@ -5,9 +5,9 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.42\dat\en_msgs.txt -cs \
   -h+dist/default/production\TIMERS.X.production.sym \
   --cmf=dist/default/production\TIMERS.X.production.cmf -z -Q18F45K50 \
-  -oC:\Users\usuario\AppData\Local\Temp\s211c.2 \
+  -oC:\Users\usuario\AppData\Local\Temp\srl0.2 \
   -Mdist/default/production/TIMERS.X.production.map -E1 -ver=XC8 \
-  -ASTACK=09Ch-07ffh -pstack=STACK -ACODE=01000h-07FFFh \
+  -ASTACK=09Fh-07ffh -pstack=STACK -ACODE=01000h-07FFFh \
   -ACONST=01000h-07FFFh -ASMALLCONST=01000h-010FFhx112 \
   -AMEDIUMCONST=01000h-07FFFh -ACOMRAM=01h-05Fh -AABS1=00h-07FFh \
   -ABIGRAM=01h-07FFh -ARAM=060h-0FFh,0100h-01FFhx7 -ABANK0=060h-0FFh \
@@ -23,7 +23,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\usuario\AppData\Local\Temp\s211c.obj \
+  C:\Users\usuario\AppData\Local\Temp\srl0.obj \
   dist/default/production\TIMERS.X.production.obj 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\usuario\AppData\Local\Temp\s211c.obj
+C:\Users\usuario\AppData\Local\Temp\srl0.obj
                 init                               10C6     10C6        4      804       0
                 reset_vec                          1000     1000        4      800       0
                 idloc                            200000   200000        8   200000       0
@@ -47,28 +47,29 @@ dist/default/production\TIMERS.X.production.obj
                 text22                             1A54     1A54       AE      804       0
                 text21                             1332     1332      1AC      804       0
                 text20                             196E     196E       E6      804       0
-                text19                             1F5E     1F5E       24      804       0
+                text19                             2018     2018       24      804       0
                 text18                             187A     187A       F4      804       0
-                text17                             1F3A     1F3A       24      804       0
+                text17                             1FF4     1FF4       24      804       0
                 text16                             1DFE     1DFE       8E      804       0
                 text15                             1D70     1D70       8E      804       0
                 text14                             1CE2     1CE2       8E      804       0
-                text12                             1FC2     1FC2       1C      804       0
+                text12                             1F66     1F66       34      804       0
                 text11                             176E     176E      10C      804       0
                 text10                             10CA     10CA      268      804       0
                 text9                              14DE     14DE      14C      804       0
-                text8                              1EE0     1EE0       30      804       0
+                text8                              1F9A     1F9A       30      804       0
                 text7                              162A     162A      144      804       0
-                text6                              1F10     1F10       2A      804       0
+                text6                              1FCA     1FCA       2A      804       0
                 text5                              1C42     1C42       A0      804       0
-                text4                              1FA2     1FA2       20      804       0
+                text4                              1F32     1F32       34      804       0
                 text3                              1BA2     1BA2       A0      804       0
-                text2                              1F82     1F82       20      804       0
+                text2                              1EFE     1EFE       34      804       0
                 text1                              1B02     1B02       A0      804       0
-                text0                              1E8C     1E8C       54      804       0
+                text0                              1E8C     1E8C       72      804       0
                 cstackCOMRAM                          1        1       4A        1       1
                 cstackBANK0                          60       60       3C       60       1
-                cinit                              1FDE     1FDE        A      804       0
+                cinit                              203C     203C        A      804       0
+                nvBANK0                              9C       9C        3       60       1
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -80,26 +81,26 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text22                             1A54     1A54       AE         0
                 text21                             1332     1332      1AC         0
                 text20                             196E     196E       E6         0
-                text19                             1F5E     1F5E       24         0
+                text19                             2018     2018       24         0
                 text18                             187A     187A       F4         0
-                text17                             1F3A     1F3A       24         0
+                text17                             1FF4     1FF4       24         0
                 text16                             1DFE     1DFE       8E         0
                 text15                             1D70     1D70       8E         0
                 text14                             1CE2     1CE2       8E         0
-                text12                             1FC2     1FC2       1C         0
+                text12                             1F66     1F66       34         0
                 text11                             176E     176E      10C         0
                 text10                             10CA     10CA      268         0
                 text9                              14DE     14DE      14C         0
-                text8                              1EE0     1EE0       30         0
+                text8                              1F9A     1F9A       30         0
                 text7                              162A     162A      144         0
-                text6                              1F10     1F10       2A         0
+                text6                              1FCA     1FCA       2A         0
                 text5                              1C42     1C42       A0         0
-                text4                              1FA2     1FA2       20         0
+                text4                              1F32     1F32       34         0
                 text3                              1BA2     1BA2       A0         0
-                text2                              1F82     1F82       20         0
+                text2                              1EFE     1EFE       34         0
                 text1                              1B02     1B02       A0         0
-                text0                              1E8C     1E8C       54         0
-                cinit                              1FDE     1FDE        A         0
+                text0                              1E8C     1E8C       72         0
+                cinit                              203C     203C        A         0
 
         CLASS   CONST          
 
@@ -119,6 +120,7 @@ TOTAL           Name                               Link     Load   Length     Sp
 
         CLASS   BANK0          
                 cstackBANK0                          60       60       3C         1
+                nvBANK0                              9C       9C        3         1
 
         CLASS   BANK1          
 
@@ -151,9 +153,9 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 cstackCOMRAM                   000001  00004B  00004C         1       1  COMRAM  
-                cstackBANK0                    000060  00003C  00009C        60       1  BANK0   
+                cstackBANK0                    000060  00003F  00009F        60       1  BANK0   
                 reset_vec                      001000  000004  001004       800       0  CODE    
-                intcode                        001008  000FE0  001FE8       804       0  CODE    
+                intcode                        001008  00103E  002046       804       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -161,7 +163,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            00009C-0000FF               64
+        BANK0            00009F-0000FF               61
         BANK1            000100-0001FF              100
         BANK2            000200-0002FF              100
         BANK3            000300-0003FF              100
@@ -170,21 +172,21 @@ UNUSED ADDRESS RANGES
         BANK6            000600-0006FF              100
         BANK7            000700-0007FF              100
         BIGRAM           00004C-00005F               14
-                         00009C-0007FF              764
+                         00009F-0007FF              761
         CODE             001004-001007                4
-                         001FE8-007FFF             6018
+                         002046-007FFF             5FBA
         COMRAM           00004C-00005F               14
         CONST            001004-001007                4
-                         001FE8-007FFF             6018
+                         002046-007FFF             5FBA
         EEDATA           F00000-F000FF              100
         FARRAM           000000-000000                1
         MEDIUMCONST      001004-001007                4
-                         001FE8-007FFF             6018
-        RAM              00009C-0007FF              100
+                         002046-007FFF             5FBA
+        RAM              00009F-0007FF              100
         SFR              000F53-000FFF                D
         SMALLCONST       001004-001007                4
-                         001FE8-007FFF              100
-        STACK            00009C-0007FF              764
+                         002046-007FFF              100
+        STACK            00009F-0007FF              761
 
                                   Symbol Table
 
@@ -200,14 +202,19 @@ UNUSED ADDRESS RANGES
 ?i2___ftpack                   cstackCOMRAM 000001
 ?i2___fttol                    cstackCOMRAM 00002A
 ?i2___lwtoft                   cstackCOMRAM 000009
-TMR0_Config@clock_source       cstackBANK0  000061
+TMR0_Config@ReadWrite_Mode     cstackBANK0  000061
+TMR0_Config@clock_source       cstackBANK0  000064
 TMR0_Config@preescaler         cstackBANK0  000060
 TMR0_StartCount@milliseconds   cstackBANK0  000098
 TMR0_StartCount@temp_time      cstackBANK0  00009A
-TMR1_Config@clock_source       cstackBANK0  000060
+TMR1_Config@ReadWrite_Mode     cstackBANK0  000061
+TMR1_Config@clock_source       cstackBANK0  000064
+TMR1_Config@preescaler         cstackBANK0  000060
 TMR1_StartCount@milliseconds   cstackBANK0  000098
 TMR1_StartCount@temp_time      cstackBANK0  00009A
-TMR3_Config@clock_source       cstackBANK0  000060
+TMR3_Config@ReadWrite_Mode     cstackBANK0  000061
+TMR3_Config@clock_source       cstackBANK0  000064
+TMR3_Config@preescaler         cstackBANK0  000060
 TMR3_StartCount@milliseconds   cstackBANK0  000098
 TMR3_StartCount@temp_time      cstackBANK0  00009A
 _ANSELB                        (abs)        000F5C
@@ -228,15 +235,18 @@ _T3CON                         (abs)        000FB1
 _T3CONbits                     (abs)        000FB1
 _TMR0H                         (abs)        000FD7
 _TMR0L                         (abs)        000FD6
-_TMR0_Config                   text12       001FC2
+_TMR0_Config                   text12       001F66
+_TMR0_PreescalerValue          nvBANK0      00009E
 _TMR0_StartCount               text5        001C42
 _TMR1H                         (abs)        000FCF
 _TMR1L                         (abs)        000FCE
-_TMR1_Config                   text4        001FA2
+_TMR1_Config                   text4        001F32
+_TMR1_PreescalerValue          nvBANK0      00009D
 _TMR1_StartCount               text3        001BA2
 _TMR3H                         (abs)        000FB3
 _TMR3L                         (abs)        000FB2
-_TMR3_Config                   text2        001F82
+_TMR3_Config                   text2        001EFE
+_TMR3_PreescalerValue          nvBANK0      00009C
 _TMR3_StartCount               text1        001B02
 _TRISB                         (abs)        000F93
 __HRAM                         (abs)        000000
@@ -277,6 +287,7 @@ __Hintret                      intret       000000
 __Hintsave_regs                intsave_regs 000000
 __Hirdata                      irdata       000000
 __Hmediumconst                 mediumconst  000000
+__HnvBANK0                     nvBANK0      000000
 __HnvFARRAM                    nvFARRAM     000000
 __Hnvbit                       nvbit        000000
 __Hnvrram                      nvrram       000000
@@ -292,7 +303,7 @@ __Hrparam                      rparam       000000
 __Hsfr                         sfr          000000
 __Hsmallconst                  smallconst   000000
 __Hspace_0                     (abs)        30000E
-__Hspace_1                     (abs)        00009C
+__Hspace_1                     (abs)        00009F
 __Hspace_2                     (abs)        000000
 __Hstack                       stack        000000
 __Hstruct                      struct       000000
@@ -358,6 +369,7 @@ __Lintret                      intret       000000
 __Lintsave_regs                intsave_regs 000000
 __Lirdata                      irdata       000000
 __Lmediumconst                 mediumconst  000000
+__LnvBANK0                     nvBANK0      000000
 __LnvFARRAM                    nvFARRAM     000000
 __Lnvbit                       nvbit        000000
 __Lnvrram                      nvrram       000000
@@ -402,7 +414,7 @@ __Ltext7                       text7        000000
 __Ltext8                       text8        000000
 __Ltext9                       text9        000000
 __S0                           (abs)        30000E
-__S1                           (abs)        00009C
+__S1                           (abs)        00009F
 __S2                           (abs)        000000
 ___ftadd                       text10       0010CA
 ___ftadd@exp1                  cstackBANK0  000088
@@ -417,7 +429,7 @@ ___ftdiv@f1                    cstackBANK0  00006B
 ___ftdiv@f2                    cstackBANK0  00006E
 ___ftdiv@f3                    cstackBANK0  000075
 ___ftdiv@sign                  cstackBANK0  000079
-___ftneg                       text8        001EE0
+___ftneg                       text8        001F9A
 ___ftneg@f1                    cstackBANK0  00007A
 ___ftpack                      text11       00176E
 ___ftpack@arg                  cstackBANK0  000060
@@ -430,64 +442,65 @@ ___fttol@lval                  cstackBANK0  000093
 ___fttol@sign1                 cstackBANK0  000092
 ___inthi_sp                    stack        000000
 ___intlo_sp                    stack        000000
-___lwtoft                      text6        001F10
+___lwtoft                      text6        001FCA
 ___lwtoft@c                    cstackBANK0  000068
 ___param_bank                  (abs)        000000
 ___rparam_used                 (abs)        000001
 ___sp                          stack        000000
 __accesstop                    (abs)        000060
 __activetblptr                 (abs)        000000
-__end_of_TMR0_Config           text12       001FDE
+__end_of_TMR0_Config           text12       001F9A
 __end_of_TMR0_StartCount       text5        001CE2
-__end_of_TMR1_Config           text4        001FC2
+__end_of_TMR1_Config           text4        001F66
 __end_of_TMR1_StartCount       text3        001C42
-__end_of_TMR3_Config           text2        001FA2
+__end_of_TMR3_Config           text2        001F32
 __end_of_TMR3_StartCount       text1        001BA2
 __end_of___ftadd               text10       001332
 __end_of___ftdiv               text9        00162A
-__end_of___ftneg               text8        001F10
+__end_of___ftneg               text8        001FCA
 __end_of___ftpack              text11       00187A
 __end_of___fttol               text7        00176E
-__end_of___lwtoft              text6        001F3A
-__end_of__initialization       cinit        001FDE
+__end_of___lwtoft              text6        001FF4
+__end_of__initialization       cinit        00203C
 __end_of_high_isr              intcode      0010C6
-__end_of_main                  text0        001EE0
+__end_of_main                  text0        001EFE
 __end_ofi2_TMR0_StartCount     text16       001E8C
 __end_ofi2_TMR1_StartCount     text15       001DFE
 __end_ofi2_TMR3_StartCount     text14       001D70
 __end_ofi2___ftadd             text21       0014DE
 __end_ofi2___ftdiv             text20       001A54
-__end_ofi2___ftneg             text19       001F82
+__end_ofi2___ftneg             text19       00203C
 __end_ofi2___ftpack            text22       001B02
 __end_ofi2___fttol             text18       00196E
-__end_ofi2___lwtoft            text17       001F5E
-__initialization               cinit        001FDE
+__end_ofi2___lwtoft            text17       002018
+__initialization               cinit        00203C
 __mediumconst                  mediumconst  000000
-__pcinit                       cinit        001FDE
+__pcinit                       cinit        00203C
 __pcstackBANK0                 cstackBANK0  000060
 __pcstackCOMRAM                cstackCOMRAM 000001
 __pintcode                     intcode      001008
+__pnvBANK0                     nvBANK0      00009C
 __ptext0                       text0        001E8C
 __ptext1                       text1        001B02
 __ptext10                      text10       0010CA
 __ptext11                      text11       00176E
-__ptext12                      text12       001FC2
+__ptext12                      text12       001F66
 __ptext14                      text14       001CE2
 __ptext15                      text15       001D70
 __ptext16                      text16       001DFE
-__ptext17                      text17       001F3A
+__ptext17                      text17       001FF4
 __ptext18                      text18       00187A
-__ptext19                      text19       001F5E
-__ptext2                       text2        001F82
+__ptext19                      text19       002018
+__ptext2                       text2        001EFE
 __ptext20                      text20       00196E
 __ptext21                      text21       001332
 __ptext22                      text22       001A54
 __ptext3                       text3        001BA2
-__ptext4                       text4        001FA2
+__ptext4                       text4        001F32
 __ptext5                       text5        001C42
-__ptext6                       text6        001F10
+__ptext6                       text6        001FCA
 __ptext7                       text7        00162A
-__ptext8                       text8        001EE0
+__ptext8                       text8        001F9A
 __ptext9                       text9        0014DE
 __ramtop                       ramtop       000800
 __size_of_TMR0_Config          (abs)        000000
@@ -517,7 +530,7 @@ __smallconst                   smallconst   000000
 _high_isr                      intcode      001008
 _main                          text0        001E8C
 btemp                          temp         00004B
-end_of_initialization          cinit        001FDE
+end_of_initialization          cinit        00203C
 i2TMR0_StartCount@milliseconds cstackCOMRAM 000039
 i2TMR0_StartCount@temp_time    cstackCOMRAM 00003B
 i2TMR1_StartCount@milliseconds cstackCOMRAM 000039
@@ -540,7 +553,7 @@ i2___ftdiv@f1                  cstackCOMRAM 00000C
 i2___ftdiv@f2                  cstackCOMRAM 00000F
 i2___ftdiv@f3                  cstackCOMRAM 000016
 i2___ftdiv@sign                cstackCOMRAM 00001A
-i2___ftneg                     text19       001F5E
+i2___ftneg                     text19       002018
 i2___ftneg@f1                  cstackCOMRAM 00001B
 i2___ftpack                    text22       001A54
 i2___ftpack@arg                cstackCOMRAM 000001
@@ -551,7 +564,7 @@ i2___fttol@exp1                cstackCOMRAM 000038
 i2___fttol@f1                  cstackCOMRAM 00002A
 i2___fttol@lval                cstackCOMRAM 000034
 i2___fttol@sign1               cstackCOMRAM 000033
-i2___lwtoft                    text17       001F3A
+i2___lwtoft                    text17       001FF4
 i2___lwtoft@c                  cstackCOMRAM 000009
 int$flags                      temp         00004B
 intlevel0                      text         000000
@@ -559,9 +572,9 @@ intlevel1                      text         000000
 intlevel2                      text         000000
 intlevel3                      text         000000
 stackhi                        (abs)        0007FF
-stacklo                        (abs)        00009C
+stacklo                        (abs)        00009F
 start                          init         0010C6
-start_initialization           cinit        001FDE
+start_initialization           cinit        00203C
 
 
 FUNCTION INFORMATION:
@@ -602,7 +615,7 @@ Total ram usage:        0 bytes
 
  *************** function _TMR3_StartCount *****************
  Defined at:
-		line 238 in file "timers.c"
+		line 298 in file "timers.c"
  Parameters:    Size  Location     Type
   milliseconds    2   56[BANK0 ] unsigned short 
  Auto vars:     Size  Location     Type
@@ -636,25 +649,27 @@ Total ram usage:        4 bytes
 
  *************** function _TMR3_Config *****************
  Defined at:
-		line 189 in file "timers.c"
+		line 242 in file "timers.c"
  Parameters:    Size  Location     Type
-  clock_source    1    wreg     unsigned char 
+  clock_source    1    wreg     enum E5919
+  preescaler      1    0[BANK0 ] enum E5913
+  ReadWrite_Mo    1    1[BANK0 ] enum E5924
  Auto vars:     Size  Location     Type
-  clock_source    1    0[BANK0 ] unsigned char 
+  clock_source    1    4[BANK0 ] enum E5919
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, status,2
+		wreg, status,2, status,0
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
-      Params:         0       0       0       0       0       0       0       0       0
+      Params:         0       2       0       0       0       0       0       0       0
       Locals:         0       1       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0
-      Totals:         0       1       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
+      Temps:          0       2       0       0       0       0       0       0       0
+      Totals:         0       5       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    4
  This function calls:
@@ -666,7 +681,7 @@ Total ram usage:        1 bytes
 
  *************** function _TMR1_StartCount *****************
  Defined at:
-		line 167 in file "timers.c"
+		line 203 in file "timers.c"
  Parameters:    Size  Location     Type
   milliseconds    2   56[BANK0 ] unsigned short 
  Auto vars:     Size  Location     Type
@@ -700,25 +715,27 @@ Total ram usage:        4 bytes
 
  *************** function _TMR1_Config *****************
  Defined at:
-		line 118 in file "timers.c"
+		line 149 in file "timers.c"
  Parameters:    Size  Location     Type
-  clock_source    1    wreg     unsigned char 
+  clock_source    1    wreg     enum E5904
+  preescaler      1    0[BANK0 ] enum E5898
+  ReadWrite_Mo    1    1[BANK0 ] enum E5909
  Auto vars:     Size  Location     Type
-  clock_source    1    0[BANK0 ] unsigned char 
+  clock_source    1    4[BANK0 ] enum E5904
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, status,2
+		wreg, status,2, status,0
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
-      Params:         0       0       0       0       0       0       0       0       0
+      Params:         0       2       0       0       0       0       0       0       0
       Locals:         0       1       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0
-      Totals:         0       1       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
+      Temps:          0       2       0       0       0       0       0       0       0
+      Totals:         0       5       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    4
  This function calls:
@@ -730,7 +747,7 @@ Total ram usage:        1 bytes
 
  *************** function _TMR0_StartCount *****************
  Defined at:
-		line 94 in file "timers.c"
+		line 110 in file "timers.c"
  Parameters:    Size  Location     Type
   milliseconds    2   56[BANK0 ] unsigned short 
  Auto vars:     Size  Location     Type
@@ -967,12 +984,13 @@ Total ram usage:        8 bytes
 
  *************** function _TMR0_Config *****************
  Defined at:
-		line 15 in file "timers.c"
+		line 27 in file "timers.c"
  Parameters:    Size  Location     Type
-  clock_source    1    wreg     unsigned char 
+  clock_source    1    wreg     enum E5890
   preescaler      1    0[BANK0 ] enum E5880
+  ReadWrite_Mo    1    1[BANK0 ] enum E5894
  Auto vars:     Size  Location     Type
-  clock_source    1    1[BANK0 ] unsigned char 
+  clock_source    1    4[BANK0 ] enum E5890
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
@@ -982,11 +1000,11 @@ Total ram usage:        8 bytes
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
-      Params:         0       1       0       0       0       0       0       0       0
+      Params:         0       2       0       0       0       0       0       0       0
       Locals:         0       1       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0
-      Totals:         0       2       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
+      Temps:          0       2       0       0       0       0       0       0       0
+      Totals:         0       5       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    4
  This function calls:
@@ -1030,7 +1048,7 @@ Total ram usage:       14 bytes
 
  *************** function i2_TMR3_StartCount *****************
  Defined at:
-		line 238 in file "timers.c"
+		line 298 in file "timers.c"
  Parameters:    Size  Location     Type
   milliseconds    2   56[COMRAM] unsigned short 
  Auto vars:     Size  Location     Type
@@ -1064,7 +1082,7 @@ Total ram usage:        4 bytes
 
  *************** function i2_TMR1_StartCount *****************
  Defined at:
-		line 167 in file "timers.c"
+		line 203 in file "timers.c"
  Parameters:    Size  Location     Type
   milliseconds    2   56[COMRAM] unsigned short 
  Auto vars:     Size  Location     Type
@@ -1098,7 +1116,7 @@ Total ram usage:        4 bytes
 
  *************** function i2_TMR0_StartCount *****************
  Defined at:
-		line 94 in file "timers.c"
+		line 110 in file "timers.c"
  Parameters:    Size  Location     Type
   milliseconds    2   56[COMRAM] unsigned short 
  Auto vars:     Size  Location     Type
@@ -1335,14 +1353,14 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 timers.c
-		_TMR0_Config   		CODE           	1FC2	0000	29
-		_TMR1_Config   		CODE           	1FA2	0000	33
-		_TMR3_Config   		CODE           	1F82	0000	33
+		_TMR0_Config   		CODE           	1F66	0000	53
+		_TMR1_Config   		CODE           	1F32	0000	53
+		_TMR3_Config   		CODE           	1EFE	0000	53
 		_TMR0_StartCount		CODE           	1C42	0000	161
 		_TMR1_StartCount		CODE           	1BA2	0000	161
 		_TMR3_StartCount		CODE           	1B02	0000	161
 
-timers.c estimated size: 578
+timers.c estimated size: 642
 
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftdiv.c
 		___ftdiv       		CODE           	14DE	0000	333
@@ -1360,26 +1378,26 @@ C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftadd.c
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftadd.c estimated size: 617
 
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\lwtoft.c
-		___lwtoft      		CODE           	1F10	0000	43
+		___lwtoft      		CODE           	1FCA	0000	43
 
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\lwtoft.c estimated size: 43
 
 shared
-		i2___ftneg     		CODE           	1F5E	0000	37
+		i2___ftneg     		CODE           	2018	0000	37
 		i2___ftadd     		CODE           	1332	0000	429
 		i2___ftdiv     		CODE           	196E	0000	231
 		i2___fttol     		CODE           	187A	0000	245
-		i2___lwtoft    		CODE           	1F3A	0000	37
+		i2___lwtoft    		CODE           	1FF4	0000	37
 		i2_TMR0_StartCount		CODE           	1DFE	0000	143
 		i2_TMR3_StartCount		CODE           	1CE2	0000	143
 		i2___ftpack    		CODE           	1A54	0000	175
-		__initialization		CODE           	1FDE	0000	1
+		__initialization		CODE           	203C	0000	1
 		i2_TMR1_StartCount		CODE           	1D70	0000	143
 
 shared estimated size: 1584
 
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftneg.c
-		___ftneg       		CODE           	1EE0	0000	49
+		___ftneg       		CODE           	1F9A	0000	49
 
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftneg.c estimated size: 49
 
@@ -1389,8 +1407,8 @@ C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c estimated size: 269
 
 main.c
-		_main          		CODE           	1E8C	0000	85
+		_main          		CODE           	1E8C	0000	115
 		_high_isr      		CODE           	1008	0000	191
 
-main.c estimated size: 276
+main.c estimated size: 306
 

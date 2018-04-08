@@ -26,6 +26,7 @@
 #define TMR0_OVERFLOW_INTERRUPT_EN  (1 << 5)
 #define TMR0_ON                     (T0CON | (1 << 8))
 #define T0CKI_PIN_TRANSITION_EN     (T0CON | (1 << 5))
+#define TMR1_ON                     (1)
 
 /** Check for flags **/
 
@@ -41,23 +42,73 @@
 #define FOSC4             0
 #define T0CKI             1
 
-/** Advanced configurations **/
+/**** Advanced configurations ****/
+/* Timer 0 */
 typedef enum{
-    T0CON_PREESCALER_OF_2,
-    T0CON_PREESCALER_OF_4,
-    T0CON_PREESCALER_OF_8,
-    T0CON_PREESCALER_OF_16,
-    T0CON_PREESCALER_OF_32,
-    T0CON_PREESCALER_OF_64,
-    T0CON_PREESCALER_OF_128,
-    T0CON_PREESCALER_OF_256
-}T0CON_PREESCALER_VALUES_T;
+    TMR0_PREESCALER_OF_2,
+    TMR0_PREESCALER_OF_4,
+    TMR0_PREESCALER_OF_8,
+    TMR0_PREESCALER_OF_16,
+    TMR0_PREESCALER_OF_32,
+    TMR0_PREESCALER_OF_64,
+    TMR0_PREESCALER_OF_128,
+    TMR0_PREESCALER_OF_256
+}TMR0_PREESCALER_VALUES_T;
 
-void TMR0_Config(UInt8_T clock_source, T0CON_PREESCALER_VALUES_T preescaler);
+typedef enum{
+    TMR0_CLOCK_SOURCE_INTERNAL,
+    TMR0_CLOCK_SOURCE_T0CKI_PIN
+}TMR0_CLOCK_SOURCE_VALUES_T;
+
+typedef enum{
+    TMR0_RW_MODE_16BIT,
+    TMR0_RW_MODE_8BIT
+}TMR0_RW_MODE_T;
+
+/* Timer 1 */
+typedef enum{
+    TMR1_PREESCALER_OF_1,
+    TMR1_PREESCALER_OF_2,
+    TMR1_PREESCALER_OF_4,
+    TMR1_PREESCALER_OF_8
+}TMR1_PREESCALER_VALUES_T;
+
+typedef enum{
+    TMR1_CLOCK_SOURCE_FOSC4,
+    TMR1_CLOCK_SOURCE_FOSC,
+    TMR1_CLOCK_SOURCE_PIN_OSC
+}TMR1_CLOCK_SOURCE_VALUES_T;
+
+typedef enum{
+    TMR1_RW_MODE_8BIT,
+    TMR1_RW_MODE_16BIT
+}TMR1_RW_MODE_T;
+
+/* Timer 3 */
+typedef enum{
+    TMR3_PREESCALER_OF_1,
+    TMR3_PREESCALER_OF_2,
+    TMR3_PREESCALER_OF_4,
+    TMR3_PREESCALER_OF_8
+}TMR3_PREESCALER_VALUES_T;
+
+typedef enum{
+    TMR3_CLOCK_SOURCE_FOSC4,
+    TMR3_CLOCK_SOURCE_FOSC,
+    TMR3_CLOCK_SOURCE_PIN_OSC
+}TMR3_CLOCK_SOURCE_VALUES_T;
+
+typedef enum{
+    TMR3_RW_MODE_8BIT,
+    TMR3_RW_MODE_16BIT
+}TMR3_RW_MODE_T;
+
+/** Function prototypes **/
+void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source, TMR0_PREESCALER_VALUES_T preescaler, TMR0_RW_MODE_T ReadWrite_Mode);
 void TMR0_StartCount(UInt16_T milliseconds);
-void TMR1_Config(UInt8_T clock_source);
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source, TMR1_PREESCALER_VALUES_T preescaler, TMR1_RW_MODE_T ReadWrite_Mode);
 void TMR1_StartCount(UInt16_T milliseconds);
-void TMR3_Config(UInt8_T clock_source);
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source, TMR3_PREESCALER_VALUES_T preescaler, TMR3_RW_MODE_T ReadWrite_Mode);
 void TMR3_StartCount(UInt16_T milliseconds);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
