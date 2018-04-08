@@ -9,7 +9,7 @@ TMR0_CLOCK_SOURCE_INTERNAL 0
 TMR0_CLOCK_SOURCE_T0CKI_PIN 1
 ]
 "107
-[e E5894 . `uc
+[e E5898 . `uc
 TMR0_RW_MODE_16BIT 0
 TMR0_RW_MODE_8BIT 1
 ]
@@ -23,37 +23,37 @@ TMR0_PREESCALER_OF_64 5
 TMR0_PREESCALER_OF_128 6
 TMR0_PREESCALER_OF_256 7
 ]
-"161
-[e E5904 . `uc
+"200
+[e E5908 . `uc
 TMR1_CLOCK_SOURCE_FOSC4 0
 TMR1_CLOCK_SOURCE_FOSC 1
 TMR1_CLOCK_SOURCE_PIN_OSC 2
 ]
-"221
-[e E5898 . `uc
+"262
+[e E5902 . `uc
 TMR1_PREESCALER_OF_1 0
 TMR1_PREESCALER_OF_2 1
 TMR1_PREESCALER_OF_4 2
 TMR1_PREESCALER_OF_8 3
 ]
-[e E5909 . `uc
+[e E5913 . `uc
 TMR1_RW_MODE_8BIT 0
 TMR1_RW_MODE_16BIT 1
 ]
-"275
-[e E5919 . `uc
+"371
+[e E5950 . `uc
 TMR3_CLOCK_SOURCE_FOSC4 0
 TMR3_CLOCK_SOURCE_FOSC 1
 TMR3_CLOCK_SOURCE_PIN_OSC 2
 ]
-"337
-[e E5913 . `uc
+"433
+[e E5944 . `uc
 TMR3_PREESCALER_OF_1 0
 TMR3_PREESCALER_OF_2 1
 TMR3_PREESCALER_OF_4 2
 TMR3_PREESCALER_OF_8 3
 ]
-[e E5924 . `uc
+[e E5955 . `uc
 TMR3_RW_MODE_8BIT 0
 TMR3_RW_MODE_16BIT 1
 ]
@@ -63,13 +63,13 @@ TMR0_CLOCK_SOURCE_INTERNAL 0
 TMR0_CLOCK_SOURCE_T0CKI_PIN 1
 ]
 "31
-[e E5904 . `uc
+[e E5908 . `uc
 TMR1_CLOCK_SOURCE_FOSC4 0
 TMR1_CLOCK_SOURCE_FOSC 1
 TMR1_CLOCK_SOURCE_PIN_OSC 2
 ]
 "32
-[e E5919 . `uc
+[e E5950 . `uc
 TMR3_CLOCK_SOURCE_FOSC4 0
 TMR3_CLOCK_SOURCE_FOSC 1
 TMR3_CLOCK_SOURCE_PIN_OSC 2
@@ -105,22 +105,34 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 "25 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\timers.c
 [v _TMR0_Config TMR0_Config `(v  1 e 1 0 ]
 "121
-[v _TMR0_StartCount TMR0_StartCount `(v  1 e 1 0 ]
-"160
+[v _TMR0_Start TMR0_Start `(v  1 e 1 0 ]
+"162
+[v _TMR0_Restart TMR0_Restart `(v  1 e 1 0 ]
+"181
+[v _TMR0_Stop TMR0_Stop `(v  1 e 1 0 ]
+"199
 [v _TMR1_Config TMR1_Config `(v  1 e 1 0 ]
-"235
-[v _TMR1_StartCount TMR1_StartCount `(v  1 e 1 0 ]
-"274
+"276
+[v _TMR1_Start TMR1_Start `(v  1 e 1 0 ]
+"317
+[v _TMR1_Restart TMR1_Restart `(v  1 e 1 0 ]
+"336
+[v _TMR1_Stop TMR1_Stop `(v  1 e 1 0 ]
+"370
 [v _TMR3_Config TMR3_Config `(v  1 e 1 0 ]
-"351
-[v _TMR3_StartCount TMR3_StartCount `(v  1 e 1 0 ]
+"447
+[v _TMR3_Start TMR3_Start `(v  1 e 1 0 ]
+"486
+[v _TMR3_Restart TMR3_Restart `(v  1 e 1 0 ]
+"505
+[v _TMR3_Stop TMR3_Stop `(v  1 e 1 0 ]
 "275 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _ANSELB ANSELB `VEuc  1 e 1 @3932 ]
 "3889
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 "4846
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
-[s S118 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S96 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -130,21 +142,21 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 `uc 1 ACTIE 1 0 :1:7 
 ]
 "6217
-[s S127 . 1 `uc 1 . 1 0 :3:0 
+[s S105 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SSP1IE 1 0 :1:3 
 `uc 1 TX1IE 1 0 :1:4 
 `uc 1 RC1IE 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 STIE 1 0 :1:7 
 ]
-[s S134 . 1 `uc 1 . 1 0 :7:0 
+[s S112 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 PSPIE 1 0 :1:7 
 ]
-[u S137 . 1 `S118 1 . 1 0 `S127 1 . 1 0 `S134 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES137  1 e 1 @3997 ]
+[u S115 . 1 `S96 1 . 1 0 `S105 1 . 1 0 `S112 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES115  1 e 1 @3997 ]
 "6287
 [v _PIR1 PIR1 `VEuc  1 e 1 @3998 ]
-[s S430 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S154 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -154,19 +166,19 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 `uc 1 ACTIF 1 0 :1:7 
 ]
 "6316
-[s S439 . 1 `uc 1 . 1 0 :3:0 
+[s S163 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SSP1IF 1 0 :1:3 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 STIF 1 0 :1:7 
 ]
-[s S446 . 1 `uc 1 . 1 0 :7:0 
+[s S170 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 PSPIF 1 0 :1:7 
 ]
-[u S449 . 1 `S430 1 . 1 0 `S439 1 . 1 0 `S446 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES449  1 e 1 @3998 ]
-[s S237 . 1 `uc 1 CCP2IE 1 0 :1:0 
+[u S173 . 1 `S154 1 . 1 0 `S163 1 . 1 0 `S170 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES173  1 e 1 @3998 ]
+[s S201 . 1 `uc 1 CCP2IE 1 0 :1:0 
 `uc 1 TMR3IE 1 0 :1:1 
 `uc 1 HLVDIE 1 0 :1:2 
 `uc 1 BCLIE 1 0 :1:3 
@@ -176,21 +188,21 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 `uc 1 OSCFIE 1 0 :1:7 
 ]
 "6514
-[s S246 . 1 `uc 1 . 1 0 :2:0 
+[s S210 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIE 1 0 :1:2 
 `uc 1 BCL1IE 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 CM2IE 1 0 :1:5 
 `uc 1 CM1IE 1 0 :1:6 
 ]
-[s S253 . 1 `uc 1 . 1 0 :6:0 
+[s S217 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 CMIE 1 0 :1:6 
 ]
-[u S256 . 1 `S237 1 . 1 0 `S246 1 . 1 0 `S253 1 . 1 0 ]
-[v _PIE2bits PIE2bits `VES256  1 e 1 @4000 ]
+[u S220 . 1 `S201 1 . 1 0 `S210 1 . 1 0 `S217 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES220  1 e 1 @4000 ]
 "6584
 [v _PIR2 PIR2 `VEuc  1 e 1 @4001 ]
-[s S508 . 1 `uc 1 CCP2IF 1 0 :1:0 
+[s S259 . 1 `uc 1 CCP2IF 1 0 :1:0 
 `uc 1 TMR3IF 1 0 :1:1 
 `uc 1 HLVDIF 1 0 :1:2 
 `uc 1 BCLIF 1 0 :1:3 
@@ -200,106 +212,32 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 `uc 1 OSCFIF 1 0 :1:7 
 ]
 "6613
-[s S517 . 1 `uc 1 . 1 0 :2:0 
+[s S268 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIF 1 0 :1:2 
 `uc 1 BCL1IF 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 CM2IF 1 0 :1:5 
 `uc 1 CM1IF 1 0 :1:6 
 ]
-[s S524 . 1 `uc 1 . 1 0 :6:0 
+[s S275 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 CMIF 1 0 :1:6 
 ]
-[u S527 . 1 `S508 1 . 1 0 `S517 1 . 1 0 `S524 1 . 1 0 ]
-[v _PIR2bits PIR2bits `VES527  1 e 1 @4001 ]
+[u S278 . 1 `S259 1 . 1 0 `S268 1 . 1 0 `S275 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES278  1 e 1 @4001 ]
 "7901
 [v _T3CON T3CON `VEuc  1 e 1 @4017 ]
-[s S291 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 NOT_T3SYNC 1 0 :1:2 
-]
-"7940
-[s S294 . 1 `uc 1 TMR3ON 1 0 :1:0 
-`uc 1 RD16 1 0 :1:1 
-`uc 1 nT3SYNC 1 0 :1:2 
-`uc 1 SOSCEN 1 0 :1:3 
-`uc 1 T3CKPS 1 0 :2:4 
-`uc 1 TMR3CS 1 0 :2:6 
-]
-[s S301 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 T3RD16 1 0 :1:1 
-`uc 1 T3SYNC 1 0 :1:2 
-`uc 1 T3SOSCEN 1 0 :1:3 
-`uc 1 T3CKPS0 1 0 :1:4 
-`uc 1 T3CKPS1 1 0 :1:5 
-`uc 1 TMR3CS0 1 0 :1:6 
-`uc 1 TMR3CS1 1 0 :1:7 
-]
-[s S310 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 T3OSCEN 1 0 :1:3 
-]
-[s S313 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 SOSCEN3 1 0 :1:3 
-`uc 1 . 1 0 :3:4 
-`uc 1 RD163 1 0 :1:7 
-]
-[u S318 . 1 `S291 1 . 1 0 `S294 1 . 1 0 `S301 1 . 1 0 `S310 1 . 1 0 `S313 1 . 1 0 ]
-[v _T3CONbits T3CONbits `VES318  1 e 1 @4017 ]
 "8037
 [v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
 "8057
 [v _TMR3H TMR3H `VEuc  1 e 1 @4019 ]
 "11955
 [v _T1CON T1CON `VEuc  1 e 1 @4045 ]
-[s S172 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 NOT_T1SYNC 1 0 :1:2 
-]
-"11994
-[s S175 . 1 `uc 1 TMR1ON 1 0 :1:0 
-`uc 1 RD16 1 0 :1:1 
-`uc 1 nT1SYNC 1 0 :1:2 
-`uc 1 SOSCEN 1 0 :1:3 
-`uc 1 T1CKPS 1 0 :2:4 
-`uc 1 TMR1CS 1 0 :2:6 
-]
-[s S182 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 T1RD16 1 0 :1:1 
-`uc 1 T1SYNC 1 0 :1:2 
-`uc 1 T1SOSCEN 1 0 :1:3 
-`uc 1 T1CKPS0 1 0 :1:4 
-`uc 1 T1CKPS1 1 0 :1:5 
-`uc 1 TMR1CS0 1 0 :1:6 
-`uc 1 TMR1CS1 1 0 :1:7 
-]
-[s S191 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 T1OSCEN 1 0 :1:3 
-]
-[s S194 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 SOSCEN1 1 0 :1:3 
-`uc 1 . 1 0 :3:4 
-`uc 1 RD161 1 0 :1:7 
-]
-[u S199 . 1 `S172 1 . 1 0 `S175 1 . 1 0 `S182 1 . 1 0 `S191 1 . 1 0 `S194 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES199  1 e 1 @4045 ]
 "12091
 [v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
 "12111
 [v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
 "12437
 [v _T0CON T0CON `VEuc  1 e 1 @4053 ]
-[s S88 . 1 `uc 1 T0PS 1 0 :3:0 
-`uc 1 PSA 1 0 :1:3 
-`uc 1 T0SE 1 0 :1:4 
-`uc 1 T0CS 1 0 :1:5 
-`uc 1 T08BIT 1 0 :1:6 
-`uc 1 TMR0ON 1 0 :1:7 
-]
-"12457
-[s S95 . 1 `uc 1 T0PS0 1 0 :1:0 
-`uc 1 T0PS1 1 0 :1:1 
-`uc 1 T0PS2 1 0 :1:2 
-]
-[u S99 . 1 `S88 1 . 1 0 `S95 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES99  1 e 1 @4053 ]
 "12514
 [v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
 "12534
@@ -331,55 +269,81 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 ]
 [u S46 . 1 `S24 1 . 1 0 `S33 1 . 1 0 `S42 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES46  1 e 1 @4082 ]
+"5 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\timers.c
+[v _TMR0_TimerValue TMR0_TimerValue `us  1 s 2 TMR0_TimerValue ]
+"6
+[v _TMR1_TimerValue TMR1_TimerValue `us  1 s 2 TMR1_TimerValue ]
+"7
+[v _TMR3_TimerValue TMR3_TimerValue `us  1 s 2 TMR3_TimerValue ]
 "21 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"61
+"58
 } 0
-"351 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\timers.c
-[v _TMR3_StartCount TMR3_StartCount `(v  1 e 1 0 ]
+"447 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\timers.c
+[v _TMR3_Start TMR3_Start `(v  1 e 1 0 ]
 {
-"352
-[v TMR3_StartCount@temp_time temp_time `us  1 a 2 58 ]
-"351
-[v TMR3_StartCount@milliseconds milliseconds `us  1 p 2 56 ]
-"371
+"448
+[v TMR3_Start@temp_time temp_time `us  1 a 2 58 ]
+"447
+[v TMR3_Start@milliseconds milliseconds `us  1 p 2 56 ]
+"472
 } 0
-"274
+"486
+[v _TMR3_Restart TMR3_Restart `(v  1 e 1 0 ]
+{
+"492
+} 0
+"505
+[v _TMR3_Stop TMR3_Stop `(v  1 e 1 0 ]
+{
+"509
+} 0
+"370
 [v _TMR3_Config TMR3_Config `(v  1 e 1 0 ]
 {
-[v TMR3_Config@clock_source clock_source `E5919  1 a 1 wreg ]
-[v TMR3_Config@clock_source clock_source `E5919  1 a 1 wreg ]
-"303
-[v TMR3_Config@clock_source clock_source `E5919  1 a 1 0 ]
-"338
+[v TMR3_Config@clock_source clock_source `E5950  1 a 1 wreg ]
+[v TMR3_Config@clock_source clock_source `E5950  1 a 1 wreg ]
+"399
+[v TMR3_Config@clock_source clock_source `E5950  1 a 1 0 ]
+"434
 } 0
-"235
-[v _TMR1_StartCount TMR1_StartCount `(v  1 e 1 0 ]
+"276
+[v _TMR1_Start TMR1_Start `(v  1 e 1 0 ]
 {
-"237
-[v TMR1_StartCount@temp_time temp_time `us  1 a 2 58 ]
-"235
-[v TMR1_StartCount@milliseconds milliseconds `us  1 p 2 56 ]
-"258
+"278
+[v TMR1_Start@temp_time temp_time `us  1 a 2 58 ]
+"276
+[v TMR1_Start@milliseconds milliseconds `us  1 p 2 56 ]
+"303
 } 0
-"160
+"317
+[v _TMR1_Restart TMR1_Restart `(v  1 e 1 0 ]
+{
+"323
+} 0
+"336
+[v _TMR1_Stop TMR1_Stop `(v  1 e 1 0 ]
+{
+"340
+} 0
+"199
 [v _TMR1_Config TMR1_Config `(v  1 e 1 0 ]
 {
-[v TMR1_Config@clock_source clock_source `E5904  1 a 1 wreg ]
-[v TMR1_Config@clock_source clock_source `E5904  1 a 1 wreg ]
-"189
-[v TMR1_Config@clock_source clock_source `E5904  1 a 1 0 ]
-"222
+[v TMR1_Config@clock_source clock_source `E5908  1 a 1 wreg ]
+[v TMR1_Config@clock_source clock_source `E5908  1 a 1 wreg ]
+"228
+[v TMR1_Config@clock_source clock_source `E5908  1 a 1 0 ]
+"263
 } 0
 "121
-[v _TMR0_StartCount TMR0_StartCount `(v  1 e 1 0 ]
+[v _TMR0_Start TMR0_Start `(v  1 e 1 0 ]
 {
 "123
-[v TMR0_StartCount@temp_time temp_time `us  1 a 2 58 ]
+[v TMR0_Start@temp_time temp_time `us  1 a 2 58 ]
 "121
-[v TMR0_StartCount@milliseconds milliseconds `us  1 p 2 56 ]
-"144
+[v TMR0_Start@milliseconds milliseconds `us  1 p 2 56 ]
+"148
 } 0
 "28 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
@@ -439,7 +403,17 @@ TMR3_CLOCK_SOURCE_PIN_OSC 2
 [v ___ftpack@sign sign `uc  1 p 1 4 ]
 "86
 } 0
-"25 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\timers.c
+"162 C:\Users\usuario\Documents\GitHub\PIC18\C programming\TIMERS.X\timers.c
+[v _TMR0_Restart TMR0_Restart `(v  1 e 1 0 ]
+{
+"168
+} 0
+"181
+[v _TMR0_Stop TMR0_Stop `(v  1 e 1 0 ]
+{
+"185
+} 0
+"25
 [v _TMR0_Config TMR0_Config `(v  1 e 1 0 ]
 {
 [v TMR0_Config@clock_source clock_source `E5890  1 a 1 wreg ]

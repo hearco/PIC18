@@ -31,31 +31,28 @@ void main(void) {
     TMR1_Config(TMR1_CLOCK_SOURCE_FOSC4);
     TMR3_Config(TMR3_CLOCK_SOURCE_FOSC4);
     
-    TMR0_StartCount(300);
-    TMR1_StartCount(25);
-    TMR3_StartCount(100);
+    TMR0_Start(300);
+    TMR1_Start(25);
+    TMR3_Start(100);
     
     while(1)
     { 
         if (TMR1_OVERFLOW)
         {
-            RESET_TMR1;
             LATB ^= 1;
-            TMR1_StartCount(25);
+            TMR1_Restart();
         }
 
         if (TMR3_OVERFLOW)
         {
-            RESET_TMR3;
             LATB ^= (1 << 1);
-            TMR3_StartCount(100);
+            TMR3_Restart();
         }
 
         if (TMR0_OVERFLOW)
         {
-            RESET_TMR0;
             LATB ^= (1 << 2);
-            TMR0_StartCount(300);
+            TMR0_Restart();
         }
     }
 }

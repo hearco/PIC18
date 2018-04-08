@@ -7081,7 +7081,7 @@ typedef signed short int SInt16_T;
 typedef signed long int SInt32_T;
 typedef signed long long int SInt64_T;
 
-# 54 "timers.h"
+# 50 "timers.h"
 typedef enum{
 TMR0_PREESCALER_OF_2,
 TMR0_PREESCALER_OF_4,
@@ -7097,6 +7097,11 @@ typedef enum{
 TMR0_CLOCK_SOURCE_INTERNAL,
 TMR0_CLOCK_SOURCE_T0CKI_PIN
 }TMR0_CLOCK_SOURCE_VALUES_T;
+
+typedef enum{
+TMR0_INC_TOCKI_ON_RISING,
+TMR0_INC_TOCKI_ON_FALLING
+}TMR0_INC_ON_TOCKI_MODE_T;
 
 typedef enum{
 TMR0_RW_MODE_16BIT,
@@ -7124,6 +7129,37 @@ TMR1_RW_MODE_16BIT
 
 
 typedef enum{
+TMR2_PREESCALER_OF_1,
+TMR2_PREESCALER_OF_4,
+TMR2_PREESCALER_OF_16
+}TMR2_PREESCALER_VALUES_T;
+
+typedef enum{
+TMR2_POSTSCALER_OF_1,
+TMR2_POSTSCALER_OF_2,
+TMR2_POSTSCALER_OF_3,
+TMR2_POSTSCALER_OF_4,
+TMR2_POSTSCALER_OF_5,
+TMR2_POSTSCALER_OF_6,
+TMR2_POSTSCALER_OF_7,
+TMR2_POSTSCALER_OF_8,
+TMR2_POSTSCALER_OF_9,
+TMR2_POSTSCALER_OF_10,
+TMR2_POSTSCALER_OF_11,
+TMR2_POSTSCALER_OF_12,
+TMR2_POSTSCALER_OF_13,
+TMR2_POSTSCALER_OF_14,
+TMR2_POSTSCALER_OF_15,
+TMR2_POSTSCALER_OF_16
+}TMR2_POSTSCALER_VALUES_T;
+
+typedef enum{
+TMR2_FREQ_SPEED_LOW,
+TMR2_FREQ_SPEED_HIGH
+}TMR2_FREQ_SPEED_MODE_T;
+
+
+typedef enum{
 TMR3_PREESCALER_OF_1,
 TMR3_PREESCALER_OF_2,
 TMR3_PREESCALER_OF_4,
@@ -7143,13 +7179,27 @@ TMR3_RW_MODE_16BIT
 
 
 void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
-void TMR0_StartCount(UInt16_T milliseconds);
-void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
-void TMR1_StartCount(UInt16_T milliseconds);
-void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
-void TMR3_StartCount(UInt16_T milliseconds);
+void TMR0_Start(UInt16_T milliseconds);
+void TMR0_Restart(void);
+void TMR0_Stop(void);
 
-# 25 "timers.c"
+void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
+void TMR1_Start(UInt16_T milliseconds);
+void TMR1_Restart(void);
+void TMR1_Stop(void);
+
+# 161
+void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
+void TMR3_Start(UInt16_T milliseconds);
+void TMR3_Restart(void);
+void TMR3_Stop(void);
+
+# 5 "timers.c"
+static UInt16_T TMR0_TimerValue;
+static UInt16_T TMR1_TimerValue;
+static UInt16_T TMR3_TimerValue;
+
+# 25
 void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source)
 {
 
@@ -7161,86 +7211,147 @@ T0CON = (TMR0_RW_MODE_16BIT << 6) | (clock_source << 5) | TMR0_PREESCALER_OF_256
 }
 
 # 121
-void TMR0_StartCount(UInt16_T milliseconds)
+void TMR0_Start(UInt16_T milliseconds)
 {
 UInt16_T temp_time;
 
 if (milliseconds > 4193)
 {
+TMR0_TimerValue = 0;
 TMR0H = 0;
 TMR0L = 0;
 }
 else
 {
 
-# 138
+# 139
 temp_time = (UInt16_T)(65536 - (milliseconds / 0.064));
+
+TMR0_TimerValue = temp_time;
+
 TMR0H = (UInt8_T)(temp_time / 256);
 TMR0L = (UInt8_T)temp_time;
 }
 
-T0CONbits.TMR0ON = 1;
+T0CON |= (1 << 7);
 }
 
-# 160
+# 162
+void TMR0_Restart(void)
+{
+TMR0_Stop();
+TMR0H = (UInt8_T)(TMR0_TimerValue >> 8);
+TMR0L = (UInt8_T)(TMR0_TimerValue);
+T0CON |= (1 << 7);
+}
+
+# 181
+void TMR0_Stop(void)
+{
+INTCONbits.TMR0IF = 0;
+T0CON &= (~(1 << 7));
+}
+
+# 199
 void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source)
 {
 
-# 189
+# 228
 PIE1bits.TMR1IE = 0;
 
-# 221
+# 262
 T1CON = (clock_source << 6) | (TMR1_PREESCALER_OF_8 << 4) | (TMR1_RW_MODE_16BIT << 1);
 }
 
-# 235
-void TMR1_StartCount(UInt16_T milliseconds)
+# 276
+void TMR1_Start(UInt16_T milliseconds)
 {
 UInt16_T temp_time;
 
 if (milliseconds > 131)
 {
+TMR1_TimerValue = 0;
 TMR1H = 0;
 TMR1L = 0;
 }
 else
 {
 
-# 252
+# 294
 temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
+
+TMR1_TimerValue = temp_time;
+
 TMR1H = (UInt8_T)(temp_time / 256);
 TMR1L = (UInt8_T)temp_time;
 }
 
-T1CONbits.TMR1ON = 1;
+T1CON |= (1);
 }
 
-# 274
+# 317
+void TMR1_Restart(void)
+{
+TMR1_Stop();
+TMR1H = (UInt8_T)(TMR1_TimerValue >> 8);
+TMR1L = (UInt8_T)(TMR1_TimerValue);
+T1CON |= (1);
+}
+
+# 336
+void TMR1_Stop(void)
+{
+PIR1bits.TMR1IF = 0;
+T1CON &= (~ (1));
+}
+
+# 370
 void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source)
 {
 
-# 303
+# 399
 PIE2bits.TMR3IE = 0;
 
-# 337
+# 433
 T3CON = (clock_source << 6) | (TMR3_PREESCALER_OF_8 << 4) | (TMR3_RW_MODE_16BIT << 1);
 }
 
-# 351
-void TMR3_StartCount(UInt16_T milliseconds){
+# 447
+void TMR3_Start(UInt16_T milliseconds){
 UInt16_T temp_time;
 
 if (milliseconds > 131){
+
+TMR3_TimerValue = 0;
 TMR3H = 0;
 TMR3L = 0;
 }
 else{
 
-# 365
+# 463
 temp_time = (UInt16_T)(65536 - (milliseconds / 0.002));
+
+TMR3_TimerValue = temp_time;
+
 TMR3H = (UInt8_T)(temp_time / 256);
 TMR3L = (UInt8_T)temp_time;
 }
 
-T3CONbits.TMR3ON = 1;
+T3CON |= (1);
+}
+
+# 486
+void TMR3_Restart(void)
+{
+TMR3_Stop();
+TMR3H = (UInt8_T)(TMR3_TimerValue >> 8);
+TMR3L = (UInt8_T)(TMR3_TimerValue);
+T3CON |= (1);
+}
+
+# 505
+void TMR3_Stop(void)
+{
+PIR2bits.TMR3IF = 0;
+T3CON &= (~ (1));
 }

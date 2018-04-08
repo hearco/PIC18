@@ -9,123 +9,36 @@ Version 3.2 HI-TECH Software Intermediate Code
 "30 main.c
 [c E5890 0 1 .. ]
 [n E5890 . TMR0_CLOCK_SOURCE_INTERNAL TMR0_CLOCK_SOURCE_T0CKI_PIN  ]
-"114 timers.h
+"146 timers.h
 [v _TMR0_Config `(v ~T0 @X0 0 ef1`E5890 ]
 "31 main.c
-[c E5904 0 1 2 .. ]
-[n E5904 . TMR1_CLOCK_SOURCE_FOSC4 TMR1_CLOCK_SOURCE_FOSC TMR1_CLOCK_SOURCE_PIN_OSC  ]
-"116 timers.h
-[v _TMR1_Config `(v ~T0 @X0 0 ef1`E5904 ]
+[c E5908 0 1 2 .. ]
+[n E5908 . TMR1_CLOCK_SOURCE_FOSC4 TMR1_CLOCK_SOURCE_FOSC TMR1_CLOCK_SOURCE_PIN_OSC  ]
+"151 timers.h
+[v _TMR1_Config `(v ~T0 @X0 0 ef1`E5908 ]
 "32 main.c
-[c E5919 0 1 2 .. ]
-[n E5919 . TMR3_CLOCK_SOURCE_FOSC4 TMR3_CLOCK_SOURCE_FOSC TMR3_CLOCK_SOURCE_PIN_OSC  ]
-"118 timers.h
-[v _TMR3_Config `(v ~T0 @X0 0 ef1`E5919 ]
-"115
-[v _TMR0_StartCount `(v ~T0 @X0 0 ef1`us ]
-"117
-[v _TMR1_StartCount `(v ~T0 @X0 0 ef1`us ]
-"119
-[v _TMR3_StartCount `(v ~T0 @X0 0 ef1`us ]
+[c E5950 0 1 2 .. ]
+[n E5950 . TMR3_CLOCK_SOURCE_FOSC4 TMR3_CLOCK_SOURCE_FOSC TMR3_CLOCK_SOURCE_PIN_OSC  ]
+"161 timers.h
+[v _TMR3_Config `(v ~T0 @X0 0 ef1`E5950 ]
+"147
+[v _TMR0_Start `(v ~T0 @X0 0 ef1`us ]
+"152
+[v _TMR1_Start `(v ~T0 @X0 0 ef1`us ]
+"162
+[v _TMR3_Start `(v ~T0 @X0 0 ef1`us ]
 "6287 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _PIR1 `Vuc ~T0 @X0 0 e@3998 ]
-"6293
-[s S250 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S250 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ACTIF ]
-"6303
-[s S251 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S251 . . SSP1IF TX1IF RC1IF . STIF ]
-"6311
-[s S252 :7 `uc 1 :1 `uc 1 ]
-[n S252 . . PSPIF ]
-"6292
-[u S249 `S250 1 `S251 1 `S252 1 ]
-[n S249 . . . . ]
-"6316
-[v _PIR1bits `VS249 ~T0 @X0 0 e@3998 ]
-"11961
-[s S526 :2 `uc 1 :1 `uc 1 ]
-[n S526 . . NOT_T1SYNC ]
-"11965
-[s S527 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :2 `uc 1 ]
-[n S527 . TMR1ON RD16 nT1SYNC SOSCEN T1CKPS TMR1CS ]
-"11973
-[s S528 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S528 . . T1RD16 T1SYNC T1SOSCEN T1CKPS0 T1CKPS1 TMR1CS0 TMR1CS1 ]
-"11983
-[s S529 :3 `uc 1 :1 `uc 1 ]
-[n S529 . . T1OSCEN ]
-"11987
-[s S530 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S530 . . SOSCEN1 . RD161 ]
-"11960
-[u S525 `S526 1 `S527 1 `S528 1 `S529 1 `S530 1 ]
-[n S525 . . . . . . ]
-"11994
-[v _T1CONbits `VS525 ~T0 @X0 0 e@4045 ]
-"6584
+"153 timers.h
+[v _TMR1_Restart `(v ~T0 @X0 0 ef ]
+"6584 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _PIR2 `Vuc ~T0 @X0 0 e@4001 ]
-"6590
-[s S262 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S262 . CCP2IF TMR3IF HLVDIF BCLIF EEIF C2IF C1IF OSCFIF ]
-"6600
-[s S263 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S263 . . LVDIF BCL1IF . CM2IF CM1IF ]
-"6608
-[s S264 :6 `uc 1 :1 `uc 1 ]
-[n S264 . . CMIF ]
-"6589
-[u S261 `S262 1 `S263 1 `S264 1 ]
-[n S261 . . . . ]
-"6613
-[v _PIR2bits `VS261 ~T0 @X0 0 e@4001 ]
-"7907
-[s S339 :2 `uc 1 :1 `uc 1 ]
-[n S339 . . NOT_T3SYNC ]
-"7911
-[s S340 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :2 `uc 1 ]
-[n S340 . TMR3ON RD16 nT3SYNC SOSCEN T3CKPS TMR3CS ]
-"7919
-[s S341 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S341 . . T3RD16 T3SYNC T3SOSCEN T3CKPS0 T3CKPS1 TMR3CS0 TMR3CS1 ]
-"7929
-[s S342 :3 `uc 1 :1 `uc 1 ]
-[n S342 . . T3OSCEN ]
-"7933
-[s S343 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S343 . . SOSCEN3 . RD163 ]
-"7906
-[u S338 `S339 1 `S340 1 `S341 1 `S342 1 `S343 1 ]
-[n S338 . . . . . . ]
-"7940
-[v _T3CONbits `VS338 ~T0 @X0 0 e@4017 ]
-"13223
+"163 timers.h
+[v _TMR3_Restart `(v ~T0 @X0 0 ef ]
+"13223 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f45k50.h
 [v _INTCON `Vuc ~T0 @X0 0 e@4082 ]
-"13229
-[s S607 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S607 . IOCIF INT0IF TMR0IF IOCIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"13239
-[s S608 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S608 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"13249
-[s S609 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S609 . . GIEL GIEH ]
-"13228
-[u S606 `S607 1 `S608 1 `S609 1 ]
-[n S606 . . . . ]
-"13255
-[v _INTCONbits `VS606 ~T0 @X0 0 e@4082 ]
-"12443
-[s S552 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S552 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"12451
-[s S553 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S553 . T0PS0 T0PS1 T0PS2 ]
-"12442
-[u S551 `S552 1 `S553 1 ]
-[n S551 . . . ]
-"12457
-[v _T0CONbits `VS551 ~T0 @X0 0 e@4053 ]
+"148 timers.h
+[v _TMR0_Restart `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5467,60 +5380,97 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dataTypes.h: 20: typedef signed short int SInt16_T;
 [; ;dataTypes.h: 21: typedef signed long int SInt32_T;
 [; ;dataTypes.h: 22: typedef signed long long int SInt64_T;
-[; ;timers.h: 54: typedef enum{
-[; ;timers.h: 55: TMR0_PREESCALER_OF_2,
-[; ;timers.h: 56: TMR0_PREESCALER_OF_4,
-[; ;timers.h: 57: TMR0_PREESCALER_OF_8,
-[; ;timers.h: 58: TMR0_PREESCALER_OF_16,
-[; ;timers.h: 59: TMR0_PREESCALER_OF_32,
-[; ;timers.h: 60: TMR0_PREESCALER_OF_64,
-[; ;timers.h: 61: TMR0_PREESCALER_OF_128,
-[; ;timers.h: 62: TMR0_PREESCALER_OF_256
-[; ;timers.h: 63: }TMR0_PREESCALER_VALUES_T;
-[; ;timers.h: 65: typedef enum{
-[; ;timers.h: 66: TMR0_CLOCK_SOURCE_INTERNAL,
-[; ;timers.h: 67: TMR0_CLOCK_SOURCE_T0CKI_PIN
-[; ;timers.h: 68: }TMR0_CLOCK_SOURCE_VALUES_T;
-[; ;timers.h: 70: typedef enum{
-[; ;timers.h: 71: TMR0_RW_MODE_16BIT,
-[; ;timers.h: 72: TMR0_RW_MODE_8BIT
-[; ;timers.h: 73: }TMR0_RW_MODE_T;
-[; ;timers.h: 76: typedef enum{
-[; ;timers.h: 77: TMR1_PREESCALER_OF_1,
-[; ;timers.h: 78: TMR1_PREESCALER_OF_2,
-[; ;timers.h: 79: TMR1_PREESCALER_OF_4,
-[; ;timers.h: 80: TMR1_PREESCALER_OF_8
-[; ;timers.h: 81: }TMR1_PREESCALER_VALUES_T;
-[; ;timers.h: 83: typedef enum{
-[; ;timers.h: 84: TMR1_CLOCK_SOURCE_FOSC4,
-[; ;timers.h: 85: TMR1_CLOCK_SOURCE_FOSC,
-[; ;timers.h: 86: TMR1_CLOCK_SOURCE_PIN_OSC
-[; ;timers.h: 87: }TMR1_CLOCK_SOURCE_VALUES_T;
-[; ;timers.h: 89: typedef enum{
-[; ;timers.h: 90: TMR1_RW_MODE_8BIT,
-[; ;timers.h: 91: TMR1_RW_MODE_16BIT
-[; ;timers.h: 92: }TMR1_RW_MODE_T;
-[; ;timers.h: 95: typedef enum{
-[; ;timers.h: 96: TMR3_PREESCALER_OF_1,
-[; ;timers.h: 97: TMR3_PREESCALER_OF_2,
-[; ;timers.h: 98: TMR3_PREESCALER_OF_4,
-[; ;timers.h: 99: TMR3_PREESCALER_OF_8
-[; ;timers.h: 100: }TMR3_PREESCALER_VALUES_T;
+[; ;timers.h: 50: typedef enum{
+[; ;timers.h: 51: TMR0_PREESCALER_OF_2,
+[; ;timers.h: 52: TMR0_PREESCALER_OF_4,
+[; ;timers.h: 53: TMR0_PREESCALER_OF_8,
+[; ;timers.h: 54: TMR0_PREESCALER_OF_16,
+[; ;timers.h: 55: TMR0_PREESCALER_OF_32,
+[; ;timers.h: 56: TMR0_PREESCALER_OF_64,
+[; ;timers.h: 57: TMR0_PREESCALER_OF_128,
+[; ;timers.h: 58: TMR0_PREESCALER_OF_256
+[; ;timers.h: 59: }TMR0_PREESCALER_VALUES_T;
+[; ;timers.h: 61: typedef enum{
+[; ;timers.h: 62: TMR0_CLOCK_SOURCE_INTERNAL,
+[; ;timers.h: 63: TMR0_CLOCK_SOURCE_T0CKI_PIN
+[; ;timers.h: 64: }TMR0_CLOCK_SOURCE_VALUES_T;
+[; ;timers.h: 66: typedef enum{
+[; ;timers.h: 67: TMR0_INC_TOCKI_ON_RISING,
+[; ;timers.h: 68: TMR0_INC_TOCKI_ON_FALLING
+[; ;timers.h: 69: }TMR0_INC_ON_TOCKI_MODE_T;
+[; ;timers.h: 71: typedef enum{
+[; ;timers.h: 72: TMR0_RW_MODE_16BIT,
+[; ;timers.h: 73: TMR0_RW_MODE_8BIT
+[; ;timers.h: 74: }TMR0_RW_MODE_T;
+[; ;timers.h: 77: typedef enum{
+[; ;timers.h: 78: TMR1_PREESCALER_OF_1,
+[; ;timers.h: 79: TMR1_PREESCALER_OF_2,
+[; ;timers.h: 80: TMR1_PREESCALER_OF_4,
+[; ;timers.h: 81: TMR1_PREESCALER_OF_8
+[; ;timers.h: 82: }TMR1_PREESCALER_VALUES_T;
+[; ;timers.h: 84: typedef enum{
+[; ;timers.h: 85: TMR1_CLOCK_SOURCE_FOSC4,
+[; ;timers.h: 86: TMR1_CLOCK_SOURCE_FOSC,
+[; ;timers.h: 87: TMR1_CLOCK_SOURCE_PIN_OSC
+[; ;timers.h: 88: }TMR1_CLOCK_SOURCE_VALUES_T;
+[; ;timers.h: 90: typedef enum{
+[; ;timers.h: 91: TMR1_RW_MODE_8BIT,
+[; ;timers.h: 92: TMR1_RW_MODE_16BIT
+[; ;timers.h: 93: }TMR1_RW_MODE_T;
+[; ;timers.h: 96: typedef enum{
+[; ;timers.h: 97: TMR2_PREESCALER_OF_1,
+[; ;timers.h: 98: TMR2_PREESCALER_OF_4,
+[; ;timers.h: 99: TMR2_PREESCALER_OF_16
+[; ;timers.h: 100: }TMR2_PREESCALER_VALUES_T;
 [; ;timers.h: 102: typedef enum{
-[; ;timers.h: 103: TMR3_CLOCK_SOURCE_FOSC4,
-[; ;timers.h: 104: TMR3_CLOCK_SOURCE_FOSC,
-[; ;timers.h: 105: TMR3_CLOCK_SOURCE_PIN_OSC
-[; ;timers.h: 106: }TMR3_CLOCK_SOURCE_VALUES_T;
-[; ;timers.h: 108: typedef enum{
-[; ;timers.h: 109: TMR3_RW_MODE_8BIT,
-[; ;timers.h: 110: TMR3_RW_MODE_16BIT
-[; ;timers.h: 111: }TMR3_RW_MODE_T;
-[; ;timers.h: 114: void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
-[; ;timers.h: 115: void TMR0_StartCount(UInt16_T milliseconds);
-[; ;timers.h: 116: void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
-[; ;timers.h: 117: void TMR1_StartCount(UInt16_T milliseconds);
-[; ;timers.h: 118: void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
-[; ;timers.h: 119: void TMR3_StartCount(UInt16_T milliseconds);
+[; ;timers.h: 103: TMR2_POSTSCALER_OF_1,
+[; ;timers.h: 104: TMR2_POSTSCALER_OF_2,
+[; ;timers.h: 105: TMR2_POSTSCALER_OF_3,
+[; ;timers.h: 106: TMR2_POSTSCALER_OF_4,
+[; ;timers.h: 107: TMR2_POSTSCALER_OF_5,
+[; ;timers.h: 108: TMR2_POSTSCALER_OF_6,
+[; ;timers.h: 109: TMR2_POSTSCALER_OF_7,
+[; ;timers.h: 110: TMR2_POSTSCALER_OF_8,
+[; ;timers.h: 111: TMR2_POSTSCALER_OF_9,
+[; ;timers.h: 112: TMR2_POSTSCALER_OF_10,
+[; ;timers.h: 113: TMR2_POSTSCALER_OF_11,
+[; ;timers.h: 114: TMR2_POSTSCALER_OF_12,
+[; ;timers.h: 115: TMR2_POSTSCALER_OF_13,
+[; ;timers.h: 116: TMR2_POSTSCALER_OF_14,
+[; ;timers.h: 117: TMR2_POSTSCALER_OF_15,
+[; ;timers.h: 118: TMR2_POSTSCALER_OF_16
+[; ;timers.h: 119: }TMR2_POSTSCALER_VALUES_T;
+[; ;timers.h: 121: typedef enum{
+[; ;timers.h: 122: TMR2_FREQ_SPEED_LOW,
+[; ;timers.h: 123: TMR2_FREQ_SPEED_HIGH
+[; ;timers.h: 124: }TMR2_FREQ_SPEED_MODE_T;
+[; ;timers.h: 127: typedef enum{
+[; ;timers.h: 128: TMR3_PREESCALER_OF_1,
+[; ;timers.h: 129: TMR3_PREESCALER_OF_2,
+[; ;timers.h: 130: TMR3_PREESCALER_OF_4,
+[; ;timers.h: 131: TMR3_PREESCALER_OF_8
+[; ;timers.h: 132: }TMR3_PREESCALER_VALUES_T;
+[; ;timers.h: 134: typedef enum{
+[; ;timers.h: 135: TMR3_CLOCK_SOURCE_FOSC4,
+[; ;timers.h: 136: TMR3_CLOCK_SOURCE_FOSC,
+[; ;timers.h: 137: TMR3_CLOCK_SOURCE_PIN_OSC
+[; ;timers.h: 138: }TMR3_CLOCK_SOURCE_VALUES_T;
+[; ;timers.h: 140: typedef enum{
+[; ;timers.h: 141: TMR3_RW_MODE_8BIT,
+[; ;timers.h: 142: TMR3_RW_MODE_16BIT
+[; ;timers.h: 143: }TMR3_RW_MODE_T;
+[; ;timers.h: 146: void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
+[; ;timers.h: 147: void TMR0_Start(UInt16_T milliseconds);
+[; ;timers.h: 148: void TMR0_Restart(void);
+[; ;timers.h: 149: void TMR0_Stop(void);
+[; ;timers.h: 151: void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source);
+[; ;timers.h: 152: void TMR1_Start(UInt16_T milliseconds);
+[; ;timers.h: 153: void TMR1_Restart(void);
+[; ;timers.h: 154: void TMR1_Stop(void);
+[; ;timers.h: 161: void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source);
+[; ;timers.h: 162: void TMR3_Start(UInt16_T milliseconds);
+[; ;timers.h: 163: void TMR3_Restart(void);
+[; ;timers.h: 164: void TMR3_Stop(void);
 [v $root$_main `(v ~T0 @X0 0 e ]
 "21 main.c
 [v _main `(v ~T0 @X0 1 ef ]
@@ -5536,19 +5486,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _TMR0_Config (1 . `E5890 0 ]
 [; ;main.c: 31: TMR1_Config(TMR1_CLOCK_SOURCE_FOSC4);
 "31
-[e ( _TMR1_Config (1 . `E5904 0 ]
+[e ( _TMR1_Config (1 . `E5908 0 ]
 [; ;main.c: 32: TMR3_Config(TMR3_CLOCK_SOURCE_FOSC4);
 "32
-[e ( _TMR3_Config (1 . `E5919 0 ]
-[; ;main.c: 34: TMR0_StartCount(300);
+[e ( _TMR3_Config (1 . `E5950 0 ]
+[; ;main.c: 34: TMR0_Start(300);
 "34
-[e ( _TMR0_StartCount (1 -> -> 300 `i `us ]
-[; ;main.c: 35: TMR1_StartCount(25);
+[e ( _TMR0_Start (1 -> -> 300 `i `us ]
+[; ;main.c: 35: TMR1_Start(25);
 "35
-[e ( _TMR1_StartCount (1 -> -> 25 `i `us ]
-[; ;main.c: 36: TMR3_StartCount(100);
+[e ( _TMR1_Start (1 -> -> 25 `i `us ]
+[; ;main.c: 36: TMR3_Start(100);
 "36
-[e ( _TMR3_StartCount (1 -> -> 100 `i `us ]
+[e ( _TMR3_Start (1 -> -> 100 `i `us ]
 [; ;main.c: 38: while(1)
 "38
 [e :U 634 ]
@@ -5561,65 +5511,56 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 41: {
 "41
 {
-[; ;main.c: 42: (PIR1bits.TMR1IF = T1CONbits.TMR1ON = 0);
+[; ;main.c: 42: LATB ^= 1;
 "42
-[e = . . _PIR1bits 0 0 = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 43: LATB ^= 1;
-"43
 [e =^ _LATB -> -> 1 `i `uc ]
-[; ;main.c: 44: TMR1_StartCount(25);
+[; ;main.c: 43: TMR1_Restart();
+"43
+[e ( _TMR1_Restart ..  ]
 "44
-[e ( _TMR1_StartCount (1 -> -> 25 `i `us ]
-"45
 }
 [e :U 636 ]
-[; ;main.c: 45: }
-[; ;main.c: 47: if ((PIR2 & (1 << 1)))
-"47
+[; ;main.c: 44: }
+[; ;main.c: 46: if ((PIR2 & (1 << 1)))
+"46
 [e $ ! != & -> _PIR2 `i << -> 1 `i -> 1 `i -> 0 `i 637  ]
-[; ;main.c: 48: {
-"48
+[; ;main.c: 47: {
+"47
 {
-[; ;main.c: 49: (PIR2bits.TMR3IF = T3CONbits.TMR3ON = 0);
-"49
-[e = . . _PIR2bits 0 1 = . . _T3CONbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 50: LATB ^= (1 << 1);
-"50
+[; ;main.c: 48: LATB ^= (1 << 1);
+"48
 [e =^ _LATB -> << -> 1 `i -> 1 `i `uc ]
-[; ;main.c: 51: TMR3_StartCount(100);
-"51
-[e ( _TMR3_StartCount (1 -> -> 100 `i `us ]
-"52
+[; ;main.c: 49: TMR3_Restart();
+"49
+[e ( _TMR3_Restart ..  ]
+"50
 }
 [e :U 637 ]
-[; ;main.c: 52: }
-[; ;main.c: 54: if ((INTCON & (1 << 2)))
-"54
+[; ;main.c: 50: }
+[; ;main.c: 52: if ((INTCON & (1 << 2)))
+"52
 [e $ ! != & -> _INTCON `i << -> 1 `i -> 2 `i -> 0 `i 638  ]
-[; ;main.c: 55: {
-"55
+[; ;main.c: 53: {
+"53
 {
-[; ;main.c: 56: (INTCONbits.TMR0IF = T0CONbits.TMR0ON = 0);
-"56
-[e = . . _INTCONbits 0 2 = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-[; ;main.c: 57: LATB ^= (1 << 2);
-"57
+[; ;main.c: 54: LATB ^= (1 << 2);
+"54
 [e =^ _LATB -> << -> 1 `i -> 2 `i `uc ]
-[; ;main.c: 58: TMR0_StartCount(300);
-"58
-[e ( _TMR0_StartCount (1 -> -> 300 `i `us ]
-"59
+[; ;main.c: 55: TMR0_Restart();
+"55
+[e ( _TMR0_Restart ..  ]
+"56
 }
 [e :U 638 ]
-"60
+"57
 }
 [e :U 633 ]
 "38
 [e $U 634  ]
 [e :U 635 ]
-[; ;main.c: 59: }
-[; ;main.c: 60: }
-[; ;main.c: 61: }
-"61
+[; ;main.c: 56: }
+[; ;main.c: 57: }
+[; ;main.c: 58: }
+"58
 [e :UE 632 ]
 }

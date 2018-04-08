@@ -1,8 +1,10 @@
 
 #include "timers.h"
 
-/**** Private variables ****/
-
+/**** Private data ****/
+static UInt16_T TMR0_TimerValue;
+static UInt16_T TMR1_TimerValue;
+static UInt16_T TMR3_TimerValue;
 
 /**** Private functions ****/
 
@@ -16,8 +18,6 @@
  *              Use this function before using TMR0_StartCount.
  * 
  *  Parameters: TMR0_CLOCK_SOURCE_VALUES_T clock_source
- *              TMR0_PREESCALER_VALUES_T   preescaler
- *              TMR0_RW_MODE_T             ReadWrite_Mode
  * 
  *     Returns: N/A
  * 
@@ -109,7 +109,7 @@ void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source)
 
 /***************************************************************************************
  * 
- *    Function: TMR0_StartCount
+ *    Function: TMR0_Start
  * 
  * Description: This function starts Timer 0 with the specified time in ms.
  * 
@@ -118,12 +118,13 @@ void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source)
  *     Returns: N/A
  * 
  ***************************************************************************************/
-void TMR0_StartCount(UInt16_T milliseconds)
+void TMR0_Start(UInt16_T milliseconds)
 {
     UInt16_T temp_time;
     
     if (milliseconds > TMR0_MAX_TIME)
     {
+        TMR0_TimerValue = 0;
         TMR0H = 0;
         TMR0L = 0;
     }
@@ -136,11 +137,51 @@ void TMR0_StartCount(UInt16_T milliseconds)
          * 
          */
         temp_time = (UInt16_T)(TIMERS_MAX_VALUE_16bits - (milliseconds / 0.064));
+        
+        TMR0_TimerValue = temp_time;
+        
         TMR0H = (UInt8_T)(temp_time / 256);
         TMR0L = (UInt8_T)temp_time;
     }
     
-    T0CONbits.TMR0ON = 1;
+    T0CON |= TMR0_ON;
+}
+
+/***************************************************************************************
+ * 
+ *    Function: TMR0_Restart
+ * 
+ * Description: This function re-starts Timer 0 with the last value specified in
+ *              TMR0_Start.
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ***************************************************************************************/
+void TMR0_Restart(void)
+{
+    TMR0_Stop();
+    TMR0H = (UInt8_T)(TMR0_TimerValue >> 8);
+    TMR0L = (UInt8_T)(TMR0_TimerValue);
+    T0CON |= TMR0_ON;
+}
+
+/***************************************************************************************
+ * 
+ *    Function: TMR0_Stop
+ * 
+ * Description: This function stops Timer 0 and clears overflow flag.
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ***************************************************************************************/
+void TMR0_Stop(void)
+{
+    INTCONbits.TMR0IF = 0;
+    T0CON &= TMR0_OFF;
 }
 
 /***************************************************************************************
@@ -151,8 +192,6 @@ void TMR0_StartCount(UInt16_T milliseconds)
  *              Use this function before using TMR1_StartCount.
  * 
  *  Parameters: TMR1_CLOCK_SOURCE_VALUES_T clock_source
- *              TMR1_PREESCALER_VALUES_T   preescaler
- *              TMR1_RW_MODE_T             ReadWrite_Mode
  * 
  *     Returns: N/A
  * 
@@ -189,41 +228,43 @@ void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source)
         PIE1bits.TMR1IE = 0;
 //#endif
     
-   /* -------------------------------------------------------------------------------------------------*
-    *  b7          b6          b5          b4          b3      b2          b1      b0                  *
-    *  TMR1CS<1>   TMR1CS<0>   T1CKPS<1>   T1CKPS<0>   SOSCEN  !(T1SYNC)   RD16    TMR1ON              *
-    *                                                                                                  *
-    *  TMR1CS<1:0>:    TIMER1 clock source select bits                                                 *
-    *                  11 -> Reserved                                                                  *
-    *                  10 -> Timer1 source is pin or oscillator                                        *
-    *                        If SOSCEN = 0: External clock from TxCKI pin (rising edge)                *
-    *                        If SOSCEN = 1: Crystal oscillator on SOSCI/SOSCO pins                     *
-    *                  01 -> Timer1 clock source is system clock (Fosc)                                *
-    *                  00 -> Timer1 clock source is instruction clock (Fosc/4)                         *
-    *  T1CKPS<1:0>:    TIMER1 input clock prescale select bits                                         *
-    *                  11 -> 1:8                                                                       *
-    *                  10 -> 1:4                                                                       *
-    *                  01 -> 1:2                                                                       *
-    *                  00 -> 1:1                                                                       *
-    *  SOSCEN:         1 -> Dedicated secondary oscillator circuit enabled                             *
-    *                  0 -> Dedicated secondary oscillator circuit disabled                            *
-    *  !(T1SYNC):      TIMER1 external clock input synchronization control bit                         *
-    *                      If TMR1CS = 1X:                                                             *
-    *                          1 -> Do not synchronize external clock input                            *
-    *                          0 -> Synchronize external clock input with Fosc                         *
-    *                      If TMR1CS = 0x:                                                             *
-    *                          This bit is ignored. Timer1 uses the internal clock when TMR1CS = 0X    *
-    *  RD16:           1 -> Enables register read/write of Timer1 in one 16-bit operation              *
-    *                  0 -> Enables register read/write of Timer1 in two 8-bit operation               *
-    *  TMR1ON:         1 -> Enables Timer1                                                             *
-    *                  0 -> Stops Timer1; clears Timer1 gate flip-flop                                 *
-    * -------------------------------------------------------------------------------------------------*/
+   /************************************ T1CON register ************************************************
+    *                                                                                                  
+    *  b7          b6          b5          b4          b3      b2          b1      b0                  
+    *  TMR1CS<1>   TMR1CS<0>   T1CKPS<1>   T1CKPS<0>   SOSCEN  !(T1SYNC)   RD16    TMR1ON              
+    *                                                                                                  
+    *  TMR1CS<1:0>:    TIMER1 clock source select bits                                                 
+    *                  11 -> Reserved                                                                  
+    *                  10 -> Timer1 source is pin or oscillator                                        
+    *                        If SOSCEN = 0: External clock from TxCKI pin (rising edge)                
+    *                        If SOSCEN = 1: Crystal oscillator on SOSCI/SOSCO pins                     
+    *                  01 -> Timer1 clock source is system clock (Fosc)                                
+    *                  00 -> Timer1 clock source is instruction clock (Fosc/4)                         
+    *  T1CKPS<1:0>:    TIMER1 input clock prescale select bits                                         
+    *                  11 -> 1:8                                                                       
+    *                  10 -> 1:4                                                                       
+    *                  01 -> 1:2                                                                       
+    *                  00 -> 1:1                                                                       
+    *       SOSCEN:    1 -> Dedicated secondary oscillator circuit enabled                             
+    *                  0 -> Dedicated secondary oscillator circuit disabled                            
+    *    !(T1SYNC):    TIMER1 external clock input synchronization control bit                         
+    *                      If TMR1CS = 1X:                                                             
+    *                          1 -> Do not synchronize external clock input                            
+    *                          0 -> Synchronize external clock input with Fosc                         
+    *                      If TMR1CS = 0x:                                                             
+    *                          This bit is ignored. Timer1 uses the internal clock when TMR1CS = 0X    
+    *         RD16:    1 -> Enables register read/write of Timer1 in one 16-bit operation              
+    *                  0 -> Enables register read/write of Timer1 in two 8-bit operation               
+    *       TMR1ON:    1 -> Enables Timer1                                                             
+    *                  0 -> Stops Timer1; clears Timer1 gate flip-flop                                 
+    *                                                                                                  
+    ****************************************************************************************************/
     T1CON = (clock_source << 6) | (TMR1_PREESCALER_OF_8 << 4) | (TMR1_RW_MODE_16BIT << 1);
 }
 
 /***************************************************************************************
  * 
- *    Function: TMR1_StartCount
+ *    Function: TMR1_Start
  * 
  * Description: This function starts Timer 1 with the specified time in ms.
  * 
@@ -232,12 +273,13 @@ void TMR1_Config(TMR1_CLOCK_SOURCE_VALUES_T clock_source)
  *     Returns: N/A
  * 
  ***************************************************************************************/
-void TMR1_StartCount(UInt16_T milliseconds)
+void TMR1_Start(UInt16_T milliseconds)
 {
     UInt16_T temp_time;
     
     if (milliseconds > TMR1_MAX_TIME)
     {
+        TMR1_TimerValue = 0;
         TMR1H = 0;
         TMR1L = 0;
     }
@@ -250,12 +292,68 @@ void TMR1_StartCount(UInt16_T milliseconds)
          * 
          */
         temp_time = (UInt16_T)(TIMERS_MAX_VALUE_16bits - (milliseconds / 0.002));
+        
+        TMR1_TimerValue = temp_time;
+        
         TMR1H = (UInt8_T)(temp_time / 256);
         TMR1L = (UInt8_T)temp_time;
     }
     
-    T1CONbits.TMR1ON = 1;
+    T1CON |= TMR1_ON;
 }
+
+/***************************************************************************************
+ * 
+ *    Function: TMR1_Restart
+ * 
+ * Description: This function re-starts Timer 1 with the last value specified in
+ *              TMR1_Start.
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ***************************************************************************************/
+void TMR1_Restart(void)
+{
+    TMR1_Stop();
+    TMR1H = (UInt8_T)(TMR1_TimerValue >> 8);
+    TMR1L = (UInt8_T)(TMR1_TimerValue);
+    T1CON |= TMR1_ON;
+}
+
+/***************************************************************************************
+ * 
+ *    Function: TMR1_Stop
+ * 
+ * Description: This function stops Timer 1 and clears overflow flag.
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ***************************************************************************************/
+void TMR1_Stop(void)
+{
+    PIR1bits.TMR1IF = 0; 
+    T1CON &= TMR1_OFF;
+}
+
+// TODO: Implement functions for Timer 2
+//void TMR2_Config(TMR2_FREQ_SPEED_MODE_T freqSpeedMode)
+//{
+//    
+//}
+//
+//void TMR2_Start(UInt32_T frequency)
+//{
+//    
+//}
+//
+//void TMR2_Stop(void)
+//{
+//    
+//}
 
 /***************************************************************************************
  * 
@@ -265,8 +363,6 @@ void TMR1_StartCount(UInt16_T milliseconds)
  *              Use this function before using TMR3_StartCount.
  * 
  *  Parameters: TMR3_CLOCK_SOURCE_VALUES_T clock_source
- *              TMR3_PREESCALER_VALUES_T   preescaler
- *              TMR3_RW_MODE_T             ReadWrite_Mode
  * 
  *     Returns: N/A
  * 
@@ -303,43 +399,43 @@ void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source)
         PIE2bits.TMR3IE = 0;
 //#endif
     
-    /* -------------------------------------------------------------------------------------------------*
-     *  b7          b6          b5          b4          b3      b2          b1      b0                  *
-     *  TMR3CS<1>   TMR3CS<0>   T3CKPS<1>   T3CKPS<0>   SOSCEN  !(T3SYNC)   RD16    TMR3ON              *
-     *                                                                                                  *
-     *  TMR3CS<1:0>:    TIMER1 clock source select bits                                                 *
-     *                  11 -> Reserved                                                                  *
-     *                  10 -> Timer3 source is pin or oscillator                                        *
-     *                        If SOSCEN = 0: External clock from TxCKI pin (rising edge)                *
-     *                        If SOSCEN = 1: Crystal oscillator on SOSCI/SOSCO pins                     *
-     *                  01 -> Timer1 clock source is system clock (Fosc)                                *
-     *                  00 -> Timer1 clock source is instruction clock (Fosc/4)                         *
-     *  T3CKPS<1:0>:    TIMER1 input clock prescale select bits                                         *
-     *                  11 -> 1:8                                                                       *
-     *                  10 -> 1:4                                                                       *
-     *                  01 -> 1:2                                                                       *
-     *                  00 -> 1:1                                                                       *
-     *  SOSCEN:         1 -> Dedicated secondary oscillator circuit enabled                             *
-     *                  0 -> Dedicated secondary oscillator circuit disabled                            *
-     *  !(T3SYNC):      TIMER1 external clock input synchronization control bit                         *
-     *                      If TMR1CS = 1X:                                                             *
-     *                          1 -> Do not synchronize external clock input                            *
-     *                          0 -> Synchronize external clock input with Fosc                         *
-     *                      If TMR1CS = 0x:                                                             *
-     *                          This bit is ignored. Timer1 uses the internal clock when TMR1CS = 0X    *
-     *  RD16:           1 -> Enables register read/write of Timer1 in one 16-bit operation              *
-     *                  0 -> Enables register read/write of Timer1 in two 8-bit operation               *
-     *  TMR3ON:         1 -> Enables Timer1                                                             *
-     *                  0 -> Stops Timer1; clears Timer1 gate flip-flop                                 *
-     * -------------------------------------------------------------------------------------------------*
-     */
-    //T3CON = 0b00110010;
+    /************************************ T3CON register ************************************************
+     * 
+     *  b7          b6          b5          b4          b3      b2          b1      b0                  
+     *  TMR3CS<1>   TMR3CS<0>   T3CKPS<1>   T3CKPS<0>   SOSCEN  !(T3SYNC)   RD16    TMR3ON              
+     *                                                                                                  
+     *  TMR3CS<1:0>:    TIMER1 clock source select bits                                                 
+     *                  11 -> Reserved                                                                  
+     *                  10 -> Timer3 source is pin or oscillator                                        
+     *                        If SOSCEN = 0: External clock from TxCKI pin (rising edge)                
+     *                        If SOSCEN = 1: Crystal oscillator on SOSCI/SOSCO pins                     
+     *                  01 -> Timer1 clock source is system clock (Fosc)                                
+     *                  00 -> Timer1 clock source is instruction clock (Fosc/4)                         
+     *  T3CKPS<1:0>:    TIMER1 input clock prescale select bits                                         
+     *                  11 -> 1:8                                                                       
+     *                  10 -> 1:4                                                                       
+     *                  01 -> 1:2                                                                       
+     *                  00 -> 1:1                                                                       
+     *       SOSCEN:    1 -> Dedicated secondary oscillator circuit enabled                             
+     *                  0 -> Dedicated secondary oscillator circuit disabled                            
+     *    !(T3SYNC):    TIMER1 external clock input synchronization control bit                         
+     *                      If TMR1CS = 1X:                                                             
+     *                          1 -> Do not synchronize external clock input                            
+     *                          0 -> Synchronize external clock input with Fosc                         
+     *                      If TMR1CS = 0x:                                                             
+     *                          This bit is ignored. Timer1 uses the internal clock when TMR1CS = 0X    
+     *         RD16:    1 -> Enables register read/write of Timer1 in one 16-bit operation              
+     *                  0 -> Enables register read/write of Timer1 in two 8-bit operation               
+     *       TMR3ON:    1 -> Enables Timer1                                                             
+     *                  0 -> Stops Timer1; clears Timer1 gate flip-flop                                 
+     * 
+     ****************************************************************************************************/
     T3CON = (clock_source << 6) | (TMR3_PREESCALER_OF_8 << 4) | (TMR3_RW_MODE_16BIT << 1);
 }
 
 /***************************************************************************************
  * 
- *    Function: TMR3_StartCount
+ *    Function: TMR3_Start
  * 
  * Description: This function starts Timer 3 with the specified time in ms.
  * 
@@ -348,10 +444,12 @@ void TMR3_Config(TMR3_CLOCK_SOURCE_VALUES_T clock_source)
  *     Returns: N/A
  * 
  ***************************************************************************************/
-void TMR3_StartCount(UInt16_T milliseconds){
+void TMR3_Start(UInt16_T milliseconds){
     UInt16_T temp_time;
     
     if (milliseconds > TMR3_MAX_TIME){
+        
+        TMR3_TimerValue = 0;
         TMR3H = 0;
         TMR3L = 0;
     }
@@ -363,9 +461,49 @@ void TMR3_StartCount(UInt16_T milliseconds){
          * 
          */
         temp_time = (UInt16_T)(TIMERS_MAX_VALUE_16bits - (milliseconds / 0.002));
+        
+        TMR3_TimerValue = temp_time;
+        
         TMR3H = (UInt8_T)(temp_time / 256);
         TMR3L = (UInt8_T)temp_time;
     }
     
-    T3CONbits.TMR3ON = 1;
+    T3CON |= TMR3_ON;
+}
+
+/***************************************************************************************
+ * 
+ *    Function: TMR3_Restart
+ * 
+ * Description: This function re-starts Timer 3 with the last value specified in
+ *              TMR3_Start.
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ***************************************************************************************/
+void TMR3_Restart(void)
+{
+    TMR3_Stop();
+    TMR3H = (UInt8_T)(TMR3_TimerValue >> 8);
+    TMR3L = (UInt8_T)(TMR3_TimerValue);
+    T3CON |= TMR3_ON;
+}
+
+/***************************************************************************************
+ * 
+ *    Function: TMR3_Stop
+ * 
+ * Description: This function stops Timer 3 and clears overflow flag.
+ * 
+ *  Parameters: N/A
+ * 
+ *     Returns: N/A
+ * 
+ ***************************************************************************************/
+void TMR3_Stop(void)
+{
+    PIR2bits.TMR3IF = 0;
+    T3CON &= TMR3_OFF;
 }
