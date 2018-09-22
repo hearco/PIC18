@@ -1,13 +1,44 @@
 
+//-HEADER
+/*******************************************************************
+ *
+ * DESCRIPTION:
+ * This file contains ...
+ *
+ *
+ * NOTES:
+ *
+ *******************************************************************/
+//~HEADER
+//-INFORMATION
+/** Start of File Information ****************************************
+ *
+ * 
+ *
+ *
+ *
+ *
+ *
+ *******************************************************************/
+//~INFORMATION
 #include "timers.h"
 
-/**** Private data ****/
+/** Defines**/
+
+/** Local Definitions **/
 static UInt16_T TMR0_TimerValue;
 static UInt16_T TMR1_TimerValue;
 static UInt16_T TMR3_TimerValue;
 
-/**** Private functions ****/
+/** External Functions **/
 
+/* Global data */
+
+/** Local functions **/
+
+/** External Data **/
+
+/**** Private functions ****/
 
 /**** Public functions ****/
 /***************************************************************************************
