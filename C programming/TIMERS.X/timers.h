@@ -1,12 +1,25 @@
-/* 
- * File:   
- * Author: 
- * Comments:
- * Revision history: 
- */
-
-// This is a guard condition so that contents of this file are not included
-// more than once.  
+///-HEADER
+/*******************************************************************
+ *
+ * DESCRIPTION:
+ * 
+ *
+ *
+ * NOTES:
+ *
+ *******************************************************************/
+//~HEADER
+//-INFORMATION
+/** Start of File Information ****************************************
+ *
+ * 
+ *
+ *
+ *
+ *
+ *******************************************************************/
+//~INFORMATION
+ 
 #ifndef TIMERS_H
 #define	TIMERS_H
 
@@ -142,7 +155,7 @@ typedef enum{
     TMR3_RW_MODE_16BIT
 }TMR3_RW_MODE_T;
 
-/** Function prototypes **/
+/** Public Functions **/
 void TMR0_Config(TMR0_CLOCK_SOURCE_VALUES_T clock_source);
 void TMR0_Start(UInt16_T milliseconds);
 void TMR0_Restart(void);
@@ -163,5 +176,14 @@ void TMR3_Start(UInt16_T milliseconds);
 void TMR3_Restart(void);
 void TMR3_Stop(void);
 
-#endif	/* XC_HEADER_TEMPLATE_H */
-
+#endif // TIMERS_H
+//-INFORMATION
+/** Start of File Information ****************************************
+ *
+ * 
+ *
+ *
+ *
+ *
+ *******************************************************************/
+//~INFORMATION
